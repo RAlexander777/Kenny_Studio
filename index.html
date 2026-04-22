@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KennyStudio - Soluciones Digitales</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <canvas id="cyber-bg"></canvas>
+    
+    <nav class="navbar minimal-nav">
+        <div class="nav-section nav-left">
+            <ul class="nav-links">
+                <li><a href="#about">Nosotros</a></li>
+                <li><a href="#services">Servicios</a></li>
+                <li><a href="#portfolio">Lab</a></li>
+            </ul>
+        </div>
+
+        <div class="nav-section nav-center">
+            <div id="nav-icon-container" class="nav-icon-hidden">
+                <img src="logo2.png" alt="KennyStudio Icon" class="icon-fluid">
+            </div>
+        </div>
+
+        <div class="nav-section nav-right">
+            <button id="theme-toggle" class="theme-btn">
+                <i class="fas fa-moon dark-icon"></i>
+                <i class="fas fa-sun light-icon" style="display:none;"></i>
+            </button>
+        </div>
+    </nav>
+
+    <header class="hero" id="home">
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="hero_video.mp4" type="video/mp4">
+            El navegador no soporta videos HTML5.
+        </video>
+
+        <div class="hero-overlay"></div>
+
+        <div class="hero-main-layout">
+            <div class="hero-content">
+                <h1 class="neon-text-minimal">KennyStudio</h1>
+                <h2>Soluciones Digitales de Nueva Generación</h2>
+                <p>De la Idea a la Infraestructura Segura.</p>
+            </div>
+
+            <div class="hero-icon-wrapper" id="hero-icon">
+                <img src="logo2.png" alt="Featured Icon" class="gold-icon-main">
+            </div>
+        </div>
+
+        <div class="terminal-panel minimal-terminal">
+            <div class="terminal-header">
+                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                <span>status_monitor.exe</span>
+            </div>
+            <div class="terminal-body" id="terminal-text">
+                > Sistemas: Online<br>
+                > Proyectos Actuales: 3<br>
+                > Ubicación: Global<span class="cursor">_</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="about" id="about">
+        <h2>Sobre KennyStudio</h2>
+        <div class="about-text">
+            <p>En KennyStudio, combinamos tecnología, análisis e inteligencia digital para ofrecer soluciones que van
+                más allá de lo convencional. No solo desarrollamos páginas web o software; creamos herramientas
+                estratégicas diseñadas para generar impacto, presencia y resultados reales.</p>
+            <p>Nuestro enfoque se basa en la precisión, la curiosidad y el entendimiento profundo de los sistemas
+                digitales. Cada proyecto es tratado como único, aplicando pensamiento analítico y creatividad para
+                resolver problemas de forma eficiente y profesional.</p>
+            <p>Desde el desarrollo Full-Stack hasta el ciberanálisis e investigación digital, trabajamos con un objetivo
+                claro: convertir la información en valor y la tecnología en ventaja.</p>
+            <p class="highlight">Porque en KennyStudio, no solo construimos soluciones… entendemos lo que otros no ven.
+            </p>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <h2>Servicios & Proyectos Integrados</h2>
+
+        <div class="service-item">
+            <button class="service-header">
+                <h3>Desarrollo de Software & Web</h3>
+                <p>Optimizados para mejorar presencia y productividad.</p>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="service-content">
+                <div class="service-theme futuristic-bg">
+                    <h4>Tema: Aplicaciones escalables, rápidas y con diseño minimalista/futurista.</h4>
+                    <p><strong>Proyecto Destacado:</strong> Plataforma web interactiva o App con arquitectura limpia.
+                        (Stack: React, Node.js, Python).</p>
+                    <div class="code-animation">/* Animación de código aquí */</div>
+                </div>
+                <div class="service-details">
+                    <p>Diseñamos y desarrollamos páginas web y sistemas funcionales orientados a ofrecer soluciones
+                        digitales modernas, eficientes y adaptadas a necesidades específicas. El enfoque combina diseño
+                        intuitivo, rendimiento optimizado y tecnologías actuales.</p>
+                    <a href="https://wa.me/51973661041?text=Hola,%20KennyStudio%20%F0%9F%91%8B%20Estoy%20interesado%20en%20el%20servicio%20de%20Desarrollo%20de%20Software%20%26%20Web.%20%C2%BFPodr%C3%ADas%20brindarme%20m%C3%A1s%20informaci%C3%B3n,%20por%20favor%3F"
+                        class="btn-whatsapp" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Solicitar Servicio
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="portfolio" id="portfolio">
+        <h2>The Lab (Proyectos)</h2>
+        <div class="filters">
+            <button class="filter-btn active">Todos</button>
+            <button class="filter-btn">Web</button>
+            <button class="filter-btn">Seguridad</button>
+        </div>
+        <div class="grid-portfolio">
+            <div class="project-card">
+                <div class="mockup-img">Imagen Mockup</div>
+                <div class="tags">
+                    <span class="tag">#Python</span>
+                    <span class="tag">#CyberSec</span>
+                    <span class="tag">#AWS</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="skills" id="skills">
+        <h2>El "Core" Técnico</h2>
+        <div class="skills-panel">
+            <div class="skill-category">
+                <h3>Lenguajes</h3>
+                <p>JavaScript, Python, C++, SQL</p>
+            </div>
+            <div class="skill-category">
+                <h3>Seguridad</h3>
+                <p>Kali Linux, Wireshark, Metasploit, Nmap</p>
+            </div>
+            <div class="skill-category">
+                <h3>Diseño</h3>
+                <p>Figma, Adobe Suite, Animaciones CSS3/Canvas</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer" id="contact">
+        <div class="contact-links">
+            <a href="https://wa.me/51973661041" target="_blank"><i class="fab fa-whatsapp"></i> 973661041</a>
+            <a href="https://t.me/Killer_Kiu" target="_blank"><i class="fab fa-telegram"></i> @Killer_Kiu</a>
+            <a href="https://facebook.com/KennyPalominoKS" target="_blank"><i class="fab fa-facebook"></i>
+                KennyPalominoKS</a>
+        </div>
+        <div class="footer-text">
+            <p>“inteligencia y tecnología en un solo lugar”</p>
+            <p>Inteligencia digital sin límites, el conocimiento es libre...</p>
+            <p>&copy; 2026 KennyStudio — Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

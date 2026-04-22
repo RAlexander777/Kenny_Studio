@@ -1,0 +1,434 @@
+/* Variables Día/Noche */
+:root {
+    --bg-color: #0a0a0a;
+    --text-color: #e0e0e0;
+    --neon-color: #00ffcc;
+    --card-bg: #1a1a1a;
+    --terminal-bg: #000000;
+    --terminal-text: #00ff00;
+    --transition: all 0.3s ease;
+}
+
+[data-theme="light"] {
+    --bg-color: #f4f4f9;
+    --text-color: #1a1a1a;
+    --neon-color: #0066ff;
+    --card-bg: #ffffff;
+    --terminal-bg: #1e1e1e;
+    --terminal-text: #33ff33;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: var(--transition);
+    line-height: 1.6;
+}
+
+/* =========================================
+   Navbar Minimalista (Glassmorphism)
+   ========================================= */
+.navbar.minimal-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 3rem;
+    z-index: 1000;
+    /* Fondo oscuro semitransparente con desenfoque */
+    background: rgba(10, 10, 10, 0.4); 
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px); /* Soporte para Safari */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: var(--transition);
+}
+
+/* Ajuste para el modo claro */
+[data-theme="light"] .navbar.minimal-nav {
+    background: rgba(255, 255, 255, 0.6);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Logo Minimalista */
+.navbar.minimal-nav .logo-minimal {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-color);
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(0, 255, 204, 0.4); /* Toque sutil de neón */
+    transition: var(--transition);
+}
+
+/* Enlaces de Navegación */
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: color 0.3s ease, opacity 0.3s ease;
+    opacity: 0.8;
+}
+
+.nav-links a:hover {
+    color: var(--neon-color);
+    opacity: 1;
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Se ocultan en móvil para mantener el minimalismo. Se puede añadir un menú hamburguesa posteriormente. */
+    }
+    .navbar.minimal-nav {
+        padding: 1rem 1.5rem;
+    }
+}
+
+.neon-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--neon-color);
+    text-shadow: 0 0 5px var(--neon-color);
+}
+
+.theme-btn {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Layout general del Hero */
+.hero {
+    position: relative;
+    height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    padding: 0 2rem;
+    gap: 3rem; /* Espacio entre el bloque principal y la terminal */
+    color: #ffffff; 
+}
+
+/* Configuración del video para que cubra todo el fondo */
+.hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: -2;
+    object-fit: cover;
+}
+
+/* Filtro oscuro sobre el video para que el texto sea legible */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65); /* La opacidad se puede ajustar (0.0 a 1.0) */
+    z-index: -1;
+}
+
+/* Contenedor del texto principal */
+.hero-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Alinea el texto hacia la derecha (hacia el logo) */
+    text-align: right;
+}
+
+.hero-content h1.neon-text-minimal {
+    font-size: 4.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--neon-color);
+    text-shadow: 0 0 15px var(--neon-color);
+    letter-spacing: 2px;
+    line-height: 1.1;
+}
+
+.hero-content h2 {
+    font-size: 1.8rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    opacity: 0.8;
+}
+
+/* Layout del Hero para acomodar el ícono */
+.hero-main-layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem; /* Aumentamos un poco la separación para que respiren ambos elementos */
+    z-index: 1;
+    width: 100%;
+    max-width: 1100px; /* Limitamos el ancho para forzar el centrado */
+    margin-top: 5rem;
+}
+
+.hero-icon-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start; /* Alinea el logo hacia la izquierda (hacia el texto) */
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
+}
+
+.gold-icon-main {
+    width: 100%;
+    max-width: 300px; /* Controlamos el tamaño máximo para que no se vea desproporcionado */
+    height: auto;
+    filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.4)); 
+}
+
+/* =========================================
+Terminal Minimalista (Hero)
+   ========================================= */
+.terminal-panel {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: left;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    z-index: 1;
+}
+
+/* Ajuste específico para cuando la terminal está sobre el video */
+.terminal-panel.minimal-terminal {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 1;
+    width: 100%;
+    max-width: 450px;
+}
+
+.terminal-header {
+    background: rgba(20, 20, 20, 0.8);
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: #aaaaaa;
+}
+
+.dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+.red { background: #ff5f56; }
+.yellow { background: #ffbd2e; }
+.green { background: #27c93f; }
+
+.terminal-body {
+    padding: 20px;
+    color: var(--terminal-text);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.cursor { animation: blink 1s step-end infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* Secciones Generales */
+section {
+    padding: 4rem 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--neon-color);
+}
+
+/* Servicios Acordeón */
+.service-item {
+    background: var(--card-bg);
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.service-header {
+    width: 100%;
+    text-align: left;
+    padding: 1.5rem;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+}
+
+.service-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    padding: 0 1.5rem;
+}
+
+.service-item.active .service-content {
+    max-height: 1000px;
+    padding-bottom: 1.5rem;
+}
+
+.service-theme {
+    background: #000;
+    color: #fff;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--neon-color);
+}
+
+.btn-whatsapp {
+    display: inline-block;
+    background: #25D366;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+/* Portafolio & Skills */
+.grid-portfolio, .skills-panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.project-card, .skill-category {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #333;
+}
+
+.tag {
+    background: rgba(0, 255, 204, 0.1);
+    color: var(--neon-color);
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    margin-right: 5px;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: var(--card-bg);
+    margin-top: 2rem;
+}
+
+.contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.contact-links a {
+    color: var(--neon-color);
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+/* Navbar: Secciones equilibradas */
+.nav-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.nav-left { justify-content: flex-start; }
+.nav-center { justify-content: center; }
+.nav-right { justify-content: flex-end; }
+
+/* Contenedor del ícono en la Navbar */
+#nav-icon-container {
+    width: 40px;
+    height: 40px;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 0;
+    transform: translateY(-20px) scale(0.5);
+}
+
+#nav-icon-container.nav-icon-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.icon-fluid {
+    width: 100%;
+    height: auto;
+}
+
+/* Efecto de salida para el ícono del hero */
+.hero-icon-faded {
+    opacity: 0;
+    transform: scale(0.8) translateY(-20px);
+}
+
+@media (max-width: 992px) {
+    .hero-main-layout { 
+        flex-direction: column; 
+        gap: 2rem; 
+        text-align: center;
+    }
+    .hero-content {
+        align-items: center;
+        text-align: center;
+    }
+    .hero-icon-wrapper {
+        justify-content: center;
+    }
+    .gold-icon-main { 
+        max-width: 200px; 
+    }
+    .nav-links {
+        display: none; /* Se ocultan en móvil para no romper el diseño */
+    }
+}

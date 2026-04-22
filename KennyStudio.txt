@@ -1,0 +1,314 @@
+				   							
+1. Landing Page (Home Texto tamaño media-grande, borde iluminado tipo neon)	
+
+																botones deinteraccion modo dia/noche con iconos de luna y sol
+
+
+  
+
+				 LOGO
+			     KennyStudio
+
+Título:					 "Soluciones Digitales de Nueva Generación: De la Idea a la Infraestructura Segura."
+
+Subtítulo: 		 “Especialista en Desarrollo Full-Stack y Software, Ciberseguridad, Ciberanálisis e Investigación Digital, e Inteligencia de Datos.”
+
+
+(Sección de "Status": Un panel pequeño que simule una terminal con datos en tiempo real (ej: "Sistemas: Online", "Proyectos Actuales: 3", "Ubicación: Global").
+
+
+
+
+
+
+
+
+2. 💬 Frase potente: (esto es como una descripcion sobre nosotos) 
+
+
+
+								Sobre KennyStudio
+
+		En KennyStudio, combinamos tecnología, análisis e inteligencia digital para ofrecer soluciones que van más allá de lo convencional. No solo desarrollamos páginas web o 		software; creamos herramientas estratégicas diseñadas para generar impacto, presencia y resultados reales.
+
+		Nuestro enfoque se basa en la precisión, la curiosidad y el entendimiento profundo de los sistemas digitales. Cada proyecto es tratado como único, aplicando pensamiento 		analítico y creatividad para resolver problemas de forma eficiente y profesional.
+
+		Desde el desarrollo Full-Stack hasta el ciberanálisis e investigación digital, trabajamos con un objetivo claro: convertir la información en valor y la tecnología en 			ventaja.
+
+		Porque en KennyStudio, no solo construimos soluciones… entendemos lo que otros no ven.
+
+
+
+
+
+
+3 . (En lugar de solo enlistar servicios, cada sección debe mostrar un "Featured Project" para validar la habilidad.)
+		
+
+				Servicios & Proyectos Integrados (animacion y decorado a criterio)
+
+(cada servio son botones orizontales con descripcion breve del servicio y cuando se presione sobre ellos se extiende una descripcion completa del servicio y fotos referenciales, cuando el servicio este extendido tiene un tema referencial al servicio, cabe mencionar que cada servicio tiene un boton de adquirir servicio cuando esta extendido solicitando el servico en el boton que se desplego, referencia whatsapp )
+
+
+
+
+Desarrollo de Software & Web
+Diseñamos y desarrollamos páginas web y sistemas funcionales, optimizados para mejorar tu presencia y productividad.  (descripcion corta de Desarrollo de Software & Web)
+
+(boton barra extendida)
+
+tema: Aplicaciones escalables, rápidas y con diseño minimalista/futurista.(imagen)
+
+Proyecto Destacado: Una plataforma web interactiva o una App con arquitectura limpia.(imagen)
+
+Detalles: Stack utilizado (React, Node.js, Python), optimización de carga y UI/UX. (puede ser una animacion en codigos)
+
+
+descripcion dentro del tema
+
+En KennyStudio, diseñamos y desarrollamos páginas web y sistemas funcionales orientados a ofrecer soluciones digitales modernas, eficientes y adaptadas a las necesidades específicas de cada cliente.
+
+Nuestro enfoque combina diseño intuitivo, rendimiento optimizado y tecnologías actuales, permitiendo crear plataformas que no solo destacan visualmente, sino que también mejoran la productividad y fortalecen la presencia digital.
+
+Trabajamos en cada proyecto con precisión y atención al detalle, asegurando soluciones escalables, seguras y alineadas a los objetivos del negocio, ya sea para presencia online, automatización de procesos o desarrollo de herramientas personalizadas.
+
+Nuestro compromiso es transformar ideas en soluciones reales, funcionales y de alto impacto.
+
+
+							boton de solicitar servicio con redireccionamiento con msm 
+									Hola, KennyStudio 👋
+						Estoy interesado en el servicio de Desarrollo de Software & Web.
+							¿Podrías brindarme más información, por favor?
+
+
+
+
+
+
+
+
+
+
+
+
+Ciberseguridad, Pentesting y Forense Digital
+
+Evaluamos y protegemos entornos digitales mediante auditorías, pruebas de penetración y análisis forense, identificando vulnerabilidades y aportando soluciones para fortalecer la seguridad.     (descripcion corta de Ciberseguridad, Pentesting y Forense Digital)
+
+
+tema. Auditorías de seguridad, pruebas de penetración (Pentesting) y análisis forense digital. (simulacion en codigo o video)
+
+
+descripcion extendida
+
+En KennyStudio, ofrecemos servicios especializados en ciberseguridad orientados a la evaluación, protección y análisis de entornos digitales, con el objetivo de identificar riesgos y fortalecer la seguridad de sistemas y plataformas.
+
+Realizamos auditorías de seguridad y pruebas de penetración (pentesting) bajo autorización, simulando escenarios controlados para detectar vulnerabilidades y puntos críticos que podrían ser explotados.
+
+Complementamos este enfoque con análisis forense digital, permitiendo examinar eventos e incidentes desde una perspectiva técnica, con el fin de comprender su origen y aportar información clara para la toma de decisiones.
+
+Nuestro trabajo se basa en la ética, la responsabilidad y el rigor técnico, brindando soluciones orientadas a la prevención, la mejora continua y la protección de la información.
+
+
+						boton de solicitar servicio con redireccionamiento con msm
+									Hola, KennyStudio 👋
+						Estoy interesado en el servicio de Ciberseguridad, Pentesting y Forense Digital.
+							¿Podrías brindarme más información, por favor?
+
+
+
+
+
+
+
+
+
+Ciberanálisis e Investigación de Personas (Análisis Forense)
+Verificamos identidades y analizamos perfiles digitales mediante técnicas OSINT y criterios forenses, brindando información clara y confiable para la toma de decisiones. (descripcion corta de Investigación de Personas)
+
+(boton barra extendida)
+(tema o imagen como tema fondo hacker)
+ descripcion dentro del tema
+
+En KennyStudio, ofrecemos un servicio de investigación digital orientado al análisis de información proveniente de fuentes abiertas, complementado con técnicas de ciberanálisis y metodología forense, con el propósito de brindar claridad, verificación y respaldo en la toma de decisiones.
+
+A través de procesos estructurados de recopilación y análisis de datos (OSINT), identificamos perfiles digitales, antecedentes visibles en línea y evaluamos la coherencia de la información proporcionada por una persona, aplicando criterios técnicos propios del análisis forense digital.
+
+Este servicio está dirigido a empresas, profesionales y particulares que requieren mayor seguridad y confianza al momento de establecer relaciones laborales, comerciales o personales, siempre dentro de un marco ético, legal y responsable.
+
+Trabajamos bajo principios de discreción, precisión y rigor analítico, transformando datos dispersos en información clara, estructurada y de alto valor.
+
+
+						boton de solicitar servicio con redireccionamiento con msm
+									Hola, KennyStudio 👋
+					Estoy interesado en el servicio de Ciberanálisis e Investigación de Personas (Análisis Forense).
+							¿Podrías brindarme más información, por favor?
+
+
+
+
+
+
+
+
+
+
+
+Desarrollo de Inteligencia Artificial & Automatización
+
+Creamos soluciones inteligentes que automatizan tareas, optimizan procesos y mejoran la productividad de tu negocio.  (descripcion breve de Desarrollo de Inteligencia Artificial)
+
+
+
+tema un red neuronal pagina referencial   https://pranx.com/hacker/simulador/
+descripcion extendida
+En KennyStudio, desarrollamos soluciones basadas en inteligencia artificial orientadas a optimizar procesos, automatizar tareas y mejorar la eficiencia digital de personas y negocios.
+
+Implementamos herramientas inteligentes como chatbots, automatizaciones, generación de contenido y asistentes digitales, adaptados a las necesidades específicas de cada cliente.
+
+Nuestro enfoque combina tecnología moderna, análisis y practicidad, permitiendo transformar tareas repetitivas en procesos automatizados que ahorran tiempo, reducen costos y aumentan la productividad.
+
+Trabajamos con soluciones accesibles, funcionales y escalables, facilitando la integración de la inteligencia artificial en entornos reales.
+
+						boton de solicitar servicio con redireccionamiento con msm
+									Hola, KennyStudio 👋
+					Estoy interesado en el servicio de Desarrollo de Inteligencia Artificial & Automatización.
+							¿Podrías brindarme más información, por favor?
+
+
+
+
+
+PAQUETES (Básico, Medio, Avanzado)
+
+
+Plan Básico – Automatización Inicial
+
+💰
+
+Incluye:
+
+Configuración básica de herramientas IA
+Automatización simple (respuestas, tareas repetitivas)
+Asesoría inicial
+
+🎯 Ideal para:
+
+Negocios pequeños
+Emprendedores
+
+
+
+
+
+
+Plan Medio – Integración Inteligente
+
+💰💰
+
+Incluye:
+
+Chatbots personalizados (WhatsApp o web)
+Automatización de procesos (respuestas, flujos)
+Optimización de tareas digitales
+
+🎯 Ideal para:
+
+Negocios en crecimiento
+Atención al cliente
+
+
+
+Plan Avanzado – Solución IA Completa
+
+💰💰💰
+
+Incluye:
+
+Sistemas automatizados avanzados
+Integración de IA en procesos del negocio
+Flujos inteligentes personalizados
+Optimización completa de operaciones
+
+🎯 Ideal para:
+
+Empresas
+Negocios que quieren escalar
+
+
+
+
+
+
+
+
+
+
+
+
+
+Consultoría Tecnológica
+Te asesoramos en el uso de tecnología para optimizar procesos, tomar mejores decisiones y potenciar tu crecimiento digital.  (descripcion breve de consultoria tecnologica)
+
+tema asesoramiento tecnologico
+descripcion de texto extendido
+En KennyStudio, ofrecemos servicios de consultoría tecnológica orientados a analizar, optimizar y guiar el uso de herramientas digitales en función de los objetivos de cada cliente.
+
+Brindamos asesoría especializada para la implementación de soluciones tecnológicas, mejora de procesos, adopción de herramientas digitales y toma de decisiones estratégicas en entornos digitales.
+
+Nuestro enfoque se basa en comprender las necesidades reales del cliente, identificar oportunidades de mejora y proponer soluciones prácticas, eficientes y adaptadas a cada caso.
+
+Acompañamos a personas y negocios en su transformación digital, facilitando el uso de la tecnología de manera clara, efectiva y orientada a resultados.
+
+
+				
+						boton de solicitar servicio con redireccionamiento con msm
+									Hola, KennyStudio 👋
+						 Estoy interesado en el servicio de Consultoría Tecnológica.
+							¿Podrías brindarme más información, por favor?
+
+
+4. Portafolio de Proyectos (The Lab proyectos improvisados)
+Una cuadrícula (Grid) donde el usuario pueda filtrar por categoría.
+
+Fichas de Proyecto: Cada una debe incluir:
+
+Imagen tipo "mockup" (en computadoras o tablets).
+
+Etiquetas de tecnologías (ej: #Python #CyberSec #AWS).
+
+
+
+
+
+5. El "Core" Técnico (Habilidades)
+Un panel visual que demuestre que sabes lo que haces:
+
+Lenguajes: JavaScript, Python, C++, SQL.
+
+Herramientas de Seguridad: Kali Linux, Wireshark, Metasploit, Nmap.
+
+Diseño: Figma, Adobe Suite, Animaciones CSS3/Canvas.
+
+
+
+
+
+6. Contacto
+
+
+whatsapp; 973661041			telegram @Killer_Kiu		facebook KennyPalominoKS(nombre de usuario)
+
+
+
+
+
+
+										(FOOTER)
+
+								“inteligencia y tecnología en un solo lugar”
+							Inteligencia digital sin límites, el conocimiento es libre...
+							  © 2026 KennyStudio — Todos los derechos reservados.
+
+
+
