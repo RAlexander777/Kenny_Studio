@@ -353,6 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const progressBar = document.getElementById('sh-fill');
     const timeDisplay = document.getElementById('sh-time');
     const toggleBtn = document.getElementById('sh-toggle');
+    const shHeader = document.querySelector('.sh-header');
     const volumeSlider = document.getElementById('sh-volume');
 
     // === Lógica de Scroll Inteligente (Oculta todo el bloque flotante) ===
@@ -376,7 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (player && toggleBtn) {
         // Contraer / Expandir
-        toggleBtn.addEventListener('click', () => {
+        shHeader.addEventListener('click', () => {
             player.classList.toggle('collapsed');
         });
 

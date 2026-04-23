@@ -1775,6 +1775,21 @@ section h2 {
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+.pulse-music {
+    margin-right: 5px;
+    display: inline-block;
+}
+
+/* La animación solo ocurre si el reproductor tiene la clase .collapsed */
+.sh-player.collapsed .pulse-music {
+    animation: music-beat 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes music-beat {
+    0% { transform: scale(0.9); opacity: 0.6; text-shadow: none; }
+    100% { transform: scale(1.2); opacity: 1; text-shadow: 0 0 10px #ff0000; }
+}
+
 /* Botón WhatsApp Estilo SUPERHOT */
 .sh-whatsapp {
     background: #000000;
@@ -1791,6 +1806,22 @@ section h2 {
     height: fit-content;
 }
 
+.sh-whatsapp i {
+    /* Mismo ritmo que la música, pero aplicado al ícono de WP */
+    animation: wsp-beat 1.2s ease-in-out infinite alternate;
+}
+
+/* Detenemos la palpitación cuando el usuario pone el cursor encima para no marear */
+.sh-whatsapp:hover i {
+    animation: none;
+    transform: scale(1.1);
+}
+
+@keyframes wsp-beat {
+    0% { transform: scale(0.9); opacity: 0.8; text-shadow: none; }
+    100% { transform: scale(1.2); opacity: 1; text-shadow: 0 0 12px #25D366; }
+}
+
 .sh-whatsapp:hover {
     transform: translate(-2px, -2px);
     box-shadow: 6px 6px 0px rgba(37, 211, 102, 1);
@@ -1803,6 +1834,8 @@ section h2 {
     justify-content: space-between;
     align-items: center;
     font-weight: 800;
+    cursor: pointer;      
+    user-select: none;
 }
 
 .sh-text { color: #ff0000; font-size: 0.8rem; letter-spacing: 2px; }
