@@ -1,28 +1,306 @@
 /* Variables Día/Noche */
 :root {
-    --bg-color: #0a0a0a;
+    --bg-color: #030305; /* Fondo más profundo */
     --text-color: #e0e0e0;
-    --neon-color: #00ffcc;
-    --card-bg: #1a1a1a;
+    --neon-cyan: #00ffcc; 
+    --neon-pink: #ff007f; /* Nuevo rosado cyberpunk */
+    --card-bg: rgba(10, 10, 15, 0.75);
     --terminal-bg: #000000;
-    --terminal-text: #00ff00;
+    --terminal-text: #00ffcc;
     --transition: all 0.3s ease;
 }
 
-[data-theme="light"] {
-    --bg-color: #f4f4f9;
-    --text-color: #1a1a1a;
-    --neon-color: #0066ff;
-    --card-bg: #ffffff;
-    --terminal-bg: #1e1e1e;
-    --terminal-text: #33ff33;
+.neon-cyan-text { color: var(--neon-cyan); text-shadow: 0 0 8px rgba(0, 255, 204, 0.4); }
+.neon-pink-text { color: var(--neon-pink); text-shadow: 0 0 8px rgba(255, 0, 127, 0.4); }
+
+.gradient-text {
+    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+}
+
+.dual-glow {
+    filter: drop-shadow(0 0 15px rgba(0, 255, 204, 0.4)) drop-shadow(0 0 20px rgba(255, 0, 127, 0.3));
+}
+
+.section-title {
+    text-align: left;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* =========================================
+   Efecto Glitch para Textos
+   ========================================= */
+.glitch-text {
+    position: relative;
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.glitch-text::before, .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+}
+
+.glitch-text::before {
+    color: var(--neon-cyan);
+    z-index: -1;
+    transform: translate(-2px, 1px);
+    animation: glitch-anim 3s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+    color: var(--neon-pink);
+    z-index: -2;
+    transform: translate(2px, -1px);
+    animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+    0% { clip-path: inset(20% 0 80% 0); }
+    20% { clip-path: inset(60% 0 10% 0); }
+    40% { clip-path: inset(40% 0 50% 0); }
+    60% { clip-path: inset(80% 0 5% 0); }
+    80% { clip-path: inset(10% 0 70% 0); }
+    100% { clip-path: inset(30% 0 50% 0); }
+}
+
+/* =========================================
+   Contenedores y Tarjetas Cyberpunk
+   ========================================= */
+.cyber-container {
+    padding: 6rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.glass-card {
+    background: var(--card-bg);
+    padding: 2.5rem;
+    border: 1px solid rgba(0, 255, 204, 0.15);
+    backdrop-filter: blur(10px);
+    border-left: 4px solid var(--neon-cyan);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 25px), calc(100% - 25px) 100%, 0 100%);
+}
+
+.highlight-box {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: rgba(255, 0, 127, 0.1);
+    border-left: 4px solid var(--neon-pink);
+    font-style: italic;
+    color: #fff;
+}
+
+/* Grid de Servicios */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.service-card {
+    background: var(--card-bg);
+    padding: 2rem;
+    position: relative;
+    clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.service-card:hover { 
+    transform: translateY(-5px); 
+    border-color: var(--neon-cyan);
+    box-shadow: 0 8px 25px rgba(0, 255, 204, 0.15), inset 0 0 15px rgba(0, 255, 204, 0.05);
+}
+
+/* El segundo servicio brilla rosa para variar */
+.service-card:nth-child(even):hover {
+    border-color: var(--neon-pink);
+    box-shadow: 0 8px 25px rgba(255, 0, 127, 0.15), inset 0 0 15px rgba(255, 0, 127, 0.05);
+}
+
+.service-icon {
+    font-size: 2.5rem;
+    color: var(--neon-pink);
+    margin-bottom: 1rem;
+}
+
+/* Botones Outline Cyber */
+.cyber-btn-outline {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.5rem 1rem;
+    color: var(--neon-cyan);
+    border: 1px solid var(--neon-cyan);
+    text-decoration: none;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    background: transparent;
+}
+
+.cyber-btn-outline:hover {
+    background: var(--neon-cyan);
+    color: #000;
+    box-shadow: 0 0 15px var(--neon-cyan);
+}
+
+/* =========================================
+   Nuevo Pie de Página (Footer Cyberpunk)
+   ========================================= */
+.cyber-footer {
+    position: relative;
+    background: #020202;
+    padding: 4rem 2rem 1rem;
+    border-top: 1px solid rgba(255, 0, 127, 0.2);
+    overflow: hidden;
+}
+
+.footer-top-line {
+    position: absolute;
+    top: 0; left: 0;
+    height: 2px; width: 100%;
+    background: linear-gradient(90deg, transparent, var(--neon-pink), var(--neon-cyan), transparent);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 3rem;
+}
+
+.footer-brand h3 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.footer-desc {
+    color: #888;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+}
+
+.social-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem 1.5rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #fff;
+    text-decoration: none;
+    transition: var(--transition);
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+.social-btn:hover {
+    transform: translateX(10px);
+    border-color: var(--neon-pink);
+    background: rgba(255, 0, 127, 0.1);
+    box-shadow: 0 0 10px rgba(255, 0, 127, 0.3);
+}
+
+.social-btn i { font-size: 1.2rem; color: var(--neon-cyan); }
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.sys-info { color: var(--neon-cyan); font-family: 'Courier New', monospace; }
+
+@media (max-width: 768px) {
+    .footer-content { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+}
+
+.sys-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 1.5rem;
+    padding: 6px 15px;
+    border: 1px solid rgba(0, 255, 204, 0.3);
+    color: var(--neon-cyan);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    background: rgba(0, 255, 204, 0.05);
+    font-family: 'Courier New', monospace;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Fuente técnica aplicada a todo el documento */
+    font-family: 'Rajdhani', sans-serif; 
+}
+
+/* =========================================
+   Fondo animado Canvas
+   ========================================= */
+#cyber-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Posicionado sobre el color de fondo, detrás del contenido y video */
+    pointer-events: none; /* Permite hacer clic a través de él */
+}
+
+/* =========================================
+   Estilo Cyberpunk para Tarjetas (Esquinas cortadas)
+   ========================================= */
+.service-item, .project-card, .skill-category {
+    background: var(--card-bg);
+    margin-bottom: 1rem;
+    /* Corte diagonal en las esquinas (Clip-path) */
+    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+    border: 1px solid rgba(0, 255, 204, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: var(--transition);
+}
+
+.service-item:hover, .project-card:hover, .skill-category:hover {
+    border-color: rgba(0, 255, 204, 0.5);
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.1); /* Resplandor sutil */
+}
+
+/* Opcional: Dar el mismo corte diagonal a la terminal del Hero */
+.terminal-panel.minimal-terminal {
+    clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
+    border: 1px solid rgba(0, 255, 204, 0.2);
 }
 
 body {
@@ -48,8 +326,9 @@ body {
     /* Fondo oscuro semitransparente con desenfoque */
     background: rgba(10, 10, 10, 0.4); 
     backdrop-filter: blur(12px); 
-    -webkit-backdrop-filter: blur(12px); /* Soporte para Safari */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    -webkit-backdrop-filter: blur(12px); 
+    border-bottom: 1px solid rgba(0, 255, 204, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 255, 204, 0.05);
     transition: var(--transition);
 }
 
@@ -87,12 +366,172 @@ body {
     letter-spacing: 1px;
     transition: color 0.3s ease, opacity 0.3s ease;
     opacity: 0.8;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.5rem;
 }
 
-.nav-links a:hover {
-    color: var(--neon-color);
-    opacity: 1;
+.nav-links a::before,
+.nav-links a::after {
+    position: absolute;
+    opacity: 0;
+    transition: all 0.3s ease;
+    color: var(--neon-cyan);
+    font-weight: bold;
 }
+.nav-links a::before { content: '['; left: -15px; }
+.nav-links a::after { content: ']'; right: -15px; }
+
+.nav-links a:hover::before { opacity: 1; transform: translateX(10px); }
+.nav-links a:hover::after { opacity: 1; transform: translateX(-10px); }
+.nav-links a:hover .link-text { color: var(--neon-cyan); text-shadow: 0 0 8px rgba(0, 255, 204, 0.5); }
+
+/* =========================================
+   MEJORA SOBRE KENNYSTUDIO (Split Layout & Radar)
+   ========================================= */
+.split-layout {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr; /* Izquierda texto, Derecha visual */
+    gap: 2rem;
+    align-items: stretch;
+}
+
+.about-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: rgba(5, 5, 10, 0.6);
+}
+
+/* Animación del Radar */
+.radar-container {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid var(--neon-cyan);
+    position: relative;
+    overflow: hidden;
+    background: rgba(0, 255, 204, 0.05);
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.2), inset 0 0 20px rgba(0, 255, 204, 0.2);
+    margin-bottom: 2rem;
+}
+
+.radar-container::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 0; right: 0; height: 1px; background: rgba(0, 255, 204, 0.3);
+}
+.radar-container::before {
+    content: '';
+    position: absolute;
+    left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(0, 255, 204, 0.3);
+}
+
+.radar-sweep {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 50%; height: 50%;
+    background: linear-gradient(45deg, rgba(0, 255, 204, 1) 0%, transparent 50%);
+    transform-origin: 0% 0%;
+    animation: sweep 4s linear infinite;
+}
+
+@keyframes sweep { 100% { transform: rotate(360deg); } }
+
+.radar-dot {
+    position: absolute; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--neon-pink); box-shadow: 0 0 8px var(--neon-pink);
+    opacity: 0; animation: blink-dot 4s infinite;
+}
+.dot-1 { top: 30%; left: 60%; animation-delay: 1s; }
+.dot-2 { top: 70%; left: 30%; animation-delay: 2.5s; }
+
+@keyframes blink-dot { 
+    0%, 90% { opacity: 0; }
+    95% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.stats-panel {
+    display: flex; justify-content: space-around; width: 100%; text-align: center;
+}
+.stat { font-family: 'Courier New', monospace; font-size: 0.85rem; color: #888; }
+.stat span { display: block; font-size: 1.5rem; font-weight: bold; margin-bottom: 5px; }
+
+@media (max-width: 768px) {
+    .split-layout { grid-template-columns: 1fr; }
+}
+
+/* =========================================
+   MEJORA MÓDULOS DE SERVICIO (Botones Dobles)
+   ========================================= */
+.card-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 1.5rem;
+    flex-wrap: wrap; /* Para que en móviles bajen si no caben */
+}
+
+.cyber-btn-outline { margin-top: 0; flex: 1; text-align: center; cursor: pointer; }
+.btn-secondary {
+    border-color: var(--neon-pink);
+    color: var(--neon-pink);
+}
+.btn-secondary:hover {
+    background: var(--neon-pink);
+    color: #000;
+    box-shadow: 0 0 15px var(--neon-pink);
+}
+
+
+/* =========================================
+   MODALES DE PROYECTOS
+   ========================================= */
+.cyber-modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 2000; opacity: 0; pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.cyber-modal-overlay.active { opacity: 1; pointer-events: all; }
+
+.cyber-modal-box {
+    width: 90%; max-width: 600px;
+    background: #0a0a0f; padding: 2.5rem;
+    position: relative;
+    transform: translateY(-50px) scale(0.9);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cyber-modal-overlay.active .cyber-modal-box { transform: translateY(0) scale(1); }
+
+.close-modal {
+    position: absolute; top: 15px; right: 15px;
+    background: transparent; border: none; color: #fff;
+    font-size: 1.5rem; cursor: pointer; transition: color 0.3s;
+}
+.close-modal:hover { color: var(--neon-pink); }
+
+.modal-content-scroll {
+    margin-top: 1.5rem; max-height: 60vh; overflow-y: auto; padding-right: 10px;
+}
+/* Scrollbar personalizado */
+.modal-content-scroll::-webkit-scrollbar { width: 5px; }
+.modal-content-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
+.modal-content-scroll::-webkit-scrollbar-thumb { background: var(--neon-cyan); }
+
+.project-mockup-item {
+    background: rgba(255,255,255,0.02);
+    border-left: 2px solid var(--neon-cyan);
+    padding: 1.5rem; margin-bottom: 1.5rem;
+}
+.project-mockup-item h4 { color: #fff; margin-bottom: 0.5rem; font-size: 1.2rem; }
+.project-mockup-item p { color: #aaa; font-size: 0.95rem; margin-bottom: 1rem; }
 
 /* Responsividad para pantallas pequeñas */
 @media (max-width: 768px) {
@@ -130,7 +569,7 @@ body {
     text-align: center;
     overflow: hidden;
     padding: 0 2rem;
-    gap: 3rem; /* Espacio entre el bloque principal y la terminal */
+    gap: 2.5rem;
     color: #ffffff; 
 }
 
@@ -159,61 +598,96 @@ body {
     z-index: -1;
 }
 
-/* Contenedor del texto principal */
-.hero-content {
-    flex: 1;
+.hero-main-layout.centered-hero {
     display: flex;
     flex-direction: column;
-    align-items: flex-end; /* Alinea el texto hacia la derecha (hacia el logo) */
-    text-align: right;
-}
-
-.hero-content h1.neon-text-minimal {
-    font-size: 4.5rem;
-    margin-bottom: 0.5rem;
-    color: var(--neon-color);
-    text-shadow: 0 0 15px var(--neon-color);
-    letter-spacing: 2px;
-    line-height: 1.1;
-}
-
-.hero-content h2 {
-    font-size: 1.8rem;
-    font-weight: 400;
-    margin-bottom: 1rem;
-    letter-spacing: 1px;
-}
-
-.hero-content p {
-    font-size: 1.2rem;
-    font-weight: 300;
-    opacity: 0.8;
-}
-
-/* Layout del Hero para acomodar el ícono */
-.hero-main-layout {
-    display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5rem; /* Aumentamos un poco la separación para que respiren ambos elementos */
+    gap: 0.8rem;
     z-index: 1;
     width: 100%;
-    max-width: 1100px; /* Limitamos el ancho para forzar el centrado */
-    margin-top: 5rem;
+    max-width: 1000px;
+    margin-top: 5rem; /* Evita superposición con el navbar */
+    text-align: center;
 }
 
+/* 1. Logo */
 .hero-icon-wrapper {
-    flex: 1;
     display: flex;
-    justify-content: flex-start; /* Alinea el logo hacia la izquierda (hacia el texto) */
+    justify-content: center;
     transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
+    margin-bottom: -10px; /* Acerca el logo al nombre de la marca */
 }
 
 .gold-icon-main {
     width: 100%;
-    max-width: 300px; /* Controlamos el tamaño máximo para que no se vea desproporcionado */
+    max-width: 300px; /* Tamaño ligeramente ajustado para no saturar arriba */
     height: auto;
-    filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.4)); 
+    filter: drop-shadow(0 0 8px rgba(255, 217, 0, 0.822)); /* Dorado translúcido */
+
+    /* Transición para un efecto de hover (opcional pero recomendado) */
+    transition: filter 0.3s ease;
+}
+
+.gold-icon-main:hover {
+    filter: drop-shadow(0 0 15px rgba(255, 217, 0, 0.788)); /* Más intenso y nítido */
+}
+
+/* 2. Nombre de la marca (KENNY STUDIO) */
+.hero-brand-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 10px;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+}
+
+.glitch-text.light-weight {
+    font-size: 3.2rem;
+    font-weight: 300; /* Peso ligero para mayor elegancia */
+    letter-spacing: 1px;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+}
+
+/* 3 y 4. Contenedor de Textos Principales */
+.hero-content.centered-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-content.centered-content h2.glitch-text {
+    font-size: 3.5rem; /* Tamaño prominente para el título principal */
+    line-height: 1.1;
+    margin-bottom: 1rem;
+}
+
+.hero-content.centered-content p.gradient-text {
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+}
+
+/* Ajustes de Responsividad para Móviles */
+@media (max-width: 992px) {
+    .hero-main-layout.centered-hero {
+        gap: 1rem;
+        margin-top: 4rem;
+    }
+    .hero-content.centered-content h2.glitch-text {
+        font-size: 2.2rem;
+    }
+    .hero-brand-name {
+        font-size: 1rem;
+        letter-spacing: 8px;
+    }
+    .gold-icon-main {
+        max-width: 150px;
+    }
 }
 
 /* =========================================
@@ -355,14 +829,6 @@ section h2 {
     margin-right: 5px;
 }
 
-/* Footer */
-.footer {
-    text-align: center;
-    padding: 3rem 2rem;
-    background: var(--card-bg);
-    margin-top: 2rem;
-}
-
 .contact-links {
     display: flex;
     justify-content: center;
@@ -376,6 +842,36 @@ section h2 {
     font-size: 1.2rem;
 }
 
+.contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contact-list li {
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.contact-list i {
+    color: var(--neon-pink);
+    font-size: 1.3rem;
+}
+
+.contact-list a {
+    color: #ddd;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+.contact-list a:hover {
+    color: #fff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
 /* Navbar: Secciones equilibradas */
 .nav-section {
     flex: 1;
@@ -384,26 +880,138 @@ section h2 {
 }
 
 .nav-left { justify-content: flex-start; }
-.nav-center { justify-content: center; }
+.nav-center { 
+    justify-content: center; 
+    position: relative; /* Necesario para anclar el logo absoluto */
+    display: flex;
+}
 .nav-right { justify-content: flex-end; }
+
+.blink-colon {
+    animation: blink-colon 1s step-end infinite;
+}
+@keyframes blink-colon {
+    50% { opacity: 0; }
+}
 
 /* Contenedor del ícono en la Navbar */
 #nav-icon-container {
-    width: 40px;
-    height: 40px;
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: absolute;
+    display: block;
+    left: 50%;
+    width: 85px; /* Tamaño mucho más grande (antes era 40px) */
+    height: auto;
     opacity: 0;
-    transform: translateY(-20px) scale(0.5);
+    /* Inicia arriba, oculto y pequeño. El translateX(-50%) lo centra perfectamente */
+    transform: translateX(-50%) translateY(-50px) scale(0.5);
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1005; /* Asegura que flote por encima del contenido inferior */
+    
+    /* Resplandor para que destaque al sobresalir del cristal */
+    filter: drop-shadow(0 8px 15px rgba(255, 217, 0, 0.35));
 }
 
 #nav-icon-container.nav-icon-visible {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateX(-50%) translateY(5px) scale(1);
+}
+
+#nav-icon-container.nav-icon-visible .icon-fluid {
+    /* Dura 0.6s y se detiene al finalizar (forwards) */
+    animation: hologram-glitch 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 .icon-fluid {
     width: 100%;
     height: auto;
+    position: relative;
+    z-index: 2;
+}
+
+#nav-icon-container::after {
+    content: '';
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    /* Genera el patrón de rayas de colores */
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.9) 0px,
+        rgba(0, 255, 204, 0.8) 2px,
+        rgba(255, 0, 127, 0.8) 4px,
+        transparent 5px,
+        transparent 8px
+    );
+    mix-blend-mode: color-dodge; /* Efecto de luz intensa */
+    opacity: 0;
+    pointer-events: none;
+    z-index: 3;
+    border-radius: 50%; /* Suaviza el borde si tu logo es circular */
+}
+
+/* 4. Gatillo de la animación de las rayas */
+#nav-icon-container.nav-icon-visible::after {
+    animation: glitch-lines 0.6s ease-out forwards;
+}
+
+/* =========================================
+   Keyframes (La magia de la animación)
+   ========================================= */
+
+/* Distorsión y cortes de la imagen */
+@keyframes hologram-glitch {
+    0% {
+        filter: drop-shadow(6px 0 0 var(--neon-cyan)) drop-shadow(-6px 0 0 var(--neon-pink));
+        clip-path: inset(20% 0 80% 0); /* Corta la imagen */
+        transform: translate(-4px, 2px);
+    }
+    20% {
+        filter: drop-shadow(-6px 0 0 var(--neon-cyan)) drop-shadow(6px 0 0 #fff);
+        clip-path: inset(80% 0 5% 0);
+        transform: translate(4px, -2px);
+    }
+    40% {
+        filter: drop-shadow(3px 0 0 var(--neon-pink)) drop-shadow(-3px 0 0 #fff);
+        clip-path: inset(0 0 0 0); /* Imagen completa */
+        transform: translate(-2px, 0);
+    }
+    60% {
+        filter: drop-shadow(0 0 15px var(--neon-cyan));
+        clip-path: inset(40% 0 40% 0);
+        transform: translate(2px, 2px);
+    }
+    80% {
+        filter: drop-shadow(3px 0 0 var(--neon-pink));
+        clip-path: inset(0 0 0 0);
+        transform: translate(0, 0);
+    }
+    100% {
+        /* Regresa a la normalidad para dejar brillar el drop-shadow original del contenedor */
+        filter: drop-shadow(0 0 0 transparent);
+        clip-path: inset(0 0 0 0);
+        transform: translate(0, 0);
+    }
+}
+
+/* Parpadeo estroboscópico de las rayas */
+@keyframes glitch-lines {
+    0% { opacity: 0; transform: translateY(-10px) scale(0.9); }
+    20% { opacity: 1; transform: translateY(5px) scale(1.1); }
+    40% { opacity: 0; transform: translateY(-5px) scale(1); }
+    60% { opacity: 0.8; transform: translateY(2px) scale(1.05); }
+    100% { opacity: 0; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 768px) {
+    #nav-icon-container {
+        width: 65px; /* Un poco más pequeño en móviles para no tapar texto */
+        transform: translateX(-50%) translateY(-40px) scale(0.5);
+    }
+    #nav-icon-container.nav-icon-visible {
+        transform: translateX(-50%) translateY(5px) scale(1);
+    }
 }
 
 /* Efecto de salida para el ícono del hero */
@@ -431,4 +1039,884 @@ section h2 {
     .nav-links {
         display: none; /* Se ocultan en móvil para no romper el diseño */
     }
+}
+
+/* =========================================
+   Core Técnico: Rediseño Avanzado
+   ========================================= */
+.skills-matrix-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Tarjetas Base */
+.skill-node {
+    background: rgba(10, 10, 15, 0.6);
+    padding: 2.5rem 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 3px solid var(--neon-cyan); /* Acento en la parte superior */
+    border-radius: 6px; 
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 25px), calc(100% - 25px) 100%, 0 100%);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-node:nth-child(2) { border-top-color: var(--neon-pink); }
+.skill-node:nth-child(3) { border-top-color: var(--neon-cyan); }
+
+/* Efecto Hover Magnético y Neón en los Nodos */
+.skill-node:hover {
+    transform: translateY(-10px);
+    background: rgba(15, 15, 20, 0.9);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0, 255, 204, 0.05);
+    border-color: rgba(0, 255, 204, 0.3);
+}
+
+.skill-node:nth-child(2):hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(255, 0, 127, 0.05);
+    border-color: rgba(255, 0, 127, 0.3);
+}
+
+/* Decoración estilo placa de circuito en hover */
+.skill-node::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 25px;
+    width: 30px;
+    height: 3px;
+    background: var(--neon-cyan);
+    opacity: 0.3;
+    transition: width 0.4s ease, opacity 0.4s ease;
+}
+
+.skill-node:nth-child(2)::after { background: var(--neon-pink); }
+
+.skill-node:hover::after {
+    width: 120px; /* Se expande al hacer hover */
+    opacity: 1;
+    box-shadow: 0 0 10px var(--neon-cyan);
+}
+.skill-node:nth-child(2):hover::after { box-shadow: 0 0 10px var(--neon-pink); }
+
+/* Cabeceras de los Nodos */
+.node-header {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+.node-header i { 
+    font-size: 1.8rem;
+    color: var(--neon-cyan); 
+    transition: filter 0.3s ease;
+}
+
+.skill-node:nth-child(2) .node-header i { color: var(--neon-pink); }
+
+.skill-node:hover .node-header i { filter: drop-shadow(0 0 10px var(--neon-cyan)); }
+.skill-node:nth-child(2):hover .node-header i { filter: drop-shadow(0 0 10px var(--neon-pink)); }
+
+/* =========================================
+   Componentes Internos: Barras y Etiquetas
+   ========================================= */
+.skill-item { margin-bottom: 1.5rem; }
+
+.skill-name {
+    display: block;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    color: #aaa;
+    font-family: 'Courier New', Courier, monospace;
+    transition: color 0.3s;
+}
+
+.skill-node:hover .skill-name { color: #fff; }
+
+.skill-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.skill-fill {
+    height: 100%;
+    background: var(--neon-cyan);
+    box-shadow: 0 0 10px var(--neon-cyan);
+    border-radius: 3px;
+    /* La animación se detiene inicialmente */
+    transform: translateX(-100%); 
+}
+
+/* La barra de progreso se llena al hacer hover sobre la tarjeta */
+.skill-node:hover .skill-fill {
+    animation: fillBar 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes fillBar {
+    to { transform: translateX(0); }
+}
+
+/* Etiquetas Holográficas (Tech Tags para Seguridad) */
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.tech-tag {
+    background: rgba(255, 0, 127, 0.05);
+    color: #ccc;
+    border: 1px solid rgba(255, 0, 127, 0.2);
+    padding: 8px 15px;
+    font-size: 0.85rem;
+    font-family: 'Courier New', Courier, monospace;
+    transition: all 0.3s ease;
+    clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+}
+
+.tech-tag:hover {
+    background: var(--neon-pink);
+    color: #ffffff;
+    border-color: var(--neon-pink);
+    box-shadow: 0 0 15px rgba(255, 0, 127, 0.6);
+    transform: translateY(-3px) scale(1.05);
+}
+
+
+/* =========================================
+   Footer: Terminal y Estación de Mando
+   ========================================= */
+.footer-main {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Da más espacio a la terminal */
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+    align-items: stretch;
+}
+
+.footer-main-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1.5fr; /* Tres columnas proporcionadas */
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto 4rem;
+    align-items: start;
+}
+
+.footer-terminal {
+    margin-top: 1.5rem;
+    background: #000;
+    border: 1px solid rgba(255, 0, 127, 0.3);
+    border-radius: 4px;
+    max-width: 500px;
+}
+
+/* Terminal Mejorada */
+.footer-terminal.enhanced-terminal {
+    margin-top: 0;
+    background: rgba(5, 5, 10, 0.85);
+    border: 1px solid rgba(0, 255, 204, 0.3);
+    border-radius: 6px;
+    max-width: 100%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(0, 255, 204, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-terminal.compact-terminal {
+    margin-top: 0;
+    background: rgba(5, 5, 10, 0.85);
+    border: 1px solid rgba(0, 255, 204, 0.3);
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(0, 255, 204, 0.05);
+}
+
+.term-header {
+    background: #111;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid rgba(0, 255, 204, 0.2);
+}
+
+.term-dot { width: 10px; height: 10px; border-radius: 50%; }
+.term-dot.red { background: #ff5f56; }
+.term-dot.yellow { background: #ffbd2e; }
+.term-dot.green { background: #27c93f; }
+
+.term-title {
+    color: #666;
+    font-size: 0.8rem;
+    font-family: 'Courier New', monospace;
+    margin-left: auto;
+}
+
+.term-body {
+    padding: 20px;
+    font-family: 'Courier New', monospace;
+}
+
+.term-output {
+    color: var(--neon-cyan);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Botones sociales dentro de la terminal */
+.social-row.in-terminal {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.social-icon-btn {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(0, 255, 204, 0.2);
+    color: var(--neon-cyan);
+    font-size: 1.3rem;
+    text-decoration: none;
+    transition: var(--transition);
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+.social-icon-btn:hover {
+    background: var(--neon-pink);
+    color: #000;
+    border-color: var(--neon-pink);
+    box-shadow: 0 0 15px var(--neon-pink);
+    transform: translateY(-3px);
+}
+
+.footer-status-bar.enhanced-status {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 1.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: #cccccc; 
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 992px) {
+    .footer-main-grid {
+        grid-template-columns: 1fr 1fr; /* Pasa a 2 columnas en tablets */
+    }
+    .terminal-col {
+        grid-column: span 2; /* La terminal ocupa todo el ancho abajo */
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-main { 
+        grid-template-columns: 1fr; 
+        gap: 2rem; 
+    }
+    .footer-status-bar.enhanced-status { 
+        flex-direction: column; 
+        gap: 1rem; 
+        text-align: center; 
+    }
+    .social-row.in-terminal {
+        justify-content: center;
+    }
+    .footer-main-grid { 
+        grid-template-columns: 1fr; /* Pasa a 1 columna en móviles */
+    }
+    .terminal-col {
+        grid-column: span 1;
+    }
+    .footer-status-bar.enhanced-status { 
+        flex-direction: column; 
+        gap: 1rem; 
+        text-align: center; 
+    }
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--neon-cyan);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--neon-cyan);
+    animation: pulse-dot 1.5s infinite alternate;
+}
+
+@keyframes pulse-dot {
+    0% { opacity: 0.4; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Columna 2: Enlaces (Directorios) */
+.col-title {
+    color: var(--neon-pink);
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px dashed rgba(255, 0, 127, 0.3);
+    padding-bottom: 0.5rem;
+}
+
+.cyber-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cyber-links li {
+    margin-bottom: 1rem;
+}
+
+.cyber-links a {
+    color: #aaa;
+    text-decoration: none;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+.cyber-links a:hover {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 8px rgba(0, 255, 204, 0.5);
+    padding-left: 8px; /* Efecto de "indentación" al pasar el cursor */
+}
+
+/* =========================================
+   Switch de Tema (Día/Noche) - MEJORADO
+   ========================================= */
+.theme-switch-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    width: 64px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    outline: none;
+    border-radius: 30px;
+}
+
+.switch-track {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(0, 255, 204, 0.4);
+    border-radius: 30px;
+    transition: var(--transition);
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.5); /* Sombra interna */
+}
+
+.switch-thumb {
+    position: absolute;
+    left: 4px;
+    width: 24px;
+    height: 24px;
+    background: var(--neon-cyan);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s cubic-bezier(0.4, 0.0, 0.2, 1), background 0.4s ease, box-shadow 0.4s ease;
+    color: #000;
+    font-size: 13px;
+    z-index: 1;
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.6);
+}
+
+.switch-thumb i {
+    transition: transform 0.5s ease; /* Transición suave para la rotación */
+}
+
+/* =========================================
+   MODO CLARO (Light Theme) - Armonización Total
+   ========================================= */
+[data-theme="light"] {
+    --bg-color: #e2e6f0; /* Fondo ligeramente más oscuro para que las tarjetas blancas resalten */
+    --text-color: #1a1a2e; /* Azul marino muy oscuro para legibilidad */
+    --neon-cyan: #0055ff; /* Azul eléctrico */
+    --neon-pink: #d9005c; /* Magenta oscuro */
+    --card-bg: #ffffff;
+    --terminal-bg: #ffffff;
+    --terminal-text: #0055ff;
+}
+
+/* 1. Cambio de overlay del video para no oscurecer demasiado */
+[data-theme="light"] .hero-overlay { 
+    background: rgba(255, 255, 255, 0.1); /* Reducimos la niebla al 10% */
+}
+
+/* 2. Íconos (Logos) a Negro Puro con sombra azulada */
+[data-theme="light"] .gold-icon-main {
+    /* Usamos colores puros (cyan y rosado) con un offset muy fino (-2px y 2px) */
+    filter: brightness(0) drop-shadow(-2px 2px 0px #00ffcc) drop-shadow(2px -2px 0px #ff007f) !important;
+    transition: filter 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+[data-theme="light"] .gold-icon-main:hover {
+    /* Los colores se colapsan al centro (0px) quedando solo el negro */
+    filter: brightness(0) drop-shadow(0px 0px 0px transparent) drop-shadow(0px 0px 0px transparent) !important;
+}
+
+[data-theme="light"] .icon-fluid {
+    /* Logo del Navbar en negro puro */
+    filter: brightness(0);
+}
+[data-theme="light"] #nav-icon-container .icon-fluid {
+    filter: brightness(0) !important; /* Fuerza el negro ignorando animaciones de neón */
+}
+
+[data-theme="light"] #nav-icon-container {
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15)) !important; /* Sombra limpia, sin dorados */
+}
+
+/* 4. Adaptación del nuevo Switch al Modo Claro */
+[data-theme="light"] .switch-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+}
+
+[data-theme="light"] .switch-thumb {
+    transform: translateX(32px);
+    background: #1a1a2e; /* Botón oscuro */
+    color: #ffcc00; /* Ícono del sol en amarillo */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] .switch-thumb i {
+    transform: rotate(360deg); /* El sol da un giro completo al aparecer */
+}
+
+[data-theme="light"] .gold-icon-main:hover {
+    filter: brightness(0) saturate(100%) invert(23%) sepia(91%) saturate(3014%) hue-rotate(212deg) brightness(99%) contrast(106%) drop-shadow(0 8px 20px rgba(0, 102, 255, 0.5));
+}
+
+/* 3. Forzar color oscuro en textos que por defecto eran blancos */
+[data-theme="light"] .hero-brand-name,
+[data-theme="light"] .glitch-text,
+[data-theme="light"] .node-header,
+[data-theme="light"] .skill-name,
+[data-theme="light"] .project-mockup-item h4,
+[data-theme="light"] h3,
+[data-theme="light"] .contact-list a,
+[data-theme="light"] .term-title,
+[data-theme="light"] .footer-desc {
+    color: var(--text-color);
+}
+
+[data-theme="light"] .highlight-box {
+    background: rgba(0, 85, 255, 0.08); /* Fondo azulado muy sutil */
+    border-left-color: var(--neon-cyan);
+    color: var(--text-color);
+}
+
+/* Suavizar el efecto glitch en modo claro */
+[data-theme="light"] .glitch-text::before,
+[data-theme="light"] .glitch-text::after {
+    opacity: 0.4; 
+}
+
+/* 4. Fondos de Tarjetas y Terminales */
+[data-theme="light"] .terminal-panel.minimal-terminal,
+[data-theme="light"] .footer-terminal.compact-terminal,
+[data-theme="light"] .glass-card,
+[data-theme="light"] .skill-node,
+[data-theme="light"] .service-card {
+    background: var(--card-bg); /* Ahora es blanco puro */
+    border-color: rgba(0, 85, 255, 0.15);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03); /* Sombra suave de elevación */
+}
+
+[data-theme="light"] .terminal-header,
+[data-theme="light"] .term-header {
+    background: #e4e7ec;
+    color: #444;
+    border-bottom: 1px solid rgba(0, 85, 255, 0.2);
+}
+
+/* Hover de tarjetas en modo claro */
+[data-theme="light"] .skill-node:hover .skill-name {
+    color: #000000; /* Negro intenso */
+    font-weight: 700; /* Negrita para máxima legibilidad */
+}
+[data-theme="light"] .service-card:hover {
+    background: #ffffff;
+    box-shadow: 0 15px 30px rgba(0, 85, 255, 0.15);
+    border-color: rgba(0, 85, 255, 0.4);
+}
+
+/* Detalles internos del Core Técnico (Barras y Tags) */
+[data-theme="light"] .skill-bar {
+    background: rgba(0, 0, 0, 0.08); /* Riel de la barra gris claro */
+}
+
+
+[data-theme="light"] .tech-tag {
+    background: rgba(0, 85, 255, 0.05);
+    border-color: rgba(0, 85, 255, 0.2);
+    color: var(--text-color);
+}
+[data-theme="light"] .tech-tag:hover {
+    background: var(--neon-cyan);
+    color: #ffffff;
+}
+
+/* 5. Ajustes Módulos de Servicios (Botones WhatsApp y Proyectos) */
+[data-theme="light"] .service-card .cyber-btn-outline[href*="wa.me"] {
+    color: #25D366; /* Verde característico de WP */
+    border-color: #25D366;
+}
+[data-theme="light"] .service-card .cyber-btn-outline[href*="wa.me"]:hover {
+    background: #25D366;
+    color: #ffffff; /* Texto a blanco */
+    box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
+}
+[data-theme="light"] .service-card .btn-secondary {
+    color: var(--neon-pink);
+    border-color: var(--neon-pink);
+}
+[data-theme="light"] .service-card .btn-secondary:hover {
+    background: var(--neon-pink);
+    color: #ffffff; /* Texto a blanco */
+    box-shadow: 0 0 15px rgba(217, 0, 92, 0.4);
+}
+
+/* 6. Modales en Modo Claro */
+[data-theme="light"] .cyber-modal-box {
+    background: #ffffff;
+    border: 1px solid rgba(0, 85, 255, 0.2);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+}
+[data-theme="light"] .close-modal {
+    color: #888;
+}
+[data-theme="light"] .close-modal:hover {
+    color: var(--neon-pink);
+}
+[data-theme="light"] .project-mockup-item {
+    background: #f4f6f9;
+    border-left-color: var(--neon-cyan);
+}
+[data-theme="light"] .project-mockup-item p {
+    color: #555;
+}
+
+/* 7. Footer Armonizado y Barra Oscura */
+[data-theme="light"] .cyber-footer {
+    background: #f4f6f9; /* Fondo gris súper claro para máxima limpieza */
+    border-top: 1px solid rgba(0, 85, 255, 0.15);
+}
+
+[data-theme="light"] .footer-brand h3, 
+[data-theme="light"] .col-title {
+    color: var(--text-color);
+}
+
+[data-theme="light"] .col-title {
+    border-bottom: 1px dashed rgba(0, 85, 255, 0.3);
+    color: var(--neon-pink); /* Magenta oscuro para títulos de directorio */
+}
+
+[data-theme="light"] .footer-desc, 
+[data-theme="light"] .cyber-links a {
+    color: #444444; /* Gris oscuro legible */
+    font-weight: 500;
+}
+
+[data-theme="light"] .cyber-links a:hover {
+    color: var(--neon-cyan); /* Azul al pasar el cursor */
+}
+
+/* Ajuste del Badge del Sistema */
+[data-theme="light"] .sys-badge {
+    border-color: rgba(0, 85, 255, 0.3);
+    color: var(--neon-cyan); /* Azul eléctrico */
+    background: rgba(0, 85, 255, 0.05);
+}
+[data-theme="light"] .pulse-dot {
+    background: var(--neon-cyan);
+    box-shadow: 0 0 8px var(--neon-cyan);
+}
+
+/* Ajuste de la Terminal del Footer y Contactos */
+[data-theme="light"] .footer-terminal.compact-terminal {
+    background: #ffffff;
+    border-color: rgba(0, 85, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+[data-theme="light"] .term-output {
+    color: var(--neon-cyan); /* Texto de salida en azul */
+    font-weight: 600;
+}
+
+[data-theme="light"] .contact-list i {
+    color: var(--neon-pink); /* Íconos (WP, Telegram) en magenta */
+}
+
+[data-theme="light"] .contact-list a {
+    color: #222222; /* Textos de contacto muy oscuros */
+    font-weight: 600;
+}
+
+[data-theme="light"] .contact-list a:hover {
+    color: var(--neon-cyan);
+}
+
+/* Mantiene la barra de derechos reservados oscura */
+[data-theme="light"] .footer-status-bar.enhanced-status {
+    background: #1a1a2e; 
+    color: #ffffff;
+    text-shadow: none;
+    border-top: none;
+    margin: 0 -2rem -1rem -2rem; 
+    padding: 1.5rem 2rem;
+}
+
+[data-theme="light"] .social-icon-btn {
+    background: #ffffff;
+    border-color: rgba(0, 85, 255, 0.2);
+}
+
+[data-theme="light"] .footer-status-bar.enhanced-status {
+    background: #1a1a2e; /* Azul marino profundo */
+    color: #ffffff;
+    text-shadow: none;
+    border-top: none;
+    /* Los márgenes negativos anulan el padding del footer padre para expandirse de lado a lado */
+    margin: 0 -2rem -1rem -2rem; 
+    padding: 1.5rem 2rem;
+}
+
+[data-theme="light"] .cyber-clock {
+    background: #ffffff;
+    text-shadow: none;
+    font-weight: 700;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05), 0 0 5px rgba(0, 85, 255, 0.2);
+}
+
+/* =========================================
+   RELOJ DINÁMICO (NAVBAR) - ESTILO DIGITAL LED
+   ========================================= */
+.cyber-clock {
+    font-family: 'Share Tech Mono', monospace; /* Fuente digital */
+    color: var(--neon-cyan);
+    font-size: 1.3rem;
+    margin-right: 1.5rem;
+    letter-spacing: 2px;
+    background: #020202; /* Fondo de pantalla LED apagado */
+    padding: 4px 12px;
+    border: 1px solid rgba(0, 255, 204, 0.15);
+    border-radius: 3px;
+    /* Efecto de pantalla incrustada con resplandor interior y exterior */
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8), 0 0 8px rgba(0, 255, 204, 0.1);
+    text-shadow: 0 0 8px var(--neon-cyan), 0 0 2px #fff; /* Resplandor LED */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 110px; /* Evita que la barra salte cuando cambian los números */
+}
+
+/* =========================================
+   WIDGETS FLOTANTES (Reproductor + WhatsApp)
+   ========================================= */
+.floating-widgets {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 2000;
+    display: flex;
+    align-items: flex-end;
+    gap: 15px;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+/* Ocultar widgets al hacer scroll */
+.floating-widgets.scroll-hidden {
+    transform: translateY(150px);
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+/* =========================================
+   REPRODUCTOR SUPERHOT (VERSIÓN MINI)
+   ========================================= */
+.sh-player {
+    width: 200px;
+    background: #000000;
+    border: 2px solid #ff0000;
+    padding: 10px;
+    font-family: 'Rajdhani', sans-serif;
+    text-transform: uppercase;
+    box-shadow: 4px 4px 0px rgba(255, 0, 0, 0.8);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Botón WhatsApp Estilo SUPERHOT */
+.sh-whatsapp {
+    background: #000000;
+    border: 2px solid #25D366; /* Verde WhatsApp */
+    color: #25D366;
+    padding: 10px 15px;
+    font-size: 1.5rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 4px 4px 0px rgba(37, 211, 102, 0.8);
+    transition: all 0.2s ease;
+    height: fit-content;
+}
+
+.sh-whatsapp:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px rgba(37, 211, 102, 1);
+    background: #25D366;
+    color: #000;
+}
+
+.sh-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 800;
+}
+
+.sh-text { color: #ff0000; font-size: 0.8rem; letter-spacing: 2px; }
+
+.sh-toggle-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: transform 0.4s ease;
+}
+
+/* Estado Colapsado */
+.sh-player.collapsed {
+    width: 120px;
+    padding: 8px 12px;
+}
+
+.sh-player.collapsed .sh-content {
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0;
+    pointer-events: none;
+}
+
+.sh-player.collapsed .sh-toggle-btn {
+    transform: rotate(180deg);
+}
+
+/* Contenido Expandible */
+.sh-content {
+    max-height: 200px;
+    opacity: 1;
+    margin-top: 15px;
+    transition: all 0.4s ease;
+    overflow: hidden;
+}
+
+.sh-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.sh-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.sh-play-btn {
+    background: #ff0000;
+    border: none;
+    width: 25px;
+    height: 25px;
+    color: #000;
+    cursor: pointer;
+    font-size: 0.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sh-bar { flex-grow: 1; height: 4px; background: rgba(255,255,255,0.2); }
+.sh-fill { width: 0%; height: 100%; background: #fff; }
+
+/* Control de Volumen */
+.sh-volume-zone {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-top: 1px solid rgba(255, 0, 0, 0.3);
+    padding-top: 10px;
+}
+
+.sh-vol-icon { color: #ff0000; font-size: 0.7rem; }
+
+.sh-volume-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 2px;
+    background: rgba(255,255,255,0.1);
+    outline: none;
+}
+
+.sh-volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 8px;
+    height: 8px;
+    background: #ff0000;
+    cursor: pointer;
+    border-radius: 0; /* Cuadrado estilo SUPERHOT */
+}
+
+.sh-player.scroll-hidden {
+    /* Lo empuja hacia abajo fuera de la pantalla y lo desvanece */
+    transform: translateY(150px);
+    opacity: 0;
+    pointer-events: none; /* Evita clics accidentales mientras está oculto */
+}
+
+@media (max-width: 768px) {
+    .floating-widgets {
+        bottom: 10px;
+        right: 10px;
+        gap: 10px;
+    }
+    .sh-player {
+        width: 180px;
+    }
+
+    .cyber-clock { display: none;}
 }

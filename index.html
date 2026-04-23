@@ -8,163 +8,368 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <canvas id="cyber-bg"></canvas>
-    
+
     <nav class="navbar minimal-nav">
         <div class="nav-section nav-left">
             <ul class="nav-links">
-                <li><a href="#about">Nosotros</a></li>
-                <li><a href="#services">Servicios</a></li>
-                <li><a href="#portfolio">Lab</a></li>
+                <li><a href="#about"><span class="link-text">Sobre KS.</span></a></li>
+                <li><a href="#services"><span class="link-text">Servicios</span></a></li>
+                <li><a href="#skills"><span class="link-text">Core Técnico</span></a></li>
             </ul>
         </div>
 
         <div class="nav-section nav-center">
             <div id="nav-icon-container" class="nav-icon-hidden">
-                <img src="logo2.png" alt="KennyStudio Icon" class="icon-fluid">
+                <a href="#home">
+                    <img src="logo2.png" alt="KennyStudio Icon" class="icon-fluid">
+                </a>
             </div>
         </div>
 
         <div class="nav-section nav-right">
-            <button id="theme-toggle" class="theme-btn">
-                <i class="fas fa-moon dark-icon"></i>
-                <i class="fas fa-sun light-icon" style="display:none;"></i>
+            <div class="cyber-clock" id="sys-clock">00:00:00</div>
+            
+            <button id="theme-toggle" class="theme-switch-btn" aria-label="Cambiar tema">
+                <div class="switch-track"></div>
+                <div class="switch-thumb">
+                    <i class="fas fa-moon"></i>
+                </div>
             </button>
         </div>
     </nav>
 
     <header class="hero" id="home">
-        <video autoplay muted loop playsinline class="hero-video">
+        <video autoplay muted loop playsinline class="hero-video" id="hero-video-bg">
             <source src="hero_video.mp4" type="video/mp4">
-            El navegador no soporta videos HTML5.
         </video>
-
         <div class="hero-overlay"></div>
 
-        <div class="hero-main-layout">
-            <div class="hero-content">
-                <h1 class="neon-text-minimal">KennyStudio</h1>
-                <h2>Soluciones Digitales de Nueva Generación</h2>
-                <p>De la Idea a la Infraestructura Segura.</p>
-            </div>
+        <div class="hero-main-layout centered-hero">
 
             <div class="hero-icon-wrapper" id="hero-icon">
-                <img src="logo2.png" alt="Featured Icon" class="gold-icon-main">
+                <img src="logo2.png" alt="Featured Icon" class="gold-icon-main dual-glow">
             </div>
+
+            <h1 class="hero-brand-name">KENNY STUDIO</h1>
+
+            <div class="hero-content centered-content">
+                <h2 class="glitch-text light-weight" data-text="Soluciones Digitales de Nueva Generación">
+                    Soluciones Digitales de Nueva Generación
+                </h2>
+                <p class="gradient-text">De la Idea a la Infraestructura Segura.</p>
+            </div>
+
         </div>
 
-        <div class="terminal-panel minimal-terminal">
+        <div class="terminal-panel minimal-terminal cyber-border">
             <div class="terminal-header">
                 <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                <span>status_monitor.exe</span>
+                <span>sys_monitor.exe // STATUS: SECURE</span>
             </div>
             <div class="terminal-body" id="terminal-text">
-                > Sistemas: Online<br>
-                > Proyectos Actuales: 3<br>
-                > Ubicación: Global<span class="cursor">_</span>
+                > root@KennyStudio:~# check_systems<br>
+                > [OK] Sistemas Nucleares: Online<br>
+                > [OK] Proyectos Activos: 3<br>
+                > [OK] Nodos de Seguridad: Desplegados<span class="cursor">_</span>
             </div>
         </div>
     </header>
 
-    <section class="about" id="about">
-        <h2>Sobre KennyStudio</h2>
-        <div class="about-text">
-            <p>En KennyStudio, combinamos tecnología, análisis e inteligencia digital para ofrecer soluciones que van
-                más allá de lo convencional. No solo desarrollamos páginas web o software; creamos herramientas
-                estratégicas diseñadas para generar impacto, presencia y resultados reales.</p>
-            <p>Nuestro enfoque se basa en la precisión, la curiosidad y el entendimiento profundo de los sistemas
-                digitales. Cada proyecto es tratado como único, aplicando pensamiento analítico y creatividad para
-                resolver problemas de forma eficiente y profesional.</p>
-            <p>Desde el desarrollo Full-Stack hasta el ciberanálisis e investigación digital, trabajamos con un objetivo
-                claro: convertir la información en valor y la tecnología en ventaja.</p>
-            <p class="highlight">Porque en KennyStudio, no solo construimos soluciones… entendemos lo que otros no ven.
-            </p>
-        </div>
-    </section>
-
-    <section class="services" id="services">
-        <h2>Servicios & Proyectos Integrados</h2>
-
-        <div class="service-item">
-            <button class="service-header">
-                <h3>Desarrollo de Software & Web</h3>
-                <p>Optimizados para mejorar presencia y productividad.</p>
-                <i class="fas fa-chevron-down"></i>
-            </button>
-            <div class="service-content">
-                <div class="service-theme futuristic-bg">
-                    <h4>Tema: Aplicaciones escalables, rápidas y con diseño minimalista/futurista.</h4>
-                    <p><strong>Proyecto Destacado:</strong> Plataforma web interactiva o App con arquitectura limpia.
-                        (Stack: React, Node.js, Python).</p>
-                    <div class="code-animation">/* Animación de código aquí */</div>
-                </div>
-                <div class="service-details">
-                    <p>Diseñamos y desarrollamos páginas web y sistemas funcionales orientados a ofrecer soluciones
-                        digitales modernas, eficientes y adaptadas a necesidades específicas. El enfoque combina diseño
-                        intuitivo, rendimiento optimizado y tecnologías actuales.</p>
-                    <a href="https://wa.me/51973661041?text=Hola,%20KennyStudio%20%F0%9F%91%8B%20Estoy%20interesado%20en%20el%20servicio%20de%20Desarrollo%20de%20Software%20%26%20Web.%20%C2%BFPodr%C3%ADas%20brindarme%20m%C3%A1s%20informaci%C3%B3n,%20por%20favor%3F"
-                        class="btn-whatsapp" target="_blank">
-                        <i class="fab fa-whatsapp"></i> Solicitar Servicio
-                    </a>
-                </div>
+    <section class="about cyber-container" id="about">
+        <h2 class="section-title">Sobre KennyStudio</h2>
+        <div class="about-grid split-layout">
+            <div class="about-text glass-card">
+                <p>En KennyStudio, la tecnología, el análisis e inteligencia digital convergen para forjar soluciones
+                    estratégicas. Se diseñan herramientas para generar impacto real y fortalecer la infraestructura en
+                    la red.</p>
+                <p>El enfoque radica en la precisión y el entendimiento estructural de los sistemas. Desde el desarrollo
+                    Full-Stack hasta la investigación forense digital, el objetivo es convertir la información en valor.
+                </p>
+                <p class="highlight-box">No se construyen simples soluciones… se entiende lo que el resto no ve.</p>
             </div>
-        </div>
-
-    </section>
-
-    <section class="portfolio" id="portfolio">
-        <h2>The Lab (Proyectos)</h2>
-        <div class="filters">
-            <button class="filter-btn active">Todos</button>
-            <button class="filter-btn">Web</button>
-            <button class="filter-btn">Seguridad</button>
-        </div>
-        <div class="grid-portfolio">
-            <div class="project-card">
-                <div class="mockup-img">Imagen Mockup</div>
-                <div class="tags">
-                    <span class="tag">#Python</span>
-                    <span class="tag">#CyberSec</span>
-                    <span class="tag">#AWS</span>
+            
+            <div class="about-visual glass-card cyber-border">
+                <div class="radar-container">
+                    <div class="radar-sweep"></div>
+                    <div class="radar-dot dot-1"></div>
+                    <div class="radar-dot dot-2"></div>
+                </div>
+                <div class="stats-panel">
+                    <div class="stat"><span class="neon-cyan-text">100%</span> Precisión</div>
+                    <div class="stat"><span class="neon-pink-text">0</span> Brechas</div>
+                    <div class="stat"><span class="neon-cyan-text">24/7</span> Monitoreo</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="skills" id="skills">
-        <h2>El "Core" Técnico</h2>
-        <div class="skills-panel">
-            <div class="skill-category">
-                <h3>Lenguajes</h3>
-                <p>JavaScript, Python, C++, SQL</p>
+    <section class="services cyber-container" id="services">
+        <h2 class="section-title">Módulos de Servicio</h2>
+        <div class="services-grid">
+
+            <div class="service-card cyber-border-hover">
+                <div class="service-icon"><i class="fas fa-code"></i></div>
+                <h3>Desarrollo Web & Software</h3>
+                <p>Arquitecturas limpias, escalables y orientadas a la máxima productividad mediante stacks modernos.</p>
+                <div class="card-actions">
+                    <a href="https://wa.me/51973661041?text=Hola,%20KennyStudio.%20Deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20Desarrollo%20Web%20y%20Software." target="_blank" class="cyber-btn-outline"><i class="fab fa-whatsapp"></i> Solicitar</a>
+                    <button class="cyber-btn-outline btn-secondary modal-trigger" data-modal="modal-dev"><i class="fas fa-folder-open"></i> Proyectos</button>
+                </div>
             </div>
-            <div class="skill-category">
-                <h3>Seguridad</h3>
-                <p>Kali Linux, Wireshark, Metasploit, Nmap</p>
+
+            <div class="service-card cyber-border-hover">
+                <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>Ciberseguridad & Pentesting</h3>
+                <p>Auditorías de seguridad, pruebas de penetración e identificación de vulnerabilidades bajo estándares forenses.</p>
+                <div class="card-actions">
+                    <a href="https://wa.me/51973661041?text=Hola,%20KennyStudio.%20Deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20Ciberseguridad%20y%20Pentesting." target="_blank" class="cyber-btn-outline"><i class="fab fa-whatsapp"></i> Solicitar</a>
+                    <button class="cyber-btn-outline btn-secondary modal-trigger" data-modal="modal-sec"><i class="fas fa-folder-open"></i> Proyectos</button>
+                </div>
             </div>
-            <div class="skill-category">
-                <h3>Diseño</h3>
-                <p>Figma, Adobe Suite, Animaciones CSS3/Canvas</p>
+
+            <div class="service-card cyber-border-hover">
+                <div class="service-icon"><i class="fas fa-user-secret"></i></div>
+                <h3>Investigación Forense OSINT</h3>
+                <p>Verificación de identidades y análisis de perfiles digitales para la toma de decisiones con respaldo legal.</p>
+                <div class="card-actions">
+                    <a href="https://wa.me/51973661041?text=Hola,%20KennyStudio.%20Deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20Investigaci%C3%B3n%20Forense%20OSINT." target="_blank" class="cyber-btn-outline"><i class="fab fa-whatsapp"></i> Solicitar</a>
+                    <button class="cyber-btn-outline btn-secondary modal-trigger" data-modal="modal-osint"><i class="fas fa-folder-open"></i> Proyectos</button>
+                </div>
+            </div>
+
+            <div class="service-card cyber-border-hover">
+                <div class="service-icon"><i class="fas fa-robot"></i></div>
+                <h3>IA & Automatización</h3>
+                <p>Integración de redes neuronales, automatización de procesos repetitivos y desarrollo de asistentes inteligentes.</p>
+                <div class="card-actions">
+                    <a href="https://wa.me/51973661041?text=Hola,%20KennyStudio.%20Deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20IA%20y%20Automatizaci%C3%B3n." target="_blank" class="cyber-btn-outline"><i class="fab fa-whatsapp"></i> Solicitar</a>
+                    <button class="cyber-btn-outline btn-secondary modal-trigger" data-modal="modal-ia"><i class="fas fa-folder-open"></i> Proyectos</button>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer class="footer" id="contact">
-        <div class="contact-links">
-            <a href="https://wa.me/51973661041" target="_blank"><i class="fab fa-whatsapp"></i> 973661041</a>
-            <a href="https://t.me/Killer_Kiu" target="_blank"><i class="fab fa-telegram"></i> @Killer_Kiu</a>
-            <a href="https://facebook.com/KennyPalominoKS" target="_blank"><i class="fab fa-facebook"></i>
-                KennyPalominoKS</a>
+    <div class="cyber-modal-overlay" id="modal-dev">
+        <div class="cyber-modal-box glass-card cyber-border">
+            <button class="close-modal"><i class="fas fa-times"></i></button>
+            <h3 class="neon-cyan-text"><i class="fas fa-code"></i> Proyectos: Desarrollo Web</h3>
+            <div class="modal-content-scroll">
+                <div class="project-mockup-item">
+                    <h4>Sistema de Control de Inventario</h4>
+                    <p>Desarrollo de una plataforma interna para PYMES que permite gestionar stock en tiempo real, registro de entradas/salidas y generación de reportes en PDF.</p>
+                    <div class="tech-tags"><span class="tech-tag">React</span><span class="tech-tag">Node.js</span></div>
+                </div>
+                <div class="project-mockup-item">
+                    <h4>Landing Page Corporativa</h4>
+                    <p>Diseño y despliegue de un sitio web informativo optimizado para SEO y alta conversión, integrado con formularios de contacto directo a WhatsApp.</p>
+                    <div class="tech-tags"><span class="tech-tag">Astro</span><span class="tech-tag">Tailwind</span></div>
+                </div>
+            </div>
         </div>
-        <div class="footer-text">
-            <p>“inteligencia y tecnología en un solo lugar”</p>
-            <p>Inteligencia digital sin límites, el conocimiento es libre...</p>
-            <p>&copy; 2026 KennyStudio — Todos los derechos reservados.</p>
+    </div>
+
+    <div class="cyber-modal-overlay" id="modal-sec">
+        <div class="cyber-modal-box glass-card cyber-border">
+            <button class="close-modal"><i class="fas fa-times"></i></button>
+            <h3 class="neon-pink-text"><i class="fas fa-shield-alt"></i> Proyectos: Ciberseguridad</h3>
+            <div class="modal-content-scroll">
+                <div class="project-mockup-item">
+                    <h4>Auditoría de Red Local</h4>
+                    <p>Evaluación de seguridad en la red Wi-Fi y LAN de una oficina comercial. Se entregó un reporte detallando configuraciones débiles y recomendaciones de mitigación.</p>
+                    <div class="tech-tags"><span class="tech-tag">Wireshark</span><span class="tech-tag">Nmap</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cyber-modal-overlay" id="modal-osint">
+        <div class="cyber-modal-box glass-card cyber-border">
+            <button class="close-modal"><i class="fas fa-times"></i></button>
+            <h3 class="neon-cyan-text"><i class="fas fa-user-secret"></i> Proyectos: OSINT</h3>
+            <div class="modal-content-scroll">
+                <div class="project-mockup-item">
+                    <h4>Verificación de Perfil Público</h4>
+                    <p>Recopilación legal de datos de fuentes abiertas (redes sociales, registros públicos) para validar la información comercial de un proveedor antes de una contratación.</p>
+                    <div class="tech-tags"><span class="tech-tag">OSINT Framework</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cyber-modal-overlay" id="modal-ia">
+        <div class="cyber-modal-box glass-card cyber-border">
+            <button class="close-modal"><i class="fas fa-times"></i></button>
+            <h3 class="neon-pink-text"><i class="fas fa-robot"></i> Proyectos: IA & Automatización</h3>
+            <div class="modal-content-scroll">
+                <div class="project-mockup-item">
+                    <h4>Bot de Reservas para WhatsApp</h4>
+                    <p>Integración de un flujo de respuestas automatizadas que permite a los clientes agendar citas médicas leyendo la disponibilidad directamente desde Google Calendar.</p>
+                    <div class="tech-tags"><span class="tech-tag">Python</span><span class="tech-tag">WhatsApp API</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="core-tech cyber-container" id="skills">
+        <h2 class="section-title">Core Técnico</h2>
+
+        <div class="skills-matrix-container">
+            <div class="skill-node cyber-border-hover">
+                <div class="node-header"><i class="fas fa-terminal"></i> Lenguajes</div>
+                <div class="node-content">
+                    <div class="skill-item">
+                        <span class="skill-name">JavaScript (ES6+)</span>
+                        <div class="skill-bar"><div class="skill-fill" style="width: 90%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Python (FastAPI/Flask)</span>
+                        <div class="skill-bar"><div class="skill-fill" style="width: 85%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">C++ & Rust</span>
+                        <div class="skill-bar"><div class="skill-fill" style="width: 70%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">SQL (PostgreSQL)</span>
+                        <div class="skill-bar"><div class="skill-fill" style="width: 88%;"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-node cyber-border-hover">
+                <div class="node-header"><i class="fas fa-user-shield"></i> Seguridad</div>
+                <div class="node-content">
+                    <div class="tech-tags">
+                        <span class="tech-tag">Kali Linux</span>
+                        <span class="tech-tag">Parrot OS</span>
+                        <span class="tech-tag">Wireshark</span>
+                        <span class="tech-tag">Nmap</span>
+                        <span class="tech-tag">Metasploit</span>
+                        <span class="tech-tag">Análisis OSINT</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-node cyber-border-hover">
+                <div class="node-header"><i class="fas fa-paint-brush"></i> Diseño & UI</div>
+                <div class="node-content">
+                    <div class="skill-item">
+                        <span class="skill-name">Figma (UI/UX)</span>
+                        <div class="skill-bar"><div class="skill-fill" style="width: 85%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Adobe Creative Suite</span>
+                        <div class="skill-bar"><div class="skill-fill" style="width: 75%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Animaciones CSS3</span>
+                        <div class="skill-bar"><div class="skill-fill" style="width: 95%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Canvas API</span>
+                        <div class="skill-bar"><div class="skill-fill" style="width: 80%;"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="cyber-footer" id="contact">
+        <div class="footer-top-line"></div>
+        <div class="footer-main-grid">
+
+            <div class="footer-col brand-col">
+                <h3 class="glitch-text" data-text="KS_TERMINAL">KS_TERMINAL</h3>
+                <p class="footer-desc">> Infraestructura digital avanzada.</p>
+                <div class="sys-badge">
+                    <span class="pulse-dot"></span> SISTEMA ONLINE
+                </div>
+            </div>
+
+            <div class="footer-col links-col">
+                <h4 class="col-title">/directorios</h4>
+                <ul class="cyber-links">
+                    <li><a href="#home">> ./inicio</a></li>
+                    <li><a href="#about">> ./sobre_ks</a></li>
+                    <li><a href="#services">> ./servicios</a></li>
+                    <li><a href="#skills">> ./core_tecnico</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col terminal-col">
+                <div class="footer-terminal compact-terminal">
+                    <div class="term-header">
+                        <span class="term-dot red"></span>
+                        <span class="term-dot yellow"></span>
+                        <span class="term-dot green"></span>
+                        <span class="term-title">ks_contact.sh</span>
+                    </div>
+                    <div class="term-body">
+                        <p class="term-output">> Estableciendo red segura...</p>
+                        <ul class="contact-list">
+                            <li>
+                                <i class="fab fa-whatsapp"></i>
+                                <a href="https://wa.me/51973661041" target="_blank">+51 973661041</a>
+                            </li>
+                            <li>
+                                <i class="fab fa-telegram"></i>
+                                <a href="https://t.me/Killer_Kiu" target="_blank">@Killer_Kiu</a>
+                            </li>
+                            <li>
+                                <i class="fab fa-facebook"></i>
+                                <a href="https://facebook.com/KennyPalominoKS" target="_blank">KennyPalominoKS</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-status-bar enhanced-status">
+            <span>LOC: PTO_MALDONADO_PE // LAT: -12.59 // LON: -69.18</span>
+            <span>© 2026 KENNYSTUDIO // ALL RIGHTS RESERVED</span>
         </div>
     </footer>
+
+    <div class="floating-widgets" id="floating-widgets">
+        
+        <a href="https://wa.me/51973661041" target="_blank" class="sh-whatsapp" title="Contactar por WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+
+        <div class="sh-player collapsed" id="sh-player">
+            <div class="sh-header">
+                <span class="sh-text">AUDIO.SYS</span>
+                <button class="sh-toggle-btn" id="sh-toggle"><i class="fas fa-chevron-up"></i></button>
+            </div>
+            
+            <div class="sh-content" id="sh-content">
+                <div class="sh-info">
+                    <span class="sh-title">SUPER.HOT.exe</span>
+                    <span class="sh-time" id="sh-time">00:00</span>
+                </div>
+                <div class="sh-controls">
+                    <button class="sh-play-btn" id="sh-play-btn"><i class="fas fa-play"></i></button>
+                    <div class="sh-bar"><div class="sh-fill" id="sh-fill"></div></div>
+                </div>
+                <div class="sh-volume-zone">
+                    <i class="fas fa-volume-down sh-vol-icon"></i>
+                    <input type="range" class="sh-volume-slider" id="sh-volume" min="0" max="1" step="0.01" value="0.5">
+                </div>
+            </div>
+            
+            <audio id="bgm-audio" loop>
+                <source src="superhot.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+        
+    </div>
 
     <script src="script.js"></script>
 </body>
