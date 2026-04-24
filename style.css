@@ -2224,9 +2224,8 @@ section h2 {
    Responsividad de la Bóveda (Terminal)
    ========================================= */
 @media (max-width: 768px) {
-    /* Eliminamos el encabezado general */
     .ls-header {
-        display: none !important;
+        display: none !important; /* Elimina encabezados superiores */
     }
 
     .terminal-ls-container {
@@ -2237,59 +2236,65 @@ section h2 {
 
     .ls-row {
         display: flex;
-        flex-direction: column; /* Apilamos los datos verticalmente */
-        background: rgba(0, 0, 0, 0.4);
-        border: 1px solid rgba(0, 255, 204, 0.15);
+        flex-direction: column; /* Apila todo verticalmente */
+        background: rgba(10, 10, 15, 0.8);
+        border: 1px solid rgba(0, 255, 204, 0.2);
         margin-bottom: 1.2rem;
-        padding: 1.5rem;
-        gap: 0.6rem;
+        padding: 1.2rem;
+        gap: 8px;
         position: relative;
+        border-left: 4px solid var(--neon-pink);
         clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
     }
 
-    /* Resaltamos el nombre del archivo como título de la tarjeta */
+    /* Nombre del archivo: Ahora es el encabezado de la tarjeta */
     .ls-name {
-        font-size: 1.2rem;
-        color: var(--neon-cyan);
+        display: block !important;
+        font-size: 1.2rem !important;
+        color: var(--neon-cyan) !important;
         border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
-        padding-bottom: 0.5rem;
-        margin-bottom: 0.5rem;
+        padding-bottom: 5px;
+        margin-bottom: 5px;
         width: 100%;
-        text-shadow: 0 0 5px rgba(0, 255, 204, 0.3);
+        font-weight: bold;
     }
 
-    /* Usamos ::before para añadir etiquetas a los datos sin usar encabezados */
-    .ls-perms::before { content: "PERMISOS: "; color: var(--neon-pink); font-size: 0.7rem; opacity: 0.8; }
-    .ls-type::before  { content: "TIPO: "; color: #888; font-size: 0.7rem; }
-    .ls-size::before  { content: "TAMAÑO: "; color: #888; font-size: 0.7rem; }
+    /* Etiquetas inyectadas para dar contexto sin tablas */
+    .ls-perms::before { content: "PERMISOS: "; color: #666; font-size: 0.7rem; }
+    .ls-type::before  { content: "TIPO: "; color: #666; font-size: 0.7rem; }
+    .ls-size::before  { content: "TAMAÑO: "; color: #666; font-size: 0.7rem; }
 
     .ls-perms, .ls-type, .ls-size {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         display: flex;
-        justify-content:间;
-        gap: 10px;
+        align-items: center;
+        gap: 8px;
     }
 
-    /* El botón de descarga ahora ocupa todo el ancho inferior */
+    .ls-type { color: var(--neon-pink); font-weight: bold; }
+
+    /* Botón de descarga de ancho completo */
     .ls-download {
-        margin-top: 1rem;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
         width: 100%;
         padding: 12px;
-        font-size: 1.1rem;
-        background: rgba(255, 0, 127, 0.05);
+        font-size: 1.2rem;
+        background: rgba(255, 0, 127, 0.1);
+        border: 1px solid var(--neon-pink);
+        color: var(--neon-pink) !important;
+        text-decoration: none;
     }
 
-    /* Ajuste para el Tema Claro en móvil */
+    /* Ajuste Modo Claro */
     [data-theme="light"] .ls-row {
         background: #ffffff;
         border-color: rgba(0, 85, 255, 0.1);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        border-left-color: var(--neon-cyan);
     }
-
-    [data-theme="light"] .ls-name {
-        color: #1a1a2e;
-        text-shadow: none;
-    }
+    [data-theme="light"] .ls-name { color: #1a1a2e !important; }
 }
 
 /* =========================================
