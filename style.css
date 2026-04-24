@@ -620,16 +620,15 @@ body {
 
 .gold-icon-main {
     width: 100%;
-    max-width: 300px; /* Tamaño ligeramente ajustado para no saturar arriba */
+    max-width: 300px; 
     height: auto;
-    filter: drop-shadow(0 0 8px rgba(255, 217, 0, 0.822)); /* Dorado translúcido */
+    filter: drop-shadow(0 0 8px rgba(255, 217, 0, 0.822)); 
 
-    /* Transición para un efecto de hover (opcional pero recomendado) */
     transition: filter 0.3s ease;
 }
 
 .gold-icon-main:hover {
-    filter: drop-shadow(0 0 15px rgba(255, 217, 0, 0.788)); /* Más intenso y nítido */
+    filter: drop-shadow(0 0 15px rgba(255, 217, 0, 0.788)); 
 }
 
 /* 2. Nombre de la marca (KENNY STUDIO) */
@@ -646,7 +645,7 @@ body {
 
 .glitch-text.light-weight {
     font-size: 3.2rem;
-    font-weight: 300; /* Peso ligero para mayor elegancia */
+    font-weight: 300; 
     letter-spacing: 1px;
     line-height: 1.2;
     margin-bottom: 0.5rem;
@@ -661,7 +660,7 @@ body {
 }
 
 .hero-content.centered-content h2.glitch-text {
-    font-size: 3.5rem; /* Tamaño prominente para el título principal */
+    font-size: 3.5rem;
     line-height: 1.1;
     margin-bottom: 1rem;
 }
@@ -898,15 +897,13 @@ section h2 {
     position: absolute;
     display: block;
     left: 50%;
-    width: 85px; /* Tamaño mucho más grande (antes era 40px) */
+    width: 85px;
     height: auto;
     opacity: 0;
-    /* Inicia arriba, oculto y pequeño. El translateX(-50%) lo centra perfectamente */
     transform: translateX(-50%) translateY(-50px) scale(0.5);
     transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    z-index: 1005; /* Asegura que flote por encima del contenido inferior */
+    z-index: 1005;
     
-    /* Resplandor para que destaque al sobresalir del cristal */
     filter: drop-shadow(0 8px 15px rgba(255, 217, 0, 0.35));
 }
 

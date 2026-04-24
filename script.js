@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, spyOptions);
 
     sections.forEach(section => spyObserver.observe(section));
-    
+
     // 1. Alternancia de Modo Día / Noche (Con Video Dinámico)
     const themeBtn = document.getElementById("theme-toggle");
     const htmlEl = document.documentElement;
@@ -726,17 +726,32 @@ document.addEventListener("DOMContentLoaded", () => {
     async function loadVault() {
         const vaultContainer = document.getElementById("vault-list");
         const paginationContainer = document.getElementById("vault-pagination");
-        const API_URL = "boveda.json"; // Cambia esto por tu SheetDB si usas Google Sheets
+        
+        // URL DE SHEETDB
+        const API_URL = "https://sheetdb.io/api/v1/ue9trerg3z72z"; 
         
         let vaultData = [];
         let currentPage = 1;
-        const itemsPerPage = 8; // Límite de ítems por página (puedes cambiarlo a 10)
+        const itemsPerPage = 8;
+
+        // Función inteligente para autogenerar permisos según el tipo de archivo
+        function generatePerms(tipo) {
+            const t = (tipo || "").toUpperCase();
+            if (t.includes("PYTHON") || t.includes("SH") || t.includes("EXE") || t.includes("SCRIPT")) {
+                return "-rwxr-xr-x"; // Archivo ejecutable
+            } else if (t.includes("DIR") || t.includes("FOLDER")) {
+                return "drwxr-xr-x"; // Directorio
+            } else if (t.includes("CONF") || t.includes("ENV")) {
+                return "-r--------"; // Archivo clasificado / Solo lectura para root
+            } else {
+                return "-rw-r--r--"; // Archivo estándar (ZIP, TXT, PDF)
+            }
+        }
 
         // Función para renderizar las filas de la tabla según la página
         function renderTable() {
             vaultContainer.innerHTML = ""; 
             
-            // Lógica de corte (paginación)
             const start = (currentPage - 1) * itemsPerPage;
             const end = start + itemsPerPage;
             const paginatedItems = vaultData.slice(start, end);
@@ -745,15 +760,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 const row = document.createElement("div");
                 row.classList.add("ls-row");
                 
-                // Genera un permiso aleatorio o estático si no viene en el JSON
-                const perms = item.perms || "-rw-r--r--"; 
+                // Autogenerar el permiso
+                const autoPerms = generatePerms(item.tipo); 
                 
                 row.innerHTML = `
-                    <div class="ls-perms">${perms}</div>
+                    <div class="ls-perms">${autoPerms}</div>
                     <div class="ls-type">${item.tipo}</div>
                     <div class="ls-size">${item.size}</div>
                     <div class="ls-name">${item.nombre}</div>
-                    <a href="${item.link}" target="_blank" class="ls-download" title="Descargar"><i class="fas fa-download"></i></a>
+                    <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="ls-download" title="Descargar"><i class="fas fa-download"></i></a>
                 `;
                 vaultContainer.appendChild(row);
             });
@@ -768,7 +783,6 @@ document.addEventListener("DOMContentLoaded", () => {
             
             const totalPages = Math.ceil(vaultData.length / itemsPerPage);
 
-            // Si hay 1 página o menos, no mostramos botones
             if (totalPages <= 1) return; 
 
             for (let i = 1; i <= totalPages; i++) {
@@ -781,6 +795,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 btn.addEventListener("click", () => {
                     currentPage = i;
                     renderTable();
+                    // Efecto Glitch al cambiar de página en la terminal
+                    const glitch = document.getElementById("global-glitch");
+                    if(glitch) {
+                        glitch.classList.add("active");
+                        setTimeout(() => glitch.classList.remove("active"), 300);
+                    }
                 });
                 
                 paginationContainer.appendChild(btn);
