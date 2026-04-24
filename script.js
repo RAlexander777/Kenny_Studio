@@ -763,12 +763,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 // Autogenerar el permiso
                 const autoPerms = generatePerms(item.tipo); 
                 
+                // === FIX: SANITIZACIÓN DEL ENLACE ===
+                let safeLink = (item.link || "").trim(); // Quitamos espacios accidentales
+                // Si el link existe pero NO empieza con http:// ni https://, se lo agregamos a la fuerza
+                if (safeLink !== "" && !safeLink.startsWith('http://') && !safeLink.startsWith('https://')) {
+                    safeLink = 'https://' + safeLink;
+                }
+                // Si la celda está vacía, evitamos que rompa la página poniendo un #
+                if (safeLink === "") safeLink = "#";
+                
                 row.innerHTML = `
                     <div class="ls-perms">${autoPerms}</div>
                     <div class="ls-type">${item.tipo}</div>
                     <div class="ls-size">${item.size}</div>
                     <div class="ls-name">${item.nombre}</div>
-                    <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="ls-download" title="Descargar"><i class="fas fa-download"></i></a>
+                    <a href="${safeLink}" target="_blank" rel="noopener noreferrer" class="ls-download" title="Descargar"><i class="fas fa-download"></i></a>
                 `;
                 vaultContainer.appendChild(row);
             });
