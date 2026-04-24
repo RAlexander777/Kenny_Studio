@@ -2225,76 +2225,87 @@ section h2 {
    ========================================= */
 @media (max-width: 768px) {
     .ls-header {
-        display: none !important; /* Elimina encabezados superiores */
+        display: none !important;
     }
 
     .terminal-ls-container {
         padding: 0.5rem;
-        background: transparent;
+        background: rgba(0, 0, 0, 0.2); /* Más sutil */
         border: none;
     }
 
     .ls-row {
-        display: flex;
-        flex-direction: column; /* Apila todo verticalmente */
-        background: rgba(10, 10, 15, 0.8);
-        border: 1px solid rgba(0, 255, 204, 0.2);
-        margin-bottom: 1.2rem;
-        padding: 1.2rem;
-        gap: 8px;
-        position: relative;
-        border-left: 4px solid var(--neon-pink);
-        clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+        display: grid;
+        /* Layout de 2 columnas: Metadatos a la izquierda, Acción a la derecha */
+        grid-template-areas: 
+            "name download"
+            "meta download";
+        grid-template-columns: 1fr 60px;
+        background: rgba(10, 10, 15, 0.9);
+        border: 1px solid rgba(0, 255, 204, 0.15);
+        border-left: 3px solid var(--neon-cyan); /* Cambiamos a cyan para consistencia */
+        margin-bottom: 0.8rem;
+        padding: 1rem;
+        gap: 5px;
+        clip-path: none; /* Simplificamos para mejor rendimiento en móvil */
+        transition: border-color 0.3s ease;
     }
 
-    /* Nombre del archivo: Ahora es el encabezado de la tarjeta */
+    /* Nombre del archivo - Destacado */
     .ls-name {
+        grid-area: name;
+        font-size: 1.1rem !important;
+        color: #fff !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; /* Evita que nombres largos rompan el layout */
         display: block !important;
-        font-size: 1.2rem !important;
-        color: var(--neon-cyan) !important;
-        border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
-        padding-bottom: 5px;
-        margin-bottom: 5px;
-        width: 100%;
-        font-weight: bold;
     }
 
-    /* Etiquetas inyectadas para dar contexto sin tablas */
-    .ls-perms::before { content: "PERMISOS: "; color: #666; font-size: 0.7rem; }
-    .ls-type::before  { content: "TIPO: "; color: #666; font-size: 0.7rem; }
-    .ls-size::before  { content: "TAMAÑO: "; color: #666; font-size: 0.7rem; }
-
-    .ls-perms, .ls-type, .ls-size {
-        font-size: 0.85rem;
+    /* Contenedor de metadatos (Permisos, Tipo, Tamaño) */
+    .ls-row .ls-meta-group {
+        grid-area: meta;
         display: flex;
-        align-items: center;
-        gap: 8px;
+        flex-wrap: wrap;
+        gap: 10px;
+        font-size: 0.75rem;
+        font-family: 'Share Tech Mono', monospace;
+        color: #666;
     }
 
-    .ls-type { color: var(--neon-pink); font-weight: bold; }
+    /* Etiquetas internas */
+    .ls-perms, .ls-type, .ls-size {
+        display: inline-block;
+    }
 
-    /* Botón de descarga de ancho completo */
+    .ls-type {
+        color: var(--neon-pink);
+        text-transform: uppercase;
+    }
+
+    /* Botón de descarga - Estilo cuadrado minimalista */
     .ls-download {
+        grid-area: download;
+        align-self: center;
+        justify-self: center;
+        width: 45px;
+        height: 45px;
         display: flex !important;
-        justify-content: center;
         align-items: center;
-        margin-top: 10px;
-        width: 100%;
-        padding: 12px;
+        justify-content: center;
         font-size: 1.2rem;
-        background: rgba(255, 0, 127, 0.1);
+        border-radius: 4px;
+        background: transparent;
         border: 1px solid var(--neon-pink);
         color: var(--neon-pink) !important;
-        text-decoration: none;
     }
 
-    /* Ajuste Modo Claro */
+    /* Ajuste para el Modo Claro */
     [data-theme="light"] .ls-row {
         background: #ffffff;
         border-color: rgba(0, 85, 255, 0.1);
         border-left-color: var(--neon-cyan);
     }
-    [data-theme="light"] .ls-name { color: #1a1a2e !important; }
 }
 
 /* =========================================

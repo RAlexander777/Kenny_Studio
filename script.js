@@ -1,15 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
-
     // === A. Secuencia de Arranque (Boot OS) ===
     const bootScreen = document.getElementById("boot-sequence");
     const bootLines = document.querySelectorAll(".boot-line");
     const bootBar = document.getElementById("boot-bar");
-    
+
     if (bootScreen) {
         // Mostrar líneas de terminal progresivamente
-        setTimeout(() => bootLines[0].style.opacity = 1, 100);
-        setTimeout(() => bootLines[1].style.opacity = 1, 400);
-        setTimeout(() => bootLines[2].style.opacity = 1, 700);
+        setTimeout(() => (bootLines[0].style.opacity = 1), 100);
+        setTimeout(() => (bootLines[1].style.opacity = 1), 400);
+        setTimeout(() => (bootLines[2].style.opacity = 1), 700);
 
         // Simular carga de barra
         let progress = 0;
@@ -19,20 +18,25 @@ document.addEventListener("DOMContentLoaded", () => {
                 progress = 100;
                 clearInterval(interval);
                 bootBar.innerHTML = `[||||||||||] 100% - ACCESO CONCEDIDO`;
-                
+
                 // Ocultar pantalla de arranque
                 setTimeout(() => {
                     bootScreen.classList.add("hidden");
                 }, 500);
             } else {
-                const bars = "|".repeat(Math.floor(progress / 10)).padEnd(10, ".");
+                const bars = "|"
+                    .repeat(Math.floor(progress / 10))
+                    .padEnd(10, ".");
                 bootBar.innerHTML = `[${bars}] ${progress}%`;
             }
         }, 100);
-        
+
         // Cierre de seguridad: Si la página carga muy lento, quitar el preloader máximo a los 3 segundos
-        window.addEventListener('load', () => {
-            setTimeout(() => { if (!bootScreen.classList.contains("hidden")) bootScreen.classList.add("hidden"); }, 2000);
+        window.addEventListener("load", () => {
+            setTimeout(() => {
+                if (!bootScreen.classList.contains("hidden"))
+                    bootScreen.classList.add("hidden");
+            }, 2000);
         });
     }
 
@@ -40,44 +44,46 @@ document.addEventListener("DOMContentLoaded", () => {
     const glitchOverlay = document.getElementById("global-glitch");
     const navAnchors = document.querySelectorAll('a[href^="#"]');
 
-    navAnchors.forEach(anchor => {
-        anchor.addEventListener("click", function(e) {
+    navAnchors.forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
             const targetId = this.getAttribute("href");
             if (targetId === "#") return; // Ignorar enlaces vacíos
-            
+
             const targetEl = document.querySelector(targetId);
             if (targetEl && glitchOverlay) {
                 // Prevenimos el scroll inmediato
                 e.preventDefault();
-                
+
                 // Disparamos el pantallazo glitch
                 glitchOverlay.classList.remove("active");
                 void glitchOverlay.offsetWidth; // Truco para reiniciar la animación
                 glitchOverlay.classList.add("active");
-                
+
                 // Esperamos un instante (mientras la pantalla falla) y hacemos el scroll
                 setTimeout(() => {
-                    targetEl.scrollIntoView({ behavior: 'auto' }); 
+                    targetEl.scrollIntoView({ behavior: "auto" });
                 }, 150); // Justo en medio del parpadeo
             }
         });
     });
 
     // === C. ScrollSpy (Radar de Navegación) ===
-    const sections = document.querySelectorAll("header.hero, section.cyber-container, footer.cyber-footer");
+    const sections = document.querySelectorAll(
+        "header.hero, section.cyber-container, footer.cyber-footer",
+    );
     const navLinksObj = document.querySelectorAll(".nav-links a");
 
     const spyOptions = {
         threshold: 0.3, // Se activa cuando el 30% de la sección es visible
-        rootMargin: "-10% 0px -50% 0px" // Ajuste para que se marque a la mitad de la pantalla
+        rootMargin: "-10% 0px -50% 0px", // Ajuste para que se marque a la mitad de la pantalla
     };
 
     const spyObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
             if (entry.isIntersecting) {
                 const currentId = entry.target.getAttribute("id");
-                
-                navLinksObj.forEach(link => {
+
+                navLinksObj.forEach((link) => {
                     link.classList.remove("active");
                     if (link.getAttribute("href") === `#${currentId}`) {
                         link.classList.add("active");
@@ -87,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }, spyOptions);
 
-    sections.forEach(section => spyObserver.observe(section));
+    sections.forEach((section) => spyObserver.observe(section));
 
     // 1. Alternancia de Modo Día / Noche (Con Video Dinámico)
     const themeBtn = document.getElementById("theme-toggle");
@@ -726,18 +732,23 @@ document.addEventListener("DOMContentLoaded", () => {
     async function loadVault() {
         const vaultContainer = document.getElementById("vault-list");
         const paginationContainer = document.getElementById("vault-pagination");
-        
-        const API_URL = "https://sheetdb.io/api/v1/ue9trerg3z72z"; 
-        
+
+        const API_URL = "https://sheetdb.io/api/v1/ue9trerg3z72z";
+
         let vaultData = [];
         let currentPage = 1;
-        
+
         // DETERMINAR ÍTEMS POR PÁGINA SEGÚN DISPOSITIVO
         const itemsPerPage = window.innerWidth <= 768 ? 5 : 8;
 
         function generatePerms(tipo) {
             const t = (tipo || "").toUpperCase();
-            if (t.includes("PYTHON") || t.includes("SH") || t.includes("EXE") || t.includes("SCRIPT")) {
+            if (
+                t.includes("PYTHON") ||
+                t.includes("SH") ||
+                t.includes("EXE") ||
+                t.includes("SCRIPT")
+            ) {
                 return "-rwxr-xr-x";
             } else if (t.includes("DIR") || t.includes("FOLDER")) {
                 return "drwxr-xr-x";
@@ -749,66 +760,71 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         function renderTable() {
-            vaultContainer.innerHTML = ""; 
-            
+            vaultContainer.innerHTML = "";
+
             const start = (currentPage - 1) * itemsPerPage;
             const end = start + itemsPerPage;
             const paginatedItems = vaultData.slice(start, end);
 
             paginatedItems.forEach((item) => {
-                // Evitar filas vacías o de instrucciones del Sheet
                 if (!item.nombre || item.nombre.trim() === "") return;
 
                 const row = document.createElement("div");
                 row.classList.add("ls-row");
-                
-                const autoPerms = generatePerms(item.tipo); 
-                
+
+                const autoPerms = generatePerms(item.tipo);
                 let safeLink = (item.link || "").trim();
-                if (safeLink !== "" && !safeLink.startsWith('http://') && !safeLink.startsWith('https://')) {
-                    safeLink = 'https://' + safeLink;
-                }
-                if (safeLink === "") safeLink = "#";
-                
+                if (safeLink !== "" && !safeLink.startsWith("http"))
+                    safeLink = "https://" + safeLink;
+
                 row.innerHTML = `
-                    <div class="ls-perms">${autoPerms}</div>
-                    <div class="ls-type">${item.tipo}</div>
-                    <div class="ls-size">${item.size}</div>
-                    <div class="ls-name">${item.nombre}</div>
-                    <a href="${safeLink}" target="_blank" rel="noopener noreferrer" class="ls-download" title="Descargar"><i class="fas fa-download"></i></a>
-                `;
+        <div class="ls-name">${item.nombre}</div>
+        <div class="ls-meta-group">
+            <span class="ls-perms">${autoPerms}</span>
+            <span class="ls-type">${item.tipo}</span>
+            <span class="ls-size">${item.size}</span>
+        </div>
+        <a href="${safeLink}" target="_blank" class="ls-download" title="Descargar">
+            <i class="fas fa-download"></i>
+        </a>
+    `;
                 vaultContainer.appendChild(row);
             });
-            
+
             renderPagination();
         }
 
         function renderPagination() {
             if (!paginationContainer) return;
             paginationContainer.innerHTML = "";
-            
+
             const totalPages = Math.ceil(vaultData.length / itemsPerPage);
-            if (totalPages <= 1) return; 
+            if (totalPages <= 1) return;
 
             for (let i = 1; i <= totalPages; i++) {
                 const btn = document.createElement("button");
                 btn.classList.add("ls-page-btn");
                 if (i === currentPage) btn.classList.add("active");
-                
+
                 btn.textContent = i;
-                
+
                 btn.addEventListener("click", () => {
                     currentPage = i;
                     renderTable();
                     const glitch = document.getElementById("global-glitch");
-                    if(glitch) {
+                    if (glitch) {
                         glitch.classList.add("active");
-                        setTimeout(() => glitch.classList.remove("active"), 300);
+                        setTimeout(
+                            () => glitch.classList.remove("active"),
+                            300,
+                        );
                     }
                     // Scroll suave hacia arriba de la bóveda al cambiar de página
-                    document.getElementById('vault').scrollIntoView({ behavior: 'smooth' });
+                    document
+                        .getElementById("vault")
+                        .scrollIntoView({ behavior: "smooth" });
                 });
-                
+
                 paginationContainer.appendChild(btn);
             }
         }
@@ -819,7 +835,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (vaultData.length > 0) {
                 renderTable();
             } else {
-                vaultContainer.innerHTML = '<div class="ls-error">> DIRECTORIO VACÍO</div>';
+                vaultContainer.innerHTML =
+                    '<div class="ls-error">> DIRECTORIO VACÍO</div>';
             }
         } catch (error) {
             vaultContainer.innerHTML =
