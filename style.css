@@ -2224,70 +2224,88 @@ section h2 {
    Responsividad de la Bóveda (Terminal)
    ========================================= */
 @media (max-width: 768px) {
-    /* Ocultamos la cabecera en móvil porque consume mucho espacio */
     .ls-header {
-        display: none;
+        display: none; /* Ocultamos la cabecera de columnas en móvil */
     }
 
     .terminal-ls-container {
         padding: 0.5rem;
+        border-color: rgba(0, 255, 204, 0.4);
     }
 
     .ls-row {
         display: grid;
-        /* Cambiamos a 2 columnas principales para móviles */
-        grid-template-columns: 1fr 1fr;
+        /* Definimos un layout de 2 columnas: información a la izquierda, botón a la derecha */
+        grid-template-columns: 1fr auto;
         grid-template-areas: 
-            "name name"
-            "perms type"
-            "size action";
-        gap: 10px;
-        padding: 1.5rem 0.5rem;
-        border-bottom: 1px solid rgba(0, 255, 204, 0.15);
+            "name action"
+            "metadata metadata";
+        gap: 8px;
+        padding: 1.2rem 1rem;
+        margin-bottom: 10px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-left: 3px solid var(--neon-pink); /* Indicador lateral de archivo */
     }
 
-    /* Asignamos las áreas para que se apilen correctamente */
-    .ls-perms { 
-        grid-area: perms; 
-        font-size: 0.75rem;
-        display: flex;
-        align-items: center;
-    }
-    
-    .ls-type { 
-        grid-area: type; 
-        text-align: right;
-    }
-    
-    .ls-size { 
-        grid-area: size;
-        display: flex;
-        align-items: center;
-    }
-    
+    /* Nombre del archivo (Protagonista) */
     .ls-name { 
         grid-area: name; 
         font-size: 1.1rem;
-        border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
-        padding-bottom: 5px;
-        margin-bottom: 5px;
-    }
-    
-    .ls-download { 
-        grid-area: action; 
-        justify-self: end;
-        width: 100%;
-        max-width: 120px;
+        color: #fff;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; /* Evita que nombres largos rompan el diseño */
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
     }
 
-    /* Ajuste para modo claro en móvil */
+    /* Botón de acción al lado del nombre */
+    .ls-download {
+        grid-area: action;
+        align-self: center;
+        padding: 6px 12px;
+        font-size: 1.1rem;
+    }
+
+    /* Contenedor de metadatos técnicos (Permisos, Tipo, Tamaño) */
+    .ls-perms, .ls-type, .ls-size {
+        display: inline-block;
+        font-size: 0.75rem;
+        margin-right: 12px;
+        margin-top: 4px;
+    }
+
+    /* Agrupamos visualmente los metadatos en el área inferior */
+    .ls-perms { grid-area: metadata; color: #777; }
+    .ls-type { color: var(--neon-cyan); font-weight: bold; }
+    .ls-size { color: #999; }
+
+    /* Ajuste de Paginación para pulgares */
+    .ls-pagination {
+        justify-content: center;
+        gap: 15px;
+        margin-top: 1.5rem;
+    }
+
+    .ls-page-btn {
+        padding: 8px 16px;
+        font-size: 1rem;
+    }
+
+    /* --- Adaptación Modo Claro Móvil --- */
     [data-theme="light"] .ls-row {
-        border-bottom-color: rgba(0, 0, 0, 0.1);
+        background: #ffffff;
+        border-color: rgba(0, 0, 0, 0.1);
+        border-left-color: var(--neon-cyan); /* Cambia a azul en modo claro */
     }
-    
+
     [data-theme="light"] .ls-name {
-        border-bottom-color: rgba(0, 0, 0, 0.05);
+        color: #000;
+        text-shadow: none;
     }
+
+    [data-theme="light"] .ls-perms { color: #666; }
+    [data-theme="light"] .ls-size { color: #444; }
 }
 
 

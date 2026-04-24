@@ -727,28 +727,27 @@ document.addEventListener("DOMContentLoaded", () => {
         const vaultContainer = document.getElementById("vault-list");
         const paginationContainer = document.getElementById("vault-pagination");
         
-        // URL DE SHEETDB
         const API_URL = "https://sheetdb.io/api/v1/ue9trerg3z72z"; 
         
         let vaultData = [];
         let currentPage = 1;
-        const itemsPerPage = 8;
+        
+        // DETERMINAR ÍTEMS POR PÁGINA SEGÚN DISPOSITIVO
+        const itemsPerPage = window.innerWidth <= 768 ? 5 : 8;
 
-        // Función inteligente para autogenerar permisos según el tipo de archivo
         function generatePerms(tipo) {
             const t = (tipo || "").toUpperCase();
             if (t.includes("PYTHON") || t.includes("SH") || t.includes("EXE") || t.includes("SCRIPT")) {
-                return "-rwxr-xr-x"; // Archivo ejecutable
+                return "-rwxr-xr-x";
             } else if (t.includes("DIR") || t.includes("FOLDER")) {
-                return "drwxr-xr-x"; // Directorio
+                return "drwxr-xr-x";
             } else if (t.includes("CONF") || t.includes("ENV")) {
-                return "-r--------"; // Archivo clasificado / Solo lectura para root
+                return "-r--------";
             } else {
-                return "-rw-r--r--"; // Archivo estándar (ZIP, TXT, PDF)
+                return "-rw-r--r--";
             }
         }
 
-        // Función para renderizar las filas de la tabla según la página
         function renderTable() {
             vaultContainer.innerHTML = ""; 
             
@@ -757,19 +756,18 @@ document.addEventListener("DOMContentLoaded", () => {
             const paginatedItems = vaultData.slice(start, end);
 
             paginatedItems.forEach((item) => {
+                // Evitar filas vacías o de instrucciones del Sheet
+                if (!item.nombre || item.nombre.trim() === "") return;
+
                 const row = document.createElement("div");
                 row.classList.add("ls-row");
                 
-                // Autogenerar el permiso
                 const autoPerms = generatePerms(item.tipo); 
                 
-                // === FIX: SANITIZACIÓN DEL ENLACE ===
-                let safeLink = (item.link || "").trim(); // Quitamos espacios accidentales
-                // Si el link existe pero NO empieza con http:// ni https://, se lo agregamos a la fuerza
+                let safeLink = (item.link || "").trim();
                 if (safeLink !== "" && !safeLink.startsWith('http://') && !safeLink.startsWith('https://')) {
                     safeLink = 'https://' + safeLink;
                 }
-                // Si la celda está vacía, evitamos que rompa la página poniendo un #
                 if (safeLink === "") safeLink = "#";
                 
                 row.innerHTML = `
@@ -785,13 +783,11 @@ document.addEventListener("DOMContentLoaded", () => {
             renderPagination();
         }
 
-        // Función para renderizar los botones de paginación
         function renderPagination() {
             if (!paginationContainer) return;
             paginationContainer.innerHTML = "";
             
             const totalPages = Math.ceil(vaultData.length / itemsPerPage);
-
             if (totalPages <= 1) return; 
 
             for (let i = 1; i <= totalPages; i++) {
@@ -804,12 +800,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 btn.addEventListener("click", () => {
                     currentPage = i;
                     renderTable();
-                    // Efecto Glitch al cambiar de página en la terminal
                     const glitch = document.getElementById("global-glitch");
                     if(glitch) {
                         glitch.classList.add("active");
                         setTimeout(() => glitch.classList.remove("active"), 300);
                     }
+                    // Scroll suave hacia arriba de la bóveda al cambiar de página
+                    document.getElementById('vault').scrollIntoView({ behavior: 'smooth' });
                 });
                 
                 paginationContainer.appendChild(btn);
@@ -819,7 +816,6 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             const response = await fetch(API_URL);
             vaultData = await response.json();
-
             if (vaultData.length > 0) {
                 renderTable();
             } else {
