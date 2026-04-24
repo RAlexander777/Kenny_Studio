@@ -2239,27 +2239,26 @@ section h2 {
         grid-template-areas: 
             "name download"
             "meta download";
-        grid-template-columns: 1fr 60px;
+        grid-template-columns: 1fr 65px;
+        grid-template-rows: auto auto; /* Dos filas de contenido */
+        
+        border-left: 5px solid var(--neon-cyan); 
+        padding: 1rem 1rem 1rem 2.2rem; 
+        
         background: rgba(10, 10, 15, 0.9);
-        border: 1px solid rgba(0, 255, 204, 0.15);
-        
-        border-left: 4px solid var(--neon-cyan); 
-        padding: 1rem 1rem 1rem 1.5rem; 
-        
         margin-bottom: 0.8rem;
-        gap: 5px;
-        clip-path: none;
-        transition: border-color 0.3s ease;
+        gap: 4px; /* Espacio mínimo entre nombre y meta */
     }
 
     .ls-name {
         grid-area: name;
+        display: block !important;
         font-size: 1.1rem !important;
         color: #fff !important;
-        
-        /* Opcional: añade un prefijo visual de consola */
-        display: flex !important;
-        align-items: center;
+        padding-bottom: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .ls-name::before {
@@ -2267,6 +2266,15 @@ section h2 {
         color: var(--neon-cyan);
         margin-right: 8px;
         font-weight: bold;
+    }
+
+    .ls-meta-wrap {
+        grid-area: meta;
+        display: flex !important; /* En móvil deja de ser contents para ser flex */
+        gap: 15px;
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 0.8rem;
+        color: #777; /* Color más sutil para la info secundaria */
     }
 
     /* Contenedor de metadatos (Permisos, Tipo, Tamaño) */
@@ -2280,14 +2288,14 @@ section h2 {
         color: #666;
     }
 
-    /* Etiquetas internas */
-    .ls-perms, .ls-type, .ls-size {
-        display: inline-block;
+    .ls-perms {
+        display: none; 
     }
 
+    /* Destacar el tipo de archivo con un color neón sutil */
     .ls-type {
-        color: var(--neon-pink);
-        text-transform: uppercase;
+        color: var(--neon-cyan);
+        opacity: 0.8;
     }
 
     /* Botón de descarga - Estilo cuadrado minimalista */
@@ -2295,16 +2303,15 @@ section h2 {
         grid-area: download;
         align-self: center;
         justify-self: center;
-        width: 45px;
-        height: 45px;
+        width: 48px;
+        height: 48px;
         display: flex !important;
         align-items: center;
         justify-content: center;
-        font-size: 1.2rem;
-        border-radius: 4px;
-        background: transparent;
         border: 1px solid var(--neon-pink);
         color: var(--neon-pink) !important;
+        background: rgba(255, 0, 127, 0.05);
+        font-size: 1.2rem;
     }
 
     /* Ajuste para el Modo Claro */
