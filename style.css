@@ -2236,30 +2236,37 @@ section h2 {
 
     .ls-row {
         display: grid;
-        /* Layout de 2 columnas: Metadatos a la izquierda, Acción a la derecha */
         grid-template-areas: 
             "name download"
             "meta download";
         grid-template-columns: 1fr 60px;
         background: rgba(10, 10, 15, 0.9);
         border: 1px solid rgba(0, 255, 204, 0.15);
-        border-left: 3px solid var(--neon-cyan); /* Cambiamos a cyan para consistencia */
+        
+        border-left: 4px solid var(--neon-cyan); 
+        padding: 1rem 1rem 1rem 1.5rem; 
+        
         margin-bottom: 0.8rem;
-        padding: 1rem;
         gap: 5px;
-        clip-path: none; /* Simplificamos para mejor rendimiento en móvil */
+        clip-path: none;
         transition: border-color 0.3s ease;
     }
 
-    /* Nombre del archivo - Destacado */
     .ls-name {
         grid-area: name;
         font-size: 1.1rem !important;
         color: #fff !important;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis; /* Evita que nombres largos rompan el layout */
-        display: block !important;
+        
+        /* Opcional: añade un prefijo visual de consola */
+        display: flex !important;
+        align-items: center;
+    }
+
+    .ls-name::before {
+        content: "> ";
+        color: var(--neon-cyan);
+        margin-right: 8px;
+        font-weight: bold;
     }
 
     /* Contenedor de metadatos (Permisos, Tipo, Tamaño) */
