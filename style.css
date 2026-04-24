@@ -2225,87 +2225,74 @@ section h2 {
    ========================================= */
 @media (max-width: 768px) {
     .ls-header {
-        display: none; /* Ocultamos la cabecera de columnas en móvil */
+        display: none; /* Ocultar cabeceras en móvil */
     }
 
     .terminal-ls-container {
         padding: 0.5rem;
-        border-color: rgba(0, 255, 204, 0.4);
+        background: rgba(0, 0, 0, 0.2);
     }
 
     .ls-row {
         display: grid;
-        /* Definimos un layout de 2 columnas: información a la izquierda, botón a la derecha */
-        grid-template-columns: 1fr auto;
+        /* Definimos una rejilla de 3 filas para separar nombre, info y botón */
+        grid-template-columns: 1fr 1fr;
         grid-template-areas: 
-            "name action"
-            "metadata metadata";
-        gap: 8px;
-        padding: 1.2rem 1rem;
-        margin-bottom: 10px;
+            "name name"
+            "metadata metadata"
+            "action action";
+        gap: 12px;
+        padding: 1.5rem;
+        margin-bottom: 15px;
         background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-left: 3px solid var(--neon-pink); /* Indicador lateral de archivo */
+        border: 1px solid rgba(0, 255, 204, 0.1);
+        border-left: 4px solid var(--neon-pink); /* Acento visual tipo 'access granted' */
+        border-radius: 4px;
     }
 
-    /* Nombre del archivo (Protagonista) */
+    /* Nombre del archivo: Ocupa toda la parte superior */
     .ls-name { 
         grid-area: name; 
-        font-size: 1.1rem;
-        color: #fff;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis; /* Evita que nombres largos rompan el diseño */
-        text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+        font-size: 1.2rem;
+        color: var(--neon-cyan);
+        white-space: normal; /* Permitir que nombres largos bajen de línea */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 8px;
     }
 
-    /* Botón de acción al lado del nombre */
+    /* Contenedor de metadatos: Agrupamos Permisos, Tipo y Tamaño */
+    .ls-perms, .ls-type, .ls-size {
+        display: inline-flex;
+        font-size: 0.8rem;
+        margin-right: 15px;
+    }
+
+    /* Asignamos todos al área de metadata para que fluyan juntos */
+    .ls-perms { grid-area: metadata; color: #666; order: 3; }
+    .ls-type { grid-area: metadata; color: var(--neon-pink); font-weight: bold; order: 1; }
+    .ls-size { grid-area: metadata; color: #aaa; order: 2; }
+
+    /* Botón de acción: Ahora es un botón de ancho completo para facilitar el clic */
     .ls-download {
         grid-area: action;
-        align-self: center;
-        padding: 6px 12px;
+        width: 100%;
+        padding: 12px;
         font-size: 1.1rem;
-    }
-
-    /* Contenedor de metadatos técnicos (Permisos, Tipo, Tamaño) */
-    .ls-perms, .ls-type, .ls-size {
-        display: inline-block;
-        font-size: 0.75rem;
-        margin-right: 12px;
-        margin-top: 4px;
-    }
-
-    /* Agrupamos visualmente los metadatos en el área inferior */
-    .ls-perms { grid-area: metadata; color: #777; }
-    .ls-type { color: var(--neon-cyan); font-weight: bold; }
-    .ls-size { color: #999; }
-
-    /* Ajuste de Paginación para pulgares */
-    .ls-pagination {
+        display: flex;
         justify-content: center;
-        gap: 15px;
-        margin-top: 1.5rem;
+        align-items: center;
+        background: rgba(255, 0, 127, 0.05);
     }
 
-    .ls-page-btn {
-        padding: 8px 16px;
-        font-size: 1rem;
-    }
-
-    /* --- Adaptación Modo Claro Móvil --- */
+    /* Adaptación Modo Claro Móvil */
     [data-theme="light"] .ls-row {
         background: #ffffff;
         border-color: rgba(0, 0, 0, 0.1);
-        border-left-color: var(--neon-cyan); /* Cambia a azul en modo claro */
+        border-left-color: var(--neon-cyan);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
-
-    [data-theme="light"] .ls-name {
-        color: #000;
-        text-shadow: none;
-    }
-
-    [data-theme="light"] .ls-perms { color: #666; }
-    [data-theme="light"] .ls-size { color: #444; }
+    [data-theme="light"] .ls-name { color: #000; }
+    [data-theme="light"] .ls-perms { color: #888; }
 }
 
 
