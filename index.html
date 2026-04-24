@@ -12,6 +12,16 @@
 </head>
 
 <body>
+    <div id="boot-sequence" class="boot-screen">
+        <div class="boot-terminal">
+            <p class="boot-line">> INICIANDO KS_OS_KERNEL...</p>
+            <p class="boot-line">> MONITORES DE SEGURIDAD: <span style="color: #27c93f;">[ONLINE]</span></p>
+            <p class="boot-line">> CARGANDO MÓDULOS_DE_INTERFAZ...</p>
+            <p class="boot-progress" id="boot-bar">[..........] 0%</p>
+            <p class="boot-blink">_</p>
+        </div>
+    </div>
+
     <canvas id="cyber-bg"></canvas>
 
     <nav class="navbar minimal-nav">
@@ -487,6 +497,8 @@
         </div>
 
     </div>
+
+    <div id="global-glitch" class="global-glitch-transition"></div>
 
     <script src="script.js"></script>
 </body>

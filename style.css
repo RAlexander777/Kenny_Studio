@@ -560,14 +560,14 @@ body {
 /* Layout general del Hero */
 .hero {
     position: relative;
-    height: 100vh; 
+    min-height: 100vh; 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     overflow: hidden;
-    padding: 0 2rem;
+    padding: 0 2rem 3rem 2rem;
     gap: 2.5rem;
     color: #ffffff; 
 }
@@ -2399,3 +2399,90 @@ section h2 {
     color: #fff;
     box-shadow: 0 0 10px rgba(0, 85, 255, 0.4);
 }
+
+html {
+    scroll-behavior: smooth; /* Desplazamiento nativo fluido */
+}
+
+/* Estado activo del Navbar indicado por el ScrollSpy */
+.nav-links a.active::before { opacity: 1; transform: translateX(10px); }
+.nav-links a.active::after { opacity: 1; transform: translateX(-10px); }
+.nav-links a.active .link-text { 
+    color: var(--neon-cyan); 
+    text-shadow: 0 0 8px rgba(0, 255, 204, 0.5); 
+}
+
+/* Modo Claro - Navbar Activo */
+[data-theme="light"] .nav-links a.active .link-text {
+    text-shadow: none;
+    font-weight: 700;
+}
+
+/* =========================================
+   Transición Glitch a Pantalla Completa
+   ========================================= */
+.global-glitch-transition {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    pointer-events: none; /* No interfiere con clics */
+    z-index: 9999; /* Por encima de todo */
+    opacity: 0;
+    /* Un filtro de inversión agresivo combinado con rayas CRT */
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 255, 204, 0.1) 0px,
+        rgba(255, 0, 127, 0.1) 4px,
+        transparent 5px,
+        transparent 8px
+    );
+    backdrop-filter: invert(1) hue-rotate(180deg) grayscale(50%) contrast(300%);
+    -webkit-backdrop-filter: invert(1) hue-rotate(180deg) grayscale(50%) contrast(300%);
+}
+
+.global-glitch-transition.active {
+    animation: screen-glitch-jump 0.5s steps(10) forwards;
+}
+
+@keyframes screen-glitch-jump {
+    0% { opacity: 1; clip-path: inset(10% 0 80% 0); transform: translateX(-15px); }
+    20% { clip-path: inset(80% 0 5% 0); transform: translateX(15px); }
+    40% { clip-path: inset(30% 0 50% 0); transform: translateX(-10px); }
+    60% { clip-path: inset(10% 0 60% 0); transform: translateX(20px); }
+    80% { clip-path: inset(70% 0 20% 0); transform: translateX(-15px); }
+    100% { opacity: 0; clip-path: inset(0 0 0 0); transform: translateX(0); }
+}
+
+/* =========================================
+   Secuencia de Arranque (Preloader)
+   ========================================= */
+.boot-screen {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: #000;
+    z-index: 10000;
+    display: flex; align-items: center; justify-content: flex-start;
+    padding-left: 10%;
+    color: var(--neon-cyan);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.2rem;
+    transition: opacity 0.6s ease, filter 0.6s ease;
+}
+
+.boot-screen.hidden {
+    opacity: 0;
+    filter: blur(10px);
+    pointer-events: none;
+}
+
+.boot-terminal { text-shadow: 0 0 8px rgba(0, 255, 204, 0.5); }
+.boot-line { margin-bottom: 0.5rem; opacity: 0; }
+.boot-progress { margin-top: 1rem; color: #fff; }
+.boot-blink { animation: blink 1s step-end infinite; margin-top: 0.5rem; }
+
+[data-theme="light"] .boot-screen {
+    background: #f4f6f9;
+    color: var(--neon-pink);
+}
+[data-theme="light"] .boot-terminal { text-shadow: none; }
+[data-theme="light"] .boot-progress { color: #000; }

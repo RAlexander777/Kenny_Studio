@@ -1,4 +1,94 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+    // === A. Secuencia de Arranque (Boot OS) ===
+    const bootScreen = document.getElementById("boot-sequence");
+    const bootLines = document.querySelectorAll(".boot-line");
+    const bootBar = document.getElementById("boot-bar");
+    
+    if (bootScreen) {
+        // Mostrar líneas de terminal progresivamente
+        setTimeout(() => bootLines[0].style.opacity = 1, 100);
+        setTimeout(() => bootLines[1].style.opacity = 1, 400);
+        setTimeout(() => bootLines[2].style.opacity = 1, 700);
+
+        // Simular carga de barra
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += Math.floor(Math.random() * 20) + 10;
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(interval);
+                bootBar.innerHTML = `[||||||||||] 100% - ACCESO CONCEDIDO`;
+                
+                // Ocultar pantalla de arranque
+                setTimeout(() => {
+                    bootScreen.classList.add("hidden");
+                }, 500);
+            } else {
+                const bars = "|".repeat(Math.floor(progress / 10)).padEnd(10, ".");
+                bootBar.innerHTML = `[${bars}] ${progress}%`;
+            }
+        }, 100);
+        
+        // Cierre de seguridad: Si la página carga muy lento, quitar el preloader máximo a los 3 segundos
+        window.addEventListener('load', () => {
+            setTimeout(() => { if (!bootScreen.classList.contains("hidden")) bootScreen.classList.add("hidden"); }, 2000);
+        });
+    }
+
+    // === B. Transición Glitch en Enlaces ===
+    const glitchOverlay = document.getElementById("global-glitch");
+    const navAnchors = document.querySelectorAll('a[href^="#"]');
+
+    navAnchors.forEach(anchor => {
+        anchor.addEventListener("click", function(e) {
+            const targetId = this.getAttribute("href");
+            if (targetId === "#") return; // Ignorar enlaces vacíos
+            
+            const targetEl = document.querySelector(targetId);
+            if (targetEl && glitchOverlay) {
+                // Prevenimos el scroll inmediato
+                e.preventDefault();
+                
+                // Disparamos el pantallazo glitch
+                glitchOverlay.classList.remove("active");
+                void glitchOverlay.offsetWidth; // Truco para reiniciar la animación
+                glitchOverlay.classList.add("active");
+                
+                // Esperamos un instante (mientras la pantalla falla) y hacemos el scroll
+                setTimeout(() => {
+                    targetEl.scrollIntoView({ behavior: 'auto' }); 
+                }, 150); // Justo en medio del parpadeo
+            }
+        });
+    });
+
+    // === C. ScrollSpy (Radar de Navegación) ===
+    const sections = document.querySelectorAll("header.hero, section.cyber-container, footer.cyber-footer");
+    const navLinksObj = document.querySelectorAll(".nav-links a");
+
+    const spyOptions = {
+        threshold: 0.3, // Se activa cuando el 30% de la sección es visible
+        rootMargin: "-10% 0px -50% 0px" // Ajuste para que se marque a la mitad de la pantalla
+    };
+
+    const spyObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const currentId = entry.target.getAttribute("id");
+                
+                navLinksObj.forEach(link => {
+                    link.classList.remove("active");
+                    if (link.getAttribute("href") === `#${currentId}`) {
+                        link.classList.add("active");
+                    }
+                });
+            }
+        });
+    }, spyOptions);
+
+    sections.forEach(section => spyObserver.observe(section));
+    
     // 1. Alternancia de Modo Día / Noche (Con Video Dinámico)
     const themeBtn = document.getElementById("theme-toggle");
     const htmlEl = document.documentElement;
