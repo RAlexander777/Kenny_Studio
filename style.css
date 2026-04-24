@@ -406,53 +406,52 @@ body {
     background: rgba(5, 5, 10, 0.6);
 }
 
-/* Animación del Radar */
-.radar-container {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    border: 2px solid var(--neon-cyan);
+/* =========================================
+   Globo Terráqueo Cybermap (Reemplazo Radar)
+   ========================================= */
+.globe-wrapper {
     position: relative;
-    overflow: hidden;
-    background: rgba(0, 255, 204, 0.05);
-    box-shadow: 0 0 20px rgba(0, 255, 204, 0.2), inset 0 0 20px rgba(0, 255, 204, 0.2);
-    margin-bottom: 2rem;
+    width: 250px;
+    height: 250px;
+    margin: 0 auto 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    /* Halo brillante alrededor del globo */
+    box-shadow: 0 0 30px rgba(0, 255, 204, 0.1), inset 0 0 20px rgba(0, 255, 204, 0.1);
+    background: radial-gradient(circle at center, rgba(0, 255, 204, 0.05) 0%, transparent 70%);
 }
 
-.radar-container::after {
-    content: '';
+#cyber-globe {
+    border-radius: 50%;
+    filter: drop-shadow(0 0 8px rgba(0, 255, 204, 0.5));
+    transition: filter 0.3s ease;
+    z-index: 1;
+}
+
+/* Sombra interior para darle profundidad esférica 3D */
+.globe-overlay {
     position: absolute;
-    top: 50%; left: 0; right: 0; height: 1px; background: rgba(0, 255, 204, 0.3);
-}
-.radar-container::before {
-    content: '';
-    position: absolute;
-    left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(0, 255, 204, 0.3);
-}
-
-.radar-sweep {
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 50%; height: 50%;
-    background: linear-gradient(45deg, rgba(0, 255, 204, 1) 0%, transparent 50%);
-    transform-origin: 0% 0%;
-    animation: sweep 4s linear infinite;
+    top: 0; left: 0; width: 100%; height: 100%;
+    border-radius: 50%;
+    box-shadow: inset -15px -15px 40px rgba(0, 0, 0, 0.8), inset 15px 15px 40px rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+    z-index: 2;
 }
 
-@keyframes sweep { 100% { transform: rotate(360deg); } }
-
-.radar-dot {
-    position: absolute; width: 6px; height: 6px; border-radius: 50%;
-    background: var(--neon-pink); box-shadow: 0 0 8px var(--neon-pink);
-    opacity: 0; animation: blink-dot 4s infinite;
+/* --- Adaptación para el Modo Claro --- */
+[data-theme="light"] .globe-wrapper {
+    box-shadow: 0 0 30px rgba(0, 85, 255, 0.1), inset 0 0 20px rgba(0, 85, 255, 0.1);
+    background: radial-gradient(circle at center, rgba(0, 85, 255, 0.05) 0%, transparent 70%);
 }
-.dot-1 { top: 30%; left: 60%; animation-delay: 1s; }
-.dot-2 { top: 70%; left: 30%; animation-delay: 2.5s; }
 
-@keyframes blink-dot { 
-    0%, 90% { opacity: 0; }
-    95% { opacity: 1; }
-    100% { opacity: 0; }
+[data-theme="light"] #cyber-globe {
+    filter: drop-shadow(0 0 8px rgba(0, 85, 255, 0.5));
+}
+
+[data-theme="light"] .globe-overlay {
+    box-shadow: inset -15px -15px 40px rgba(255, 255, 255, 0.6), inset 15px 15px 40px rgba(255, 255, 255, 0.3);
 }
 
 .stats-panel {
@@ -1952,4 +1951,451 @@ section h2 {
     }
 
     .cyber-clock { display: none;}
+}
+
+/* =========================================
+   Ajustes de Texto (Sobre KS)
+   ========================================= */
+.about-text p {
+    font-size: 1.15rem; /* Letra más grande */
+    line-height: 1.7;   /* Mayor espaciado entre líneas */
+    margin-bottom: 1.2rem;
+}
+
+.about-text .highlight-box {
+    font-size: 1.25rem;
+    margin-top: 2rem;
+}
+
+/* =========================================
+   Acordeón Desplegable en Módulos de Servicio
+   ========================================= */
+.toggle-desc-btn {
+    background: transparent;
+    border: none;
+    color: var(--neon-cyan);
+    font-size: 0.85rem;
+    font-family: 'Courier New', monospace;
+    cursor: pointer;
+    margin-top: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
+    text-transform: uppercase;
+}
+
+.toggle-desc-btn:hover {
+    color: var(--neon-pink);
+    text-shadow: 0 0 8px rgba(255, 0, 127, 0.5);
+}
+
+.toggle-desc-btn i {
+    transition: transform 0.4s ease;
+}
+
+.service-card.expanded .toggle-desc-btn i {
+    transform: rotate(180deg);
+}
+
+.service-extra-content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.4s ease, margin-top 0.4s ease;
+}
+
+.service-card.expanded .service-extra-content {
+    max-height: 250px;
+    opacity: 1;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.cyber-list {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+
+.cyber-list li {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-bottom: 0.6rem;
+    padding-left: 15px;
+    position: relative;
+    line-height: 1.4;
+}
+
+.cyber-list li::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: var(--neon-pink);
+    font-weight: bold;
+}
+
+[data-theme="light"] .cyber-list li {
+    color: #555;
+}
+
+/* =========================================
+   Menú Móvil Futurista
+   ========================================= */
+.cyber-burger {
+    display: none; /* Oculto en PC */
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 35px;
+    height: 22px;
+    position: relative;
+    z-index: 2500;
+    margin-right: 20px; /* Cambiado: Margen a la derecha ahora que está en la izquierda */
+}
+
+.cyber-burger span {
+    display: block;
+    position: absolute;
+    height: 3px;
+    background: var(--neon-cyan);
+    border-radius: 0;
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 0 8px var(--neon-cyan);
+    left: 0; /* Cambiado: Ahora la línea plana nace desde la izquierda */
+}
+
+/* Diseño asimétrico para el icono cerrado (invertido) */
+.cyber-burger span:nth-child(1) { top: 0; width: 100%; }
+.cyber-burger span:nth-child(2) { top: 9px; width: 70%; }
+.cyber-burger span:nth-child(3) { top: 18px; width: 85%; }
+
+/* Estado Activo (La X visible) */
+.cyber-burger.open span:nth-child(1) { top: 9px; transform: rotate(45deg); width: 100%; }
+.cyber-burger.open span:nth-child(2) { opacity: 0; left: -20px; } /* Animación hacia la izquierda */
+.cyber-burger.open span:nth-child(3) { top: 9px; transform: rotate(-45deg); width: 100%; }
+
+/* Pantalla del Menú (Overlay) */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(5, 5, 10, 0.95);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    
+    /* ¡EL FIX CLAVE! Antes era 2000. Al ponerlo en 990, se despliega por debajo 
+       de tu barra de navegación (1000), dejando la "X" siempre por encima y visible */
+    z-index: 990; 
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    transition: clip-path 0.5s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.5s ease;
+    border-bottom: 3px solid var(--neon-cyan);
+}
+
+.mobile-menu-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.mobile-nav-links {
+    list-style: none;
+    text-align: left; /* Alineado tipo terminal */
+    padding: 0;
+}
+
+.mobile-nav-links li {
+    margin: 2rem 0;
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+/* Animación en cascada de los enlaces al abrir */
+.mobile-menu-overlay.active .mobile-nav-links li { transform: translateY(0); opacity: 1; }
+.mobile-menu-overlay.active .mobile-nav-links li:nth-child(1) { transition-delay: 0.2s; }
+.mobile-menu-overlay.active .mobile-nav-links li:nth-child(2) { transition-delay: 0.3s; }
+.mobile-menu-overlay.active .mobile-nav-links li:nth-child(3) { transition-delay: 0.4s; }
+.mobile-menu-overlay.active .mobile-nav-links li:nth-child(4) { transition-delay: 0.5s; }
+
+.mobile-link {
+    font-size: 2.2rem;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 2px;
+    transition: color 0.3s ease;
+    text-transform: uppercase;
+}
+
+.mobile-link:hover, .mobile-link:active {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 15px var(--neon-cyan);
+}
+
+/* --- Adaptación Modo Claro --- */
+[data-theme="light"] .cyber-burger span {
+    background: #000000; /* Negro como pediste */
+    box-shadow: none;
+}
+[data-theme="light"] .mobile-menu-overlay {
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom: 3px solid var(--neon-pink);
+}
+[data-theme="light"] .mobile-link { color: #1a1a2e; }
+[data-theme="light"] .mobile-link:hover, 
+[data-theme="light"] .mobile-link:active {
+    color: var(--neon-cyan);
+    text-shadow: none;
+}
+
+/* --- Media Query --- */
+@media (max-width: 768px) {
+    .cyber-burger {
+        display: block; /* Muestra la hamburguesa en móvil */
+    }
+}
+
+/* =========================================
+   Sección: La Bóveda (Vault)
+   ========================================= */
+.vault-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.vault-item {
+    background: rgba(10, 10, 15, 0.6);
+    border: 1px dashed rgba(255, 0, 127, 0.3); /* Borde estilo "Clasificado" */
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    transition: var(--transition);
+}
+
+.vault-item:hover {
+    border-style: solid;
+    border-color: var(--neon-pink);
+    box-shadow: 0 5px 20px rgba(255, 0, 127, 0.1);
+    transform: translateX(5px);
+}
+
+.vault-icon {
+    font-size: 2rem;
+    color: var(--neon-pink);
+    background: rgba(255, 0, 127, 0.05);
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+.vault-info { flex-grow: 1; }
+.vault-info h4 { color: #fff; font-size: 1.1rem; margin-bottom: 0.3rem; }
+.vault-info p { color: #888; font-size: 0.85rem; line-height: 1.3; }
+
+.vault-download-btn {
+    background: transparent;
+    color: var(--neon-cyan);
+    border: 1px solid var(--neon-cyan);
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    text-decoration: none;
+    font-family: 'Courier New', monospace;
+    transition: var(--transition);
+}
+
+.vault-download-btn:hover {
+    background: var(--neon-cyan); color: #000;
+    box-shadow: 0 0 10px var(--neon-cyan);
+}
+
+/* Modo Claro Bóveda */
+[data-theme="light"] .vault-item { background: #ffffff; border-color: rgba(217, 0, 92, 0.3); }
+[data-theme="light"] .vault-info h4 { color: var(--text-color); }
+[data-theme="light"] .vault-icon { color: var(--neon-pink); background: rgba(217, 0, 92, 0.05); }
+
+
+/* =========================================
+   Efecto Glitch Constante (Líneas Horizontales)
+   ========================================= */
+.secret-glitch {
+    position: relative;
+    display: inline-block;
+    color: var(--neon-pink) !important;
+    text-shadow: 0 0 5px rgba(255, 0, 127, 0.4);
+}
+
+/* Creamos dos capas falsas del texto que se recortarán horizontalmente */
+.secret-glitch::before, .secret-glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    /* El fondo es VITAL para tapar el texto original cuando ocurre el corte */
+    background: var(--bg-color); 
+    pointer-events: none;
+}
+
+/* Cortes de colores invertidos */
+.secret-glitch::before {
+    color: var(--neon-cyan);
+    left: -2px;
+    animation: slice-glitch-1 2s infinite linear alternate-reverse;
+}
+
+.secret-glitch::after {
+    color: var(--neon-pink);
+    left: 2px;
+    background: transparent; /* Solo una capa tapa el fondo, la otra flota transparente */
+    animation: slice-glitch-2 3s infinite linear alternate-reverse;
+}
+
+/* Excepciones de fondo para que el Glitch funcione en Modo Claro y Navbar de cristal */
+[data-theme="light"] .secret-glitch::before { background: #e2e6f0; }
+[data-theme="light"] .cyber-footer .secret-glitch::before { background: #f4f6f9; }
+.navbar .secret-glitch::before { background: rgba(10, 10, 10, 0.9); }
+[data-theme="light"] .navbar .secret-glitch::before { background: rgba(255, 255, 255, 0.9); }
+
+/* Animaciones de cortes horizontales aleatorios (Inset) */
+@keyframes slice-glitch-1 {
+    0% { clip-path: inset(10% 0 85% 0); transform: translateX(-2px); }
+    20% { clip-path: inset(80% 0 5% 0); transform: translateX(2px); }
+    40% { clip-path: inset(30% 0 60% 0); transform: translateX(-1px); }
+    60% { clip-path: inset(90% 0 2% 0); transform: translateX(3px); }
+    80% { clip-path: inset(15% 0 75% 0); transform: translateX(-2px); }
+    100% { clip-path: inset(45% 0 45% 0); transform: translateX(1px); }
+}
+
+@keyframes slice-glitch-2 {
+    0% { clip-path: inset(25% 0 65% 0); transform: translateX(2px); }
+    20% { clip-path: inset(5% 0 90% 0); transform: translateX(-2px); }
+    40% { clip-path: inset(55% 0 35% 0); transform: translateX(1px); }
+    60% { clip-path: inset(75% 0 15% 0); transform: translateX(-3px); }
+    80% { clip-path: inset(5% 0 85% 0); transform: translateX(2px); }
+    100% { clip-path: inset(85% 0 5% 0); transform: translateX(-1px); }
+}
+
+.terminal-ls-container {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(0, 255, 204, 0.2);
+    font-family: 'Share Tech Mono', monospace;
+    padding: 1rem;
+    overflow-x: auto;
+}
+
+.ls-header {
+    display: grid;
+    grid-template-columns: 120px 80px 100px 1fr 100px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.5rem;
+    color: var(--neon-pink);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+.ls-header span {
+    font-weight: bold;
+}
+
+.ls-row {
+    display: grid;
+    grid-template-columns: 120px 80px 100px 1fr 100px;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background 0.2s;
+    align-items: center;
+}
+
+.ls-row:hover {
+    background: rgba(0, 255, 204, 0.05);
+}
+
+.ls-perms { color: #999; font-size: 0.85rem; } /* Más brillante */
+.ls-type { color: var(--neon-cyan); font-weight: bold; }
+.ls-size { color: #ccc; } /* Más brillante */
+.ls-name { color: #fff; font-weight: bold; text-shadow: 0 0 5px rgba(255, 255, 255, 0.2); }
+
+/* Ícono de descarga en lugar de texto */
+.ls-download {
+    color: var(--neon-pink);
+    text-decoration: none;
+    border: 1px solid var(--neon-pink);
+    padding: 4px 10px;
+    font-size: 1rem;
+    text-align: center;
+    border-radius: 3px;
+    transition: var(--transition);
+    display: inline-block;
+}
+
+.ls-download:hover {
+    background: var(--neon-pink);
+    color: #000;
+    box-shadow: 0 0 10px var(--neon-pink);
+}
+
+/* =========================================
+   Paginación de la Terminal
+   ========================================= */
+.ls-pagination {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.ls-page-btn {
+    background: transparent;
+    color: var(--neon-cyan);
+    border: 1px solid var(--neon-cyan);
+    padding: 3px 10px;
+    cursor: pointer;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.ls-page-btn:hover, .ls-page-btn.active {
+    background: var(--neon-cyan);
+    color: #000;
+    box-shadow: 0 0 10px var(--neon-cyan);
+}
+
+/* =========================================
+   Adaptación al Tema Claro (Light Theme)
+   ========================================= */
+[data-theme="light"] .terminal-ls-container {
+    background: #f4f6f9; /* Fondo gris claro técnico */
+    border-color: rgba(0, 85, 255, 0.3);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .ls-header {
+    color: var(--neon-pink);
+    border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .ls-row { border-bottom-color: rgba(0, 0, 0, 0.05); }
+[data-theme="light"] .ls-row:hover { background: rgba(0, 85, 255, 0.05); }
+
+[data-theme="light"] .ls-perms { color: #666; } /* Gris oscuro */
+[data-theme="light"] .ls-size { color: #444; font-weight: 500; }
+[data-theme="light"] .ls-name { color: #111; text-shadow: none; font-weight: 700; }
+
+[data-theme="light"] .ls-pagination { border-top-color: rgba(0, 0, 0, 0.1); }
+[data-theme="light"] .ls-page-btn.active {
+    background: var(--neon-cyan);
+    color: #fff;
+    box-shadow: 0 0 10px rgba(0, 85, 255, 0.4);
 }

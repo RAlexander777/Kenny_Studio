@@ -16,10 +16,17 @@
 
     <nav class="navbar minimal-nav">
         <div class="nav-section nav-left">
+            <button class="cyber-burger" id="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
             <ul class="nav-links">
                 <li><a href="#about"><span class="link-text">Sobre KS.</span></a></li>
                 <li><a href="#services"><span class="link-text">Servicios</span></a></li>
                 <li><a href="#skills"><span class="link-text">Core Técnico</span></a></li>
+                <li><a href="#vault"><span class="link-text secret-glitch" data-text="La_Bóveda">La_Bóveda</span></a></li>
             </ul>
         </div>
 
@@ -33,7 +40,7 @@
 
         <div class="nav-section nav-right">
             <div class="cyber-clock" id="sys-clock">00:00:00</div>
-            
+
             <button id="theme-toggle" class="theme-switch-btn" aria-label="Cambiar tema">
                 <div class="switch-track"></div>
                 <div class="switch-thumb">
@@ -42,6 +49,16 @@
             </button>
         </div>
     </nav>
+
+    <div class="mobile-menu-overlay" id="mobile-menu">
+        <ul class="mobile-nav-links">
+            <li><a href="#home" class="mobile-link">> ./INICIO</a></li>
+            <li><a href="#about" class="mobile-link">> ./SOBRE_KS</a></li>
+            <li><a href="#services" class="mobile-link">> ./SERVICIOS</a></li>
+            <li><a href="#skills" class="mobile-link">> ./CORE_TECNICO</a></li>
+            <li><a href="#vault" class="mobile-link secret-glitch" data-text="> ./LA_BOVEDA">> ./LA_BOVEDA</a></li>
+        </ul>
+    </div>
 
     <header class="hero" id="home">
         <video autoplay muted loop playsinline class="hero-video" id="hero-video-bg">
@@ -92,12 +109,11 @@
                 </p>
                 <p class="highlight-box">No se construyen simples soluciones… se entiende lo que el resto no ve.</p>
             </div>
-            
+
             <div class="about-visual glass-card cyber-border">
-                <div class="radar-container">
-                    <div class="radar-sweep"></div>
-                    <div class="radar-dot dot-1"></div>
-                    <div class="radar-dot dot-2"></div>
+                <div class="globe-wrapper">
+                    <canvas id="cyber-globe" width="250" height="250"></canvas>
+                    <div class="globe-overlay"></div>
                 </div>
                 <div class="stats-panel">
                     <div class="stat"><span class="neon-cyan-text">100%</span> Precisión</div>
@@ -115,40 +131,92 @@
             <div class="service-card cyber-border-hover">
                 <div class="service-icon"><i class="fas fa-code"></i></div>
                 <h3>Desarrollo Web & Software</h3>
-                <p>Arquitecturas limpias, escalables y orientadas a la máxima productividad mediante stacks modernos.</p>
+                <p>Arquitecturas limpias, escalables y orientadas a la máxima productividad mediante stacks modernos.
+                </p>
+
+                <button class="toggle-desc-btn">Ver especificaciones <i class="fas fa-chevron-down"></i></button>
+                <div class="service-extra-content">
+                    <ul class="cyber-list">
+                        <li>Creación de Single Page Applications (SPA).</li>
+                        <li>Arquitectura y despliegue en la nube (AWS, VPS).</li>
+                        <li>Optimización de rendimiento y Core Web Vitals.</li>
+                    </ul>
+                </div>
+
                 <div class="card-actions">
-                    <a href="https://wa.me/51973661041?text=Hola,%20KennyStudio.%20Deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20Desarrollo%20Web%20y%20Software." target="_blank" class="cyber-btn-outline"><i class="fab fa-whatsapp"></i> Solicitar</a>
-                    <button class="cyber-btn-outline btn-secondary modal-trigger" data-modal="modal-dev"><i class="fas fa-folder-open"></i> Proyectos</button>
+                    <a href="https://wa.me/51973661041?text=Hola,%20KennyStudio.%20Deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20Desarrollo%20Web%20y%20Software."
+                        target="_blank" rel="noopener noreferrer" class="cyber-btn-outline"><i class="fab fa-whatsapp"></i> Solicitar</a>
+                    <button class="cyber-btn-outline btn-secondary modal-trigger" data-modal="modal-dev"><i
+                            class="fas fa-folder-open"></i> Proyectos</button>
                 </div>
             </div>
 
             <div class="service-card cyber-border-hover">
                 <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
                 <h3>Ciberseguridad & Pentesting</h3>
-                <p>Auditorías de seguridad, pruebas de penetración e identificación de vulnerabilidades bajo estándares forenses.</p>
+                <p>Auditorías de seguridad, pruebas de penetración e identificación de vulnerabilidades bajo estándares
+                    forenses.</p>
+
+                <button class="toggle-desc-btn">Ver especificaciones <i class="fas fa-chevron-down"></i></button>
+                <div class="service-extra-content">
+                    <ul class="cyber-list">
+                        <li>Análisis de vulnerabilidades web (OWASP Top 10).</li>
+                        <li>Hardening de redes y servidores (Linux/Windows).</li>
+                        <li>Generación de reportes ejecutivos y técnicos.</li>
+                    </ul>
+                </div>
+
                 <div class="card-actions">
-                    <a href="https://wa.me/51973661041?text=Hola,%20KennyStudio.%20Deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20Ciberseguridad%20y%20Pentesting." target="_blank" class="cyber-btn-outline"><i class="fab fa-whatsapp"></i> Solicitar</a>
-                    <button class="cyber-btn-outline btn-secondary modal-trigger" data-modal="modal-sec"><i class="fas fa-folder-open"></i> Proyectos</button>
+                    <a href="https://wa.me/51973661041?text=Hola,%20KennyStudio.%20Deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20Ciberseguridad%20y%20Pentesting."
+                        target="_blank" rel="noopener noreferrer" class="cyber-btn-outline"><i class="fab fa-whatsapp"></i> Solicitar</a>
+                    <button class="cyber-btn-outline btn-secondary modal-trigger" data-modal="modal-sec"><i
+                            class="fas fa-folder-open"></i> Proyectos</button>
                 </div>
             </div>
 
             <div class="service-card cyber-border-hover">
                 <div class="service-icon"><i class="fas fa-user-secret"></i></div>
                 <h3>Investigación Forense OSINT</h3>
-                <p>Verificación de identidades y análisis de perfiles digitales para la toma de decisiones con respaldo legal.</p>
+                <p>Verificación de identidades y análisis de perfiles digitales para la toma de decisiones con respaldo
+                    legal.</p>
+
+                <button class="toggle-desc-btn">Ver especificaciones <i class="fas fa-chevron-down"></i></button>
+                <div class="service-extra-content">
+                    <ul class="cyber-list">
+                        <li>Trazabilidad avanzada de correos y dominios.</li>
+                        <li>Mapeo de huella digital de individuos/empresas.</li>
+                        <li>Detección de fugas de datos (Data Leaks).</li>
+                    </ul>
+                </div>
+
                 <div class="card-actions">
-                    <a href="https://wa.me/51973661041?text=Hola,%20KennyStudio.%20Deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20Investigaci%C3%B3n%20Forense%20OSINT." target="_blank" class="cyber-btn-outline"><i class="fab fa-whatsapp"></i> Solicitar</a>
-                    <button class="cyber-btn-outline btn-secondary modal-trigger" data-modal="modal-osint"><i class="fas fa-folder-open"></i> Proyectos</button>
+                    <a href="https://wa.me/51973661041?text=Hola,%20KennyStudio.%20Deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20Investigaci%C3%B3n%20Forense%20OSINT."
+                        target="_blank" rel="noopener noreferrer" class="cyber-btn-outline"><i class="fab fa-whatsapp"></i> Solicitar</a>
+                    <button class="cyber-btn-outline btn-secondary modal-trigger" data-modal="modal-osint"><i
+                            class="fas fa-folder-open"></i> Proyectos</button>
                 </div>
             </div>
 
             <div class="service-card cyber-border-hover">
                 <div class="service-icon"><i class="fas fa-robot"></i></div>
                 <h3>IA & Automatización</h3>
-                <p>Integración de redes neuronales, automatización de procesos repetitivos y desarrollo de asistentes inteligentes.</p>
+                <p>Integración de redes neuronales, automatización de procesos repetitivos y desarrollo de asistentes
+                    inteligentes.</p>
+
+                <button class="toggle-desc-btn">Ver especificaciones <i class="fas fa-chevron-down"></i></button>
+                <div class="service-extra-content">
+                    <ul class="cyber-list">
+                        <li>Chatbots conversacionales con PNL (IA).</li>
+                        <li>Scraping y extracción de datos web a gran escala.</li>
+                        <li>Bots de automatización de tareas y flujos (Python).</li>
+                    </ul>
+                </div>
+
                 <div class="card-actions">
-                    <a href="https://wa.me/51973661041?text=Hola,%20KennyStudio.%20Deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20IA%20y%20Automatizaci%C3%B3n." target="_blank" class="cyber-btn-outline"><i class="fab fa-whatsapp"></i> Solicitar</a>
-                    <button class="cyber-btn-outline btn-secondary modal-trigger" data-modal="modal-ia"><i class="fas fa-folder-open"></i> Proyectos</button>
+                    <a href="https://wa.me/51973661041?text=Hola,%20KennyStudio.%20Deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20IA%20y%20Automatizaci%C3%B3n."
+                        target="_blank" rel="noopener noreferrer" class="cyber-btn-outline"><i class="fab fa-whatsapp"></i> Solicitar</a>
+                    <button class="cyber-btn-outline btn-secondary modal-trigger" data-modal="modal-ia"><i
+                            class="fas fa-folder-open"></i> Proyectos</button>
                 </div>
             </div>
         </div>
@@ -161,13 +229,17 @@
             <div class="modal-content-scroll">
                 <div class="project-mockup-item">
                     <h4>Sistema de Control de Inventario</h4>
-                    <p>Desarrollo de una plataforma interna para PYMES que permite gestionar stock en tiempo real, registro de entradas/salidas y generación de reportes en PDF.</p>
-                    <div class="tech-tags"><span class="tech-tag">React</span><span class="tech-tag">Node.js</span></div>
+                    <p>Desarrollo de una plataforma interna para PYMES que permite gestionar stock en tiempo real,
+                        registro de entradas/salidas y generación de reportes en PDF.</p>
+                    <div class="tech-tags"><span class="tech-tag">React</span><span class="tech-tag">Node.js</span>
+                    </div>
                 </div>
                 <div class="project-mockup-item">
                     <h4>Landing Page Corporativa</h4>
-                    <p>Diseño y despliegue de un sitio web informativo optimizado para SEO y alta conversión, integrado con formularios de contacto directo a WhatsApp.</p>
-                    <div class="tech-tags"><span class="tech-tag">Astro</span><span class="tech-tag">Tailwind</span></div>
+                    <p>Diseño y despliegue de un sitio web informativo optimizado para SEO y alta conversión, integrado
+                        con formularios de contacto directo a WhatsApp.</p>
+                    <div class="tech-tags"><span class="tech-tag">Astro</span><span class="tech-tag">Tailwind</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -180,8 +252,10 @@
             <div class="modal-content-scroll">
                 <div class="project-mockup-item">
                     <h4>Auditoría de Red Local</h4>
-                    <p>Evaluación de seguridad en la red Wi-Fi y LAN de una oficina comercial. Se entregó un reporte detallando configuraciones débiles y recomendaciones de mitigación.</p>
-                    <div class="tech-tags"><span class="tech-tag">Wireshark</span><span class="tech-tag">Nmap</span></div>
+                    <p>Evaluación de seguridad en la red Wi-Fi y LAN de una oficina comercial. Se entregó un reporte
+                        detallando configuraciones débiles y recomendaciones de mitigación.</p>
+                    <div class="tech-tags"><span class="tech-tag">Wireshark</span><span class="tech-tag">Nmap</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -194,7 +268,8 @@
             <div class="modal-content-scroll">
                 <div class="project-mockup-item">
                     <h4>Verificación de Perfil Público</h4>
-                    <p>Recopilación legal de datos de fuentes abiertas (redes sociales, registros públicos) para validar la información comercial de un proveedor antes de una contratación.</p>
+                    <p>Recopilación legal de datos de fuentes abiertas (redes sociales, registros públicos) para validar
+                        la información comercial de un proveedor antes de una contratación.</p>
                     <div class="tech-tags"><span class="tech-tag">OSINT Framework</span></div>
                 </div>
             </div>
@@ -208,8 +283,10 @@
             <div class="modal-content-scroll">
                 <div class="project-mockup-item">
                     <h4>Bot de Reservas para WhatsApp</h4>
-                    <p>Integración de un flujo de respuestas automatizadas que permite a los clientes agendar citas médicas leyendo la disponibilidad directamente desde Google Calendar.</p>
-                    <div class="tech-tags"><span class="tech-tag">Python</span><span class="tech-tag">WhatsApp API</span></div>
+                    <p>Integración de un flujo de respuestas automatizadas que permite a los clientes agendar citas
+                        médicas leyendo la disponibilidad directamente desde Google Calendar.</p>
+                    <div class="tech-tags"><span class="tech-tag">Python</span><span class="tech-tag">WhatsApp
+                            API</span></div>
                 </div>
             </div>
         </div>
@@ -224,19 +301,27 @@
                 <div class="node-content">
                     <div class="skill-item">
                         <span class="skill-name">JavaScript (ES6+)</span>
-                        <div class="skill-bar"><div class="skill-fill" style="width: 90%;"></div></div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" style="width: 90%;"></div>
+                        </div>
                     </div>
                     <div class="skill-item">
                         <span class="skill-name">Python (FastAPI/Flask)</span>
-                        <div class="skill-bar"><div class="skill-fill" style="width: 85%;"></div></div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" style="width: 85%;"></div>
+                        </div>
                     </div>
                     <div class="skill-item">
                         <span class="skill-name">C++ & Rust</span>
-                        <div class="skill-bar"><div class="skill-fill" style="width: 70%;"></div></div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" style="width: 70%;"></div>
+                        </div>
                     </div>
                     <div class="skill-item">
                         <span class="skill-name">SQL (PostgreSQL)</span>
-                        <div class="skill-bar"><div class="skill-fill" style="width: 88%;"></div></div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" style="width: 88%;"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -260,22 +345,49 @@
                 <div class="node-content">
                     <div class="skill-item">
                         <span class="skill-name">Figma (UI/UX)</span>
-                        <div class="skill-bar"><div class="skill-fill" style="width: 85%;"></div></div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" style="width: 85%;"></div>
+                        </div>
                     </div>
                     <div class="skill-item">
                         <span class="skill-name">Adobe Creative Suite</span>
-                        <div class="skill-bar"><div class="skill-fill" style="width: 75%;"></div></div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" style="width: 75%;"></div>
+                        </div>
                     </div>
                     <div class="skill-item">
                         <span class="skill-name">Animaciones CSS3</span>
-                        <div class="skill-bar"><div class="skill-fill" style="width: 95%;"></div></div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" style="width: 95%;"></div>
+                        </div>
                     </div>
                     <div class="skill-item">
                         <span class="skill-name">Canvas API</span>
-                        <div class="skill-bar"><div class="skill-fill" style="width: 80%;"></div></div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" style="width: 80%;"></div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section class="vault cyber-container" id="vault">
+        <h2 class="section-title">/vault_ls -la</h2>
+        <p class="gradient-text">> Acceso a recursos clasificados. Directorio: /root/ks/tools</p>
+        
+        <div class="terminal-ls-container">
+            <div class="ls-header">
+                <span>PERMISOS</span>
+                <span>TIPO</span>
+                <span>TAMAÑO</span>
+                <span>NOMBRE_DEL_ARCHIVO</span>
+                <span>ACCIÓN</span>
+            </div>
+            <div id="vault-list" class="ls-body">
+                <div class="ls-loading">> Cargando base de datos...</div>
+            </div>
+            <div id="vault-pagination" class="ls-pagination"></div>
         </div>
     </section>
 
@@ -298,6 +410,7 @@
                     <li><a href="#about">> ./sobre_ks</a></li>
                     <li><a href="#services">> ./servicios</a></li>
                     <li><a href="#skills">> ./core_tecnico</a></li>
+                    <li><a href="#vault"><span class="secret-glitch" data-text="> ./la_boveda">> ./la_boveda</span></a></li>
                 </ul>
             </div>
 
@@ -314,15 +427,15 @@
                         <ul class="contact-list">
                             <li>
                                 <i class="fab fa-whatsapp"></i>
-                                <a href="https://wa.me/51973661041" target="_blank">+51 973661041</a>
+                                <a href="https://wa.me/51973661041" target="_blank" rel="noopener noreferrer">+51 973661041</a>
                             </li>
                             <li>
                                 <i class="fab fa-telegram"></i>
-                                <a href="https://t.me/Killer_Kiu" target="_blank">@Killer_Kiu</a>
+                                <a href="https://t.me/Killer_Kiu" target="_blank" rel="noopener noreferrer">@Killer_Kiu</a>
                             </li>
                             <li>
                                 <i class="fab fa-facebook"></i>
-                                <a href="https://facebook.com/KennyPalominoKS" target="_blank">KennyPalominoKS</a>
+                                <a href="https://facebook.com/KennyPalominoKS" target="_blank" rel="noopener noreferrer">KennyPalominoKS</a>
                             </li>
                         </ul>
                     </div>
@@ -338,8 +451,8 @@
     </footer>
 
     <div class="floating-widgets" id="floating-widgets">
-        
-        <a href="https://wa.me/51973661041" target="_blank" class="sh-whatsapp" title="Contactar por WhatsApp">
+
+        <a href="https://wa.me/51973661041" target="_blank" rel="noopener noreferrer" class="sh-whatsapp" title="Contactar por WhatsApp">
             <i class="fab fa-whatsapp"></i>
         </a>
 
@@ -350,7 +463,7 @@
                 </span>
                 <button class="sh-toggle-btn" id="sh-toggle"><i class="fas fa-chevron-up"></i></button>
             </div>
-            
+
             <div class="sh-content" id="sh-content">
                 <div class="sh-info">
                     <span class="sh-title">SUPER.HOT.exe</span>
@@ -358,19 +471,21 @@
                 </div>
                 <div class="sh-controls">
                     <button class="sh-play-btn" id="sh-play-btn"><i class="fas fa-play"></i></button>
-                    <div class="sh-bar"><div class="sh-fill" id="sh-fill"></div></div>
+                    <div class="sh-bar">
+                        <div class="sh-fill" id="sh-fill"></div>
+                    </div>
                 </div>
                 <div class="sh-volume-zone">
                     <i class="fas fa-volume-down sh-vol-icon"></i>
                     <input type="range" class="sh-volume-slider" id="sh-volume" min="0" max="1" step="0.01" value="0.5">
                 </div>
             </div>
-            
+
             <audio id="bgm-audio" loop>
                 <source src="superhot.mp3" type="audio/mpeg">
             </audio>
         </div>
-        
+
     </div>
 
     <script src="script.js"></script>

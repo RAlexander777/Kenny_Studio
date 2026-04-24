@@ -1,0 +1,20 @@
+[
+    {
+        "tipo": "PYTHON",
+        "size": "15KB",
+        "nombre": "osint_scraper_v2.1.py",
+        "link": "https://tu-link-de-descarga.com/archivo1.zip"
+    },
+    {
+        "tipo": "WORDLIST",
+        "size": "2.4MB",
+        "nombre": "payloads_fuzzing_top.txt",
+        "link": "https://tu-link-de-descarga.com/archivo2.txt"
+    },
+    {
+        "tipo": "CONFIG",
+        "size": "8KB",
+        "nombre": "nmap_stealth_scan.conf",
+        "link": "https://tu-link-de-descarga.com/archivo3.conf"
+    }
+]
