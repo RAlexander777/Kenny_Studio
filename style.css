@@ -2333,6 +2333,10 @@ section h2 {
         border-color: rgba(0, 85, 255, 0.1);
         border-left-color: var(--neon-cyan);
     }
+
+    [data-theme="light"] .ls-name {
+        color: #000 !important;
+    }
 }
 
 .ls-meta-wrap {
