@@ -2224,77 +2224,73 @@ section h2 {
    Responsividad de la Bóveda (Terminal)
    ========================================= */
 @media (max-width: 768px) {
+    /* Eliminamos el encabezado general */
     .ls-header {
-        display: none; /* Ocultar cabeceras en móvil */
+        display: none !important;
     }
 
     .terminal-ls-container {
         padding: 0.5rem;
-        background: rgba(0, 0, 0, 0.2);
+        background: transparent;
+        border: none;
     }
 
     .ls-row {
-        display: grid;
-        /* Definimos una rejilla de 3 filas para separar nombre, info y botón */
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas: 
-            "name name"
-            "metadata metadata"
-            "action action";
-        gap: 12px;
+        display: flex;
+        flex-direction: column; /* Apilamos los datos verticalmente */
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(0, 255, 204, 0.15);
+        margin-bottom: 1.2rem;
         padding: 1.5rem;
-        margin-bottom: 15px;
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(0, 255, 204, 0.1);
-        border-left: 4px solid var(--neon-pink); /* Acento visual tipo 'access granted' */
-        border-radius: 4px;
+        gap: 0.6rem;
+        position: relative;
+        clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
     }
 
-    /* Nombre del archivo: Ocupa toda la parte superior */
-    .ls-name { 
-        grid-area: name; 
+    /* Resaltamos el nombre del archivo como título de la tarjeta */
+    .ls-name {
         font-size: 1.2rem;
         color: var(--neon-cyan);
-        white-space: normal; /* Permitir que nombres largos bajen de línea */
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        padding-bottom: 8px;
+        border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+        padding-bottom: 0.5rem;
+        margin-bottom: 0.5rem;
+        width: 100%;
+        text-shadow: 0 0 5px rgba(0, 255, 204, 0.3);
     }
 
-    /* Contenedor de metadatos: Agrupamos Permisos, Tipo y Tamaño */
+    /* Usamos ::before para añadir etiquetas a los datos sin usar encabezados */
+    .ls-perms::before { content: "PERMISOS: "; color: var(--neon-pink); font-size: 0.7rem; opacity: 0.8; }
+    .ls-type::before  { content: "TIPO: "; color: #888; font-size: 0.7rem; }
+    .ls-size::before  { content: "TAMAÑO: "; color: #888; font-size: 0.7rem; }
+
     .ls-perms, .ls-type, .ls-size {
-        display: inline-flex;
-        font-size: 0.8rem;
-        margin-right: 15px;
+        font-size: 0.9rem;
+        display: flex;
+        justify-content:间;
+        gap: 10px;
     }
 
-    /* Asignamos todos al área de metadata para que fluyan juntos */
-    .ls-perms { grid-area: metadata; color: #666; order: 3; }
-    .ls-type { grid-area: metadata; color: var(--neon-pink); font-weight: bold; order: 1; }
-    .ls-size { grid-area: metadata; color: #aaa; order: 2; }
-
-    /* Botón de acción: Ahora es un botón de ancho completo para facilitar el clic */
+    /* El botón de descarga ahora ocupa todo el ancho inferior */
     .ls-download {
-        grid-area: action;
+        margin-top: 1rem;
         width: 100%;
         padding: 12px;
         font-size: 1.1rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
         background: rgba(255, 0, 127, 0.05);
     }
 
-    /* Adaptación Modo Claro Móvil */
+    /* Ajuste para el Tema Claro en móvil */
     [data-theme="light"] .ls-row {
         background: #ffffff;
-        border-color: rgba(0, 0, 0, 0.1);
-        border-left-color: var(--neon-cyan);
+        border-color: rgba(0, 85, 255, 0.1);
         box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
-    [data-theme="light"] .ls-name { color: #000; }
-    [data-theme="light"] .ls-perms { color: #888; }
-}
 
+    [data-theme="light"] .ls-name {
+        color: #1a1a2e;
+        text-shadow: none;
+    }
+}
 
 /* =========================================
    Efecto Glitch Constante (Líneas Horizontales)
