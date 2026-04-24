@@ -778,12 +778,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     safeLink = "https://" + safeLink;
 
                 row.innerHTML = `
-        <div class="ls-name">${item.nombre}</div>
-        <div class="ls-meta-group">
+        <div class="ls-meta-wrap">
             <span class="ls-perms">${autoPerms}</span>
             <span class="ls-type">${item.tipo}</span>
             <span class="ls-size">${item.size}</span>
         </div>
+        <div class="ls-name">${item.nombre}</div>
         <a href="${safeLink}" target="_blank" class="ls-download" title="Descargar">
             <i class="fas fa-download"></i>
         </a>
