@@ -2239,15 +2239,16 @@ section h2 {
         grid-template-areas: 
             "name download"
             "meta download";
-        grid-template-columns: 1fr 65px;
-        grid-template-rows: auto auto; /* Dos filas de contenido */
+        /* Ajustamos la columna del botón para que esté más pegada al borde */
+        grid-template-columns: 1fr 55px; 
         
-        border-left: 5px solid var(--neon-cyan); 
-        padding: 1rem 1rem 1rem 2.2rem; 
+        /* Mantenemos tu línea cyan con el aire de 2.2rem, 
+           pero bajamos el padding derecho a 0.5rem */
+        padding: 1rem 0.5rem 1rem 2.2rem; 
         
         background: rgba(10, 10, 15, 0.9);
         margin-bottom: 0.8rem;
-        gap: 4px; /* Espacio mínimo entre nombre y meta */
+        gap: 4px;
     }
 
     .ls-name {
@@ -2255,10 +2256,22 @@ section h2 {
         display: block !important;
         font-size: 1.1rem !important;
         color: #fff !important;
-        padding-bottom: 2px;
+        
+        /* Truncado por defecto */
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        
+        /* Feedback visual de que se puede tocar */
+        cursor: pointer; 
+        transition: all 0.3s ease;
+    }
+
+    .ls-name.expanded {
+        white-space: normal !important; /* Permite saltos de línea */
+        overflow: visible !important;
+        text-overflow: unset !important;
+        word-break: break-all; /* Útil para nombres de archivos muy largos sin espacios */
     }
 
     .ls-name::before {
@@ -2302,15 +2315,15 @@ section h2 {
     .ls-download {
         grid-area: download;
         align-self: center;
-        justify-self: center;
-        width: 48px;
-        height: 48px;
+        /* Movemos el botón al final de su celda (hacia el borde) */
+        justify-self: end; 
+        width: 45px;
+        height: 45px;
         display: flex !important;
         align-items: center;
         justify-content: center;
         border: 1px solid var(--neon-pink);
         color: var(--neon-pink) !important;
-        background: rgba(255, 0, 127, 0.05);
         font-size: 1.2rem;
     }
 

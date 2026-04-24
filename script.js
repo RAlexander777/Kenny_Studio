@@ -788,6 +788,12 @@ document.addEventListener("DOMContentLoaded", () => {
             <i class="fas fa-download"></i>
         </a>
     `;
+
+                const nameElement = row.querySelector(".ls-name");
+                nameElement.addEventListener("click", () => {
+                    nameElement.classList.toggle("expanded");
+                });
+                
                 vaultContainer.appendChild(row);
             });
 
