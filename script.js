@@ -456,6 +456,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    const yearSpan = document.getElementById('copy-year');
+    if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+    }
+
     // 6. Lógica del Reloj Dinámico (Navbar) - Efecto LED
     const clockElement = document.getElementById("sys-clock");
     if (clockElement) {
@@ -853,3 +858,4 @@ document.addEventListener("DOMContentLoaded", () => {
     // Ejecutar al cargar la página
     loadVault();
 });
+
