@@ -1052,6 +1052,22 @@
     box-shadow: 0 0 10px var(--neon-cyan);
 }
 
+/* Mensajes de la Bóveda: directorio sin recursos y fallo de conexión */
+.ls-empty,
+.ls-error {
+    padding: 1.5rem 0;
+    font-family: var(--font-led);
+}
+
+.ls-empty {
+    color: var(--neon-cyan);
+    opacity: 0.75;
+}
+
+.ls-error {
+    color: var(--neon-pink);
+}
+
 /* Modo claro de la Bóveda */
 [data-theme="light"] .terminal-ls-container {
     background: #f4f6f9;
