@@ -4,29 +4,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KennyStudio - Soluciones Digitales</title>
-    <link rel="stylesheet" href="style.css?v=1.1">
+
+    <title>KennyStudio | Soluciones Digitales, Ciberseguridad e IA</title>
+    <meta name="description"
+        content="KennyStudio: desarrollo web y software a medida, ciberseguridad y pentesting, investigación forense OSINT e inteligencia artificial aplicada a la automatización.">
+    <meta name="author" content="KennyStudio">
+    <link rel="canonical" href="https://kennystudioks.com/">
+
+    <meta name="theme-color" content="#030305" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#e2e6f0" media="(prefers-color-scheme: light)">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="KennyStudio">
+    <meta property="og:locale" content="es_PE">
+    <meta property="og:url" content="https://kennystudioks.com/">
+    <meta property="og:title" content="KennyStudio | Soluciones Digitales, Ciberseguridad e IA">
+    <meta property="og:description"
+        content="Desarrollo web y software, ciberseguridad y pentesting, investigación forense OSINT e IA aplicada a la automatización.">
+    <meta property="og:image" content="https://kennystudioks.com/assets/img/logo2.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="KennyStudio | Soluciones Digitales, Ciberseguridad e IA">
+    <meta name="twitter:description"
+        content="Desarrollo web y software, ciberseguridad y pentesting, investigación forense OSINT e IA aplicada a la automatización.">
+    <meta name="twitter:image" content="https://kennystudioks.com/assets/img/logo2.png">
+
+    <link rel="icon" href="assets/img/logo2.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/img/logo2.png">
+
+    <!-- Tema antes del primer pintado, para evitar el destello.
+         Por defecto oscuro (identidad del sitio); solo se respeta una
+         elección explícita del visitante guardada en el navegador. -->
+    <script>
+        (function () {
+            try {
+                var stored = localStorage.getItem('ks:theme');
+                document.documentElement.setAttribute('data-theme', stored === 'light' ? 'light' : 'dark');
+            } catch (error) {
+                /* Sin almacenamiento disponible se queda el tema por defecto del HTML. */
+            }
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap">
+
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
 </head>
 
 <body>
-    <div id="boot-sequence" class="boot-screen">
+    <a class="skip-link" href="#home">Saltar al contenido</a>
+
+    <div id="boot-sequence" class="boot-screen" aria-hidden="true">
         <div class="boot-terminal">
             <p class="boot-line">> INICIANDO KS_OS_KERNEL...</p>
-            <p class="boot-line">> MONITORES DE SEGURIDAD: <span style="color: #27c93f;">[ONLINE]</span></p>
+            <p class="boot-line">> MONITORES DE SEGURIDAD: <span class="boot-ok">[ONLINE]</span></p>
             <p class="boot-line">> CARGANDO MÓDULOS_DE_INTERFAZ...</p>
             <p class="boot-progress" id="boot-bar">[..........] 0%</p>
             <p class="boot-blink">_</p>
         </div>
     </div>
 
-    <canvas id="cyber-bg"></canvas>
+    <canvas id="cyber-bg" aria-hidden="true"></canvas>
 
-    <nav class="navbar minimal-nav">
+    <nav class="navbar minimal-nav" aria-label="Navegación principal">
         <div class="nav-section nav-left">
-            <button class="cyber-burger" id="mobile-menu-btn">
+            <button class="cyber-burger" id="mobile-menu-btn" type="button" aria-label="Abrir menú de navegación"
+                aria-expanded="false" aria-controls="mobile-menu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -36,14 +89,15 @@
                 <li><a href="#about"><span class="link-text">Sobre KS.</span></a></li>
                 <li><a href="#services"><span class="link-text">Servicios</span></a></li>
                 <li><a href="#skills"><span class="link-text">Core Técnico</span></a></li>
-                <li><a href="#vault"><span class="link-text secret-glitch" data-text="La_Bóveda">La_Bóveda</span></a></li>
+                <li><a href="#vault"><span class="link-text secret-glitch" data-text="La_Bóveda">La_Bóveda</span></a>
+                </li>
             </ul>
         </div>
 
         <div class="nav-section nav-center">
-            <div id="nav-icon-container" class="nav-icon-hidden">
+            <div id="nav-icon-container">
                 <a href="#home">
-                    <img src="logo2.png" alt="KennyStudio Icon" class="icon-fluid">
+                    <img src="assets/img/logo2.png" alt="KennyStudio" class="icon-fluid" width="600" height="600">
                 </a>
             </div>
         </div>
@@ -51,16 +105,17 @@
         <div class="nav-section nav-right">
             <div class="cyber-clock" id="sys-clock">00:00:00</div>
 
-            <button id="theme-toggle" class="theme-switch-btn" aria-label="Cambiar tema">
+            <button id="theme-toggle" class="theme-switch-btn" type="button" aria-label="Cambiar tema"
+                aria-pressed="false">
                 <div class="switch-track"></div>
                 <div class="switch-thumb">
-                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-moon" aria-hidden="true"></i>
                 </div>
             </button>
         </div>
     </nav>
 
-    <div class="mobile-menu-overlay" id="mobile-menu">
+    <div class="mobile-menu-overlay" id="mobile-menu" aria-hidden="true">
         <ul class="mobile-nav-links">
             <li><a href="#home" class="mobile-link">> ./INICIO</a></li>
             <li><a href="#about" class="mobile-link">> ./SOBRE_KS</a></li>
@@ -71,15 +126,17 @@
     </div>
 
     <header class="hero" id="home">
-        <video autoplay muted loop playsinline class="hero-video" id="hero-video-bg">
-            <source src="hero_video.mp4" type="video/mp4">
+        <video autoplay muted loop playsinline class="hero-video" id="hero-video-bg" aria-hidden="true"
+            preload="metadata">
+            <source src="assets/video/hero_video.mp4" type="video/mp4">
         </video>
         <div class="hero-overlay"></div>
 
         <div class="hero-main-layout centered-hero">
 
             <div class="hero-icon-wrapper" id="hero-icon">
-                <img src="logo2.png" alt="Featured Icon" class="gold-icon-main dual-glow">
+                <img src="assets/img/logo2.png" alt="KennyStudio" class="gold-icon-main dual-glow" width="600"
+                    height="600">
             </div>
 
             <h1 class="hero-brand-name">KENNY STUDIO</h1>
@@ -93,7 +150,7 @@
 
         </div>
 
-        <div class="terminal-panel minimal-terminal cyber-border">
+        <div class="terminal-panel minimal-terminal">
             <div class="terminal-header">
                 <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
                 <span>sys_monitor.exe // STATUS: SECURE</span>
@@ -107,135 +164,257 @@
         </div>
     </header>
 
-    <section class="about cyber-container" id="about">
-        <h2 class="section-title">Sobre KennyStudio</h2>
-        <div class="about-grid split-layout">
-            <div class="about-text glass-card">
-                <p>En KennyStudio, la tecnología, el análisis e inteligencia digital convergen para forjar soluciones
-                    estratégicas. Se diseñan herramientas para generar impacto real y fortalecer la infraestructura en
-                    la red.</p>
-                <p>El enfoque radica en la precisión y el entendimiento estructural de los sistemas. Desde el desarrollo
-                    Full-Stack hasta la investigación forense digital, el objetivo es convertir la información en valor.
-                </p>
-                <p class="highlight-box">No se construyen simples soluciones… se entiende lo que el resto no ve.</p>
-            </div>
-
-            <div class="about-visual glass-card cyber-border">
-                <div class="globe-wrapper">
-                    <canvas id="cyber-globe" width="250" height="250"></canvas>
-                    <div class="globe-overlay"></div>
-                </div>
-                <div class="stats-panel">
-                    <div class="stat"><span class="neon-cyan-text">100%</span> Precisión</div>
-                    <div class="stat"><span class="neon-pink-text">0</span> Brechas</div>
-                    <div class="stat"><span class="neon-cyan-text">24/7</span> Monitoreo</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="services cyber-container" id="services">
-        <h2 class="section-title">Módulos de Servicio</h2>
-        <div class="services-grid">
-
-            <div class="service-card cyber-border-hover">
-                <div class="service-icon"><i class="fas fa-code"></i></div>
-                <h3>Desarrollo Web & Software</h3>
-                <p>Arquitecturas limpias, escalables y orientadas a la máxima productividad mediante stacks modernos.
-                </p>
-
-                <button class="toggle-desc-btn">Ver especificaciones <i class="fas fa-chevron-down"></i></button>
-                <div class="service-extra-content">
-                    <ul class="cyber-list">
-                        <li>Creación de Single Page Applications (SPA).</li>
-                        <li>Arquitectura y despliegue en la nube (AWS, VPS).</li>
-                        <li>Optimización de rendimiento y Core Web Vitals.</li>
-                    </ul>
+    <main>
+        <section class="about cyber-container" id="about">
+            <h2 class="section-title">Sobre KennyStudio</h2>
+            <div class="about-grid split-layout">
+                <div class="about-text glass-card">
+                    <p>En KennyStudio, la tecnología, el análisis e inteligencia digital convergen para forjar
+                        soluciones
+                        estratégicas. Se diseñan herramientas para generar impacto real y fortalecer la infraestructura
+                        en
+                        la red.</p>
+                    <p>El enfoque radica en la precisión y el entendimiento estructural de los sistemas. Desde el
+                        desarrollo
+                        Full-Stack hasta la investigación forense digital, el objetivo es convertir la información en
+                        valor.
+                    </p>
+                    <p class="highlight-box">No se construyen simples soluciones… se entiende lo que el resto no ve.
+                    </p>
                 </div>
 
-                <div class="card-actions">
-                    <a href="https://wa.me/51973661041?text=Hola,%20KennyStudio.%20Deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20Desarrollo%20Web%20y%20Software."
-                        target="_blank" rel="noopener noreferrer" class="cyber-btn-outline"><i class="fab fa-whatsapp"></i> Solicitar</a>
-                    <button class="cyber-btn-outline btn-secondary modal-trigger" data-modal="modal-dev"><i
-                            class="fas fa-folder-open"></i> Proyectos</button>
+                <div class="about-visual glass-card cyber-border">
+                    <div class="globe-wrapper">
+                        <canvas id="cyber-globe" width="250" height="250" aria-hidden="true"></canvas>
+                        <div class="globe-overlay"></div>
+                    </div>
+                    <div class="stats-panel">
+                        <div class="stat"><span class="neon-cyan-text">100%</span> Precisión</div>
+                        <div class="stat"><span class="neon-pink-text">0</span> Brechas</div>
+                        <div class="stat"><span class="neon-cyan-text">24/7</span> Monitoreo</div>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <div class="service-card cyber-border-hover">
-                <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
-                <h3>Ciberseguridad & Pentesting</h3>
-                <p>Auditorías de seguridad, pruebas de penetración e identificación de vulnerabilidades bajo estándares
-                    forenses.</p>
+        <section class="services cyber-container" id="services">
+            <h2 class="section-title">Módulos de Servicio</h2>
+            <div class="services-grid">
 
-                <button class="toggle-desc-btn">Ver especificaciones <i class="fas fa-chevron-down"></i></button>
-                <div class="service-extra-content">
-                    <ul class="cyber-list">
-                        <li>Análisis de vulnerabilidades web (OWASP Top 10).</li>
-                        <li>Hardening de redes y servidores (Linux/Windows).</li>
-                        <li>Generación de reportes ejecutivos y técnicos.</li>
-                    </ul>
+                <div class="service-card cyber-border-hover">
+                    <div class="service-icon"><i class="fas fa-code" aria-hidden="true"></i></div>
+                    <h3>Desarrollo Web & Software</h3>
+                    <p>Arquitecturas limpias, escalables y orientadas a la máxima productividad mediante stacks
+                        modernos.
+                    </p>
+
+                    <button class="toggle-desc-btn" type="button">Ver especificaciones <i class="fas fa-chevron-down"
+                            aria-hidden="true"></i></button>
+                    <div class="service-extra-content">
+                        <ul class="cyber-list">
+                            <li>Creación de Single Page Applications (SPA).</li>
+                            <li>Arquitectura y despliegue en la nube (AWS, VPS).</li>
+                            <li>Optimización de rendimiento y Core Web Vitals.</li>
+                        </ul>
+                    </div>
+
+                    <div class="card-actions">
+                        <a href="https://wa.me/51973661041?text=Hola,%20KennyStudio.%20Deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20Desarrollo%20Web%20y%20Software."
+                            target="_blank" rel="noopener noreferrer" class="cyber-btn-outline"><i
+                                class="fab fa-whatsapp" aria-hidden="true"></i> Solicitar</a>
+                        <button class="cyber-btn-outline btn-secondary modal-trigger" type="button"
+                            data-modal="modal-dev"><i class="fas fa-folder-open" aria-hidden="true"></i> Proyectos</button>
+                    </div>
                 </div>
 
-                <div class="card-actions">
-                    <a href="https://wa.me/51973661041?text=Hola,%20KennyStudio.%20Deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20Ciberseguridad%20y%20Pentesting."
-                        target="_blank" rel="noopener noreferrer" class="cyber-btn-outline"><i class="fab fa-whatsapp"></i> Solicitar</a>
-                    <button class="cyber-btn-outline btn-secondary modal-trigger" data-modal="modal-sec"><i
-                            class="fas fa-folder-open"></i> Proyectos</button>
+                <div class="service-card cyber-border-hover">
+                    <div class="service-icon"><i class="fas fa-shield-alt" aria-hidden="true"></i></div>
+                    <h3>Ciberseguridad & Pentesting</h3>
+                    <p>Auditorías de seguridad, pruebas de penetración e identificación de vulnerabilidades bajo
+                        estándares
+                        forenses.</p>
+
+                    <button class="toggle-desc-btn" type="button">Ver especificaciones <i class="fas fa-chevron-down"
+                            aria-hidden="true"></i></button>
+                    <div class="service-extra-content">
+                        <ul class="cyber-list">
+                            <li>Análisis de vulnerabilidades web (OWASP Top 10).</li>
+                            <li>Hardening de redes y servidores (Linux/Windows).</li>
+                            <li>Generación de reportes ejecutivos y técnicos.</li>
+                        </ul>
+                    </div>
+
+                    <div class="card-actions">
+                        <a href="https://wa.me/51973661041?text=Hola,%20KennyStudio.%20Deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20Ciberseguridad%20y%20Pentesting."
+                            target="_blank" rel="noopener noreferrer" class="cyber-btn-outline"><i
+                                class="fab fa-whatsapp" aria-hidden="true"></i> Solicitar</a>
+                        <button class="cyber-btn-outline btn-secondary modal-trigger" type="button"
+                            data-modal="modal-sec"><i class="fas fa-folder-open" aria-hidden="true"></i> Proyectos</button>
+                    </div>
+                </div>
+
+                <div class="service-card cyber-border-hover">
+                    <div class="service-icon"><i class="fas fa-user-secret" aria-hidden="true"></i></div>
+                    <h3>Investigación Forense OSINT</h3>
+                    <p>Verificación de identidades y análisis de perfiles digitales para la toma de decisiones con
+                        respaldo
+                        legal.</p>
+
+                    <button class="toggle-desc-btn" type="button">Ver especificaciones <i class="fas fa-chevron-down"
+                            aria-hidden="true"></i></button>
+                    <div class="service-extra-content">
+                        <ul class="cyber-list">
+                            <li>Trazabilidad avanzada de correos y dominios.</li>
+                            <li>Mapeo de huella digital de individuos/empresas.</li>
+                            <li>Detección de fugas de datos (Data Leaks).</li>
+                        </ul>
+                    </div>
+
+                    <div class="card-actions">
+                        <a href="https://wa.me/51973661041?text=Hola,%20KennyStudio.%20Deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20Investigaci%C3%B3n%20Forense%20OSINT."
+                            target="_blank" rel="noopener noreferrer" class="cyber-btn-outline"><i
+                                class="fab fa-whatsapp" aria-hidden="true"></i> Solicitar</a>
+                        <button class="cyber-btn-outline btn-secondary modal-trigger" type="button"
+                            data-modal="modal-osint"><i class="fas fa-folder-open" aria-hidden="true"></i>
+                            Proyectos</button>
+                    </div>
+                </div>
+
+                <div class="service-card cyber-border-hover">
+                    <div class="service-icon"><i class="fas fa-robot" aria-hidden="true"></i></div>
+                    <h3>IA & Automatización</h3>
+                    <p>Integración de redes neuronales, automatización de procesos repetitivos y desarrollo de
+                        asistentes
+                        inteligentes.</p>
+
+                    <button class="toggle-desc-btn" type="button">Ver especificaciones <i class="fas fa-chevron-down"
+                            aria-hidden="true"></i></button>
+                    <div class="service-extra-content">
+                        <ul class="cyber-list">
+                            <li>Chatbots conversacionales con PNL (IA).</li>
+                            <li>Scraping y extracción de datos web a gran escala.</li>
+                            <li>Bots de automatización de tareas y flujos (Python).</li>
+                        </ul>
+                    </div>
+
+                    <div class="card-actions">
+                        <a href="https://wa.me/51973661041?text=Hola,%20KennyStudio.%20Deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20IA%20y%20Automatizaci%C3%B3n."
+                            target="_blank" rel="noopener noreferrer" class="cyber-btn-outline"><i
+                                class="fab fa-whatsapp" aria-hidden="true"></i> Solicitar</a>
+                        <button class="cyber-btn-outline btn-secondary modal-trigger" type="button" data-modal="modal-ia"><i
+                                class="fas fa-folder-open" aria-hidden="true"></i> Proyectos</button>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <div class="service-card cyber-border-hover">
-                <div class="service-icon"><i class="fas fa-user-secret"></i></div>
-                <h3>Investigación Forense OSINT</h3>
-                <p>Verificación de identidades y análisis de perfiles digitales para la toma de decisiones con respaldo
-                    legal.</p>
+        <section class="core-tech cyber-container" id="skills">
+            <h2 class="section-title">Core Técnico</h2>
 
-                <button class="toggle-desc-btn">Ver especificaciones <i class="fas fa-chevron-down"></i></button>
-                <div class="service-extra-content">
-                    <ul class="cyber-list">
-                        <li>Trazabilidad avanzada de correos y dominios.</li>
-                        <li>Mapeo de huella digital de individuos/empresas.</li>
-                        <li>Detección de fugas de datos (Data Leaks).</li>
-                    </ul>
+            <div class="skills-matrix-container">
+                <div class="skill-node cyber-border-hover">
+                    <div class="node-header"><i class="fas fa-terminal" aria-hidden="true"></i> Lenguajes</div>
+                    <div class="node-content">
+                        <div class="skill-item">
+                            <span class="skill-name">JavaScript (ES6+)</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Python (FastAPI/Flask)</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">C++ & Rust</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 70%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">SQL (PostgreSQL)</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 88%;"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="card-actions">
-                    <a href="https://wa.me/51973661041?text=Hola,%20KennyStudio.%20Deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20Investigaci%C3%B3n%20Forense%20OSINT."
-                        target="_blank" rel="noopener noreferrer" class="cyber-btn-outline"><i class="fab fa-whatsapp"></i> Solicitar</a>
-                    <button class="cyber-btn-outline btn-secondary modal-trigger" data-modal="modal-osint"><i
-                            class="fas fa-folder-open"></i> Proyectos</button>
+                <div class="skill-node cyber-border-hover">
+                    <div class="node-header"><i class="fas fa-user-shield" aria-hidden="true"></i> Seguridad</div>
+                    <div class="node-content">
+                        <div class="tech-tags">
+                            <span class="tech-tag">Kali Linux</span>
+                            <span class="tech-tag">Parrot OS</span>
+                            <span class="tech-tag">Wireshark</span>
+                            <span class="tech-tag">Nmap</span>
+                            <span class="tech-tag">Metasploit</span>
+                            <span class="tech-tag">Análisis OSINT</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-node cyber-border-hover">
+                    <div class="node-header"><i class="fas fa-paint-brush" aria-hidden="true"></i> Diseño & UI</div>
+                    <div class="node-content">
+                        <div class="skill-item">
+                            <span class="skill-name">Figma (UI/UX)</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Adobe Creative Suite</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Animaciones CSS3</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Canvas API</span>
+                            <div class="skill-bar">
+                                <div class="skill-fill" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <div class="service-card cyber-border-hover">
-                <div class="service-icon"><i class="fas fa-robot"></i></div>
-                <h3>IA & Automatización</h3>
-                <p>Integración de redes neuronales, automatización de procesos repetitivos y desarrollo de asistentes
-                    inteligentes.</p>
+        <section class="vault cyber-container" id="vault">
+            <h2 class="section-title">/vault_ls -la</h2>
+            <p class="gradient-text">> Acceso a recursos clasificados. Directorio: /root/ks/tools</p>
 
-                <button class="toggle-desc-btn">Ver especificaciones <i class="fas fa-chevron-down"></i></button>
-                <div class="service-extra-content">
-                    <ul class="cyber-list">
-                        <li>Chatbots conversacionales con PNL (IA).</li>
-                        <li>Scraping y extracción de datos web a gran escala.</li>
-                        <li>Bots de automatización de tareas y flujos (Python).</li>
-                    </ul>
+            <div class="terminal-ls-container">
+                <div class="ls-header">
+                    <span>PERMISOS</span>
+                    <span>TIPO</span>
+                    <span>TAMAÑO</span>
+                    <span>NOMBRE_DEL_ARCHIVO</span>
+                    <span>ACCIÓN</span>
                 </div>
-
-                <div class="card-actions">
-                    <a href="https://wa.me/51973661041?text=Hola,%20KennyStudio.%20Deseo%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20servicio%20de%20IA%20y%20Automatizaci%C3%B3n."
-                        target="_blank" rel="noopener noreferrer" class="cyber-btn-outline"><i class="fab fa-whatsapp"></i> Solicitar</a>
-                    <button class="cyber-btn-outline btn-secondary modal-trigger" data-modal="modal-ia"><i
-                            class="fas fa-folder-open"></i> Proyectos</button>
+                <div id="vault-list" class="ls-body">
+                    <div class="ls-loading">> Cargando base de datos...</div>
                 </div>
+                <div id="vault-pagination" class="ls-pagination"></div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <div class="cyber-modal-overlay" id="modal-dev">
+    <div class="cyber-modal-overlay" id="modal-dev" role="dialog" aria-modal="true" aria-labelledby="modal-dev-title"
+        aria-hidden="true">
         <div class="cyber-modal-box glass-card cyber-border">
-            <button class="close-modal"><i class="fas fa-times"></i></button>
-            <h3 class="neon-cyan-text"><i class="fas fa-code"></i> Proyectos: Desarrollo Web</h3>
+            <button class="close-modal" type="button" aria-label="Cerrar"><i class="fas fa-times"
+                    aria-hidden="true"></i></button>
+            <h3 class="neon-cyan-text" id="modal-dev-title"><i class="fas fa-code" aria-hidden="true"></i> Proyectos:
+                Desarrollo Web</h3>
             <div class="modal-content-scroll">
                 <div class="project-mockup-item">
                     <h4>Sistema de Control de Inventario</h4>
@@ -255,10 +434,13 @@
         </div>
     </div>
 
-    <div class="cyber-modal-overlay" id="modal-sec">
+    <div class="cyber-modal-overlay" id="modal-sec" role="dialog" aria-modal="true" aria-labelledby="modal-sec-title"
+        aria-hidden="true">
         <div class="cyber-modal-box glass-card cyber-border">
-            <button class="close-modal"><i class="fas fa-times"></i></button>
-            <h3 class="neon-pink-text"><i class="fas fa-shield-alt"></i> Proyectos: Ciberseguridad</h3>
+            <button class="close-modal" type="button" aria-label="Cerrar"><i class="fas fa-times"
+                    aria-hidden="true"></i></button>
+            <h3 class="neon-pink-text" id="modal-sec-title"><i class="fas fa-shield-alt" aria-hidden="true"></i>
+                Proyectos: Ciberseguridad</h3>
             <div class="modal-content-scroll">
                 <div class="project-mockup-item">
                     <h4>Auditoría de Red Local</h4>
@@ -271,10 +453,13 @@
         </div>
     </div>
 
-    <div class="cyber-modal-overlay" id="modal-osint">
+    <div class="cyber-modal-overlay" id="modal-osint" role="dialog" aria-modal="true" aria-labelledby="modal-osint-title"
+        aria-hidden="true">
         <div class="cyber-modal-box glass-card cyber-border">
-            <button class="close-modal"><i class="fas fa-times"></i></button>
-            <h3 class="neon-cyan-text"><i class="fas fa-user-secret"></i> Proyectos: OSINT</h3>
+            <button class="close-modal" type="button" aria-label="Cerrar"><i class="fas fa-times"
+                    aria-hidden="true"></i></button>
+            <h3 class="neon-cyan-text" id="modal-osint-title"><i class="fas fa-user-secret" aria-hidden="true"></i>
+                Proyectos: OSINT</h3>
             <div class="modal-content-scroll">
                 <div class="project-mockup-item">
                     <h4>Verificación de Perfil Público</h4>
@@ -286,10 +471,13 @@
         </div>
     </div>
 
-    <div class="cyber-modal-overlay" id="modal-ia">
+    <div class="cyber-modal-overlay" id="modal-ia" role="dialog" aria-modal="true" aria-labelledby="modal-ia-title"
+        aria-hidden="true">
         <div class="cyber-modal-box glass-card cyber-border">
-            <button class="close-modal"><i class="fas fa-times"></i></button>
-            <h3 class="neon-pink-text"><i class="fas fa-robot"></i> Proyectos: IA & Automatización</h3>
+            <button class="close-modal" type="button" aria-label="Cerrar"><i class="fas fa-times"
+                    aria-hidden="true"></i></button>
+            <h3 class="neon-pink-text" id="modal-ia-title"><i class="fas fa-robot" aria-hidden="true"></i> Proyectos: IA
+                & Automatización</h3>
             <div class="modal-content-scroll">
                 <div class="project-mockup-item">
                     <h4>Bot de Reservas para WhatsApp</h4>
@@ -301,105 +489,6 @@
             </div>
         </div>
     </div>
-
-    <section class="core-tech cyber-container" id="skills">
-        <h2 class="section-title">Core Técnico</h2>
-
-        <div class="skills-matrix-container">
-            <div class="skill-node cyber-border-hover">
-                <div class="node-header"><i class="fas fa-terminal"></i> Lenguajes</div>
-                <div class="node-content">
-                    <div class="skill-item">
-                        <span class="skill-name">JavaScript (ES6+)</span>
-                        <div class="skill-bar">
-                            <div class="skill-fill" style="width: 90%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Python (FastAPI/Flask)</span>
-                        <div class="skill-bar">
-                            <div class="skill-fill" style="width: 85%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">C++ & Rust</span>
-                        <div class="skill-bar">
-                            <div class="skill-fill" style="width: 70%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">SQL (PostgreSQL)</span>
-                        <div class="skill-bar">
-                            <div class="skill-fill" style="width: 88%;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="skill-node cyber-border-hover">
-                <div class="node-header"><i class="fas fa-user-shield"></i> Seguridad</div>
-                <div class="node-content">
-                    <div class="tech-tags">
-                        <span class="tech-tag">Kali Linux</span>
-                        <span class="tech-tag">Parrot OS</span>
-                        <span class="tech-tag">Wireshark</span>
-                        <span class="tech-tag">Nmap</span>
-                        <span class="tech-tag">Metasploit</span>
-                        <span class="tech-tag">Análisis OSINT</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="skill-node cyber-border-hover">
-                <div class="node-header"><i class="fas fa-paint-brush"></i> Diseño & UI</div>
-                <div class="node-content">
-                    <div class="skill-item">
-                        <span class="skill-name">Figma (UI/UX)</span>
-                        <div class="skill-bar">
-                            <div class="skill-fill" style="width: 85%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Adobe Creative Suite</span>
-                        <div class="skill-bar">
-                            <div class="skill-fill" style="width: 75%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Animaciones CSS3</span>
-                        <div class="skill-bar">
-                            <div class="skill-fill" style="width: 95%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Canvas API</span>
-                        <div class="skill-bar">
-                            <div class="skill-fill" style="width: 80%;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="vault cyber-container" id="vault">
-        <h2 class="section-title">/vault_ls -la</h2>
-        <p class="gradient-text">> Acceso a recursos clasificados. Directorio: /root/ks/tools</p>
-        
-        <div class="terminal-ls-container">
-            <div class="ls-header">
-                <span>PERMISOS</span>
-                <span>TIPO</span>
-                <span>TAMAÑO</span>
-                <span>NOMBRE_DEL_ARCHIVO</span>
-                <span>ACCIÓN</span>
-            </div>
-            <div id="vault-list" class="ls-body">
-                <div class="ls-loading">> Cargando base de datos...</div>
-            </div>
-            <div id="vault-pagination" class="ls-pagination"></div>
-        </div>
-    </section>
 
     <footer class="cyber-footer" id="contact">
         <div class="footer-top-line"></div>
@@ -420,7 +509,8 @@
                     <li><a href="#about">> ./sobre_ks</a></li>
                     <li><a href="#services">> ./servicios</a></li>
                     <li><a href="#skills">> ./core_tecnico</a></li>
-                    <li><a href="#vault"><span class="secret-glitch" data-text="> ./la_boveda">> ./la_boveda</span></a></li>
+                    <li><a href="#vault"><span class="secret-glitch" data-text="> ./la_boveda">> ./la_boveda</span></a>
+                    </li>
                 </ul>
             </div>
 
@@ -434,18 +524,21 @@
                     </div>
                     <div class="term-body">
                         <p class="term-output">> Estableciendo red segura...</p>
-                        <ul class="contact-list">
+                        <!-- Contactos por defecto. js/socials.js los reemplaza solo si la
+                             pestaña "Redes" de la planilla responde con datos válidos. -->
+                        <ul class="contact-list" data-socials>
                             <li>
-                                <i class="fab fa-whatsapp"></i>
+                                <i class="fab fa-whatsapp" aria-hidden="true"></i>
                                 <a href="https://wa.me/51973661041" target="_blank" rel="noopener noreferrer">+51 973661041</a>
                             </li>
                             <li>
-                                <i class="fab fa-telegram"></i>
+                                <i class="fab fa-telegram" aria-hidden="true"></i>
                                 <a href="https://t.me/Killer_Kiu" target="_blank" rel="noopener noreferrer">@Killer_Kiu</a>
                             </li>
                             <li>
-                                <i class="fab fa-facebook"></i>
-                                <a href="https://facebook.com/KennyPalominoKS" target="_blank" rel="noopener noreferrer">KennyPalominoKS</a>
+                                <i class="fab fa-facebook" aria-hidden="true"></i>
+                                <a href="https://facebook.com/KennyPalominoKS" target="_blank"
+                                    rel="noopener noreferrer">KennyPalominoKS</a>
                             </li>
                         </ul>
                     </div>
@@ -456,11 +549,15 @@
 
         <div class="footer-status-bar enhanced-status">
             <span>
-                Desarrollado por 
-                <a href="https://www.linkedin.com/in/rodrigo-alexander-becerra-lucano-268a8121a/" target="_blank" rel="noopener noreferrer" class="footer-credit-link">
-                    <i class="fab fa-linkedin"></i> Rodrigo Alexander Becerra Lucano
-                </a> 
-                & Kenny Palomino
+                Desarrollado por
+                <a href="https://www.linkedin.com/in/rodrigo-alexander-becerra-lucano-268a8121a/" target="_blank"
+                    rel="noopener noreferrer" class="footer-credit-link">
+                    <i class="fab fa-linkedin" aria-hidden="true"></i> Rodrigo Alexander Becerra Lucano
+                </a>
+                & <a href="https://www.linkedin.com/in/kenny-palomino-065523437" target="_blank"
+                    rel="noopener noreferrer" class="footer-credit-link">
+                    <i class="fab fa-linkedin" aria-hidden="true"></i> Kenny Palomino
+                </a>
             </span>
             <span>© <span id="copy-year">2026</span> KENNYSTUDIO // ALL RIGHTS RESERVED</span>
         </div>
@@ -468,16 +565,19 @@
 
     <div class="floating-widgets" id="floating-widgets">
 
-        <a href="https://wa.me/51973661041" target="_blank" rel="noopener noreferrer" class="sh-whatsapp" title="Contactar por WhatsApp">
-            <i class="fab fa-whatsapp"></i>
+        <a href="https://wa.me/51973661041" target="_blank" rel="noopener noreferrer" class="sh-whatsapp"
+            title="Contactar por WhatsApp" aria-label="Contactar por WhatsApp">
+            <i class="fab fa-whatsapp" aria-hidden="true"></i>
         </a>
 
         <div class="sh-player collapsed" id="sh-player">
             <div class="sh-header" title="Reproductor de Música">
                 <span class="sh-text">
-                    <i class="fas fa-music pulse-music"></i> BGM.SYS
+                    <i class="fas fa-music pulse-music" aria-hidden="true"></i> BGM.SYS
                 </span>
-                <button class="sh-toggle-btn" id="sh-toggle"><i class="fas fa-chevron-up"></i></button>
+                <button class="sh-toggle-btn" id="sh-toggle" type="button" aria-label="Mostrar reproductor">
+                    <i class="fas fa-chevron-up" aria-hidden="true"></i>
+                </button>
             </div>
 
             <div class="sh-content" id="sh-content">
@@ -486,27 +586,30 @@
                     <span class="sh-time" id="sh-time">00:00</span>
                 </div>
                 <div class="sh-controls">
-                    <button class="sh-play-btn" id="sh-play-btn"><i class="fas fa-play"></i></button>
+                    <button class="sh-play-btn" id="sh-play-btn" type="button" aria-label="Reproducir">
+                        <i class="fas fa-play" aria-hidden="true"></i>
+                    </button>
                     <div class="sh-bar">
                         <div class="sh-fill" id="sh-fill"></div>
                     </div>
                 </div>
                 <div class="sh-volume-zone">
-                    <i class="fas fa-volume-down sh-vol-icon"></i>
-                    <input type="range" class="sh-volume-slider" id="sh-volume" min="0" max="1" step="0.01" value="0.5">
+                    <i class="fas fa-volume-down sh-vol-icon" aria-hidden="true"></i>
+                    <input type="range" class="sh-volume-slider" id="sh-volume" min="0" max="1" step="0.01" value="0.5"
+                        aria-label="Volumen">
                 </div>
             </div>
 
             <audio id="bgm-audio" loop>
-                <source src="superhot.mp3" type="audio/mpeg">
+                <source src="assets/audio/superhot.mp3" type="audio/mpeg">
             </audio>
         </div>
 
     </div>
 
-    <div id="global-glitch" class="global-glitch-transition"></div>
+    <div id="global-glitch" class="global-glitch-transition" aria-hidden="true"></div>
 
-    <script src="script.js"></script>
+    <script type="module" src="js/main.js"></script>
 </body>
 
 </html>

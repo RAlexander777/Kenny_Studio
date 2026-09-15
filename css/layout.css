@@ -1,0 +1,665 @@
+/* =========================================================
+   KENNY STUDIO — layout.css
+   Estructura de página: contenedores, navbar, hero, grids,
+   footer y menú móvil. Incluye todas las media queries
+   de layout, en el mismo orden en que resolvían antes.
+   ========================================================= */
+
+/* =========================================
+   1. Contenedores de sección
+   ========================================= */
+.cyber-container {
+    padding: 6rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+section {
+    padding: 4rem 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Evita que la navbar fija tape el título al navegar por anclas */
+#home,
+section,
+.cyber-footer {
+    scroll-margin-top: 90px;
+}
+
+/* =========================================
+   2. Navbar minimalista (glassmorphism)
+   ========================================= */
+.navbar.minimal-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 3rem;
+    z-index: 1000;
+    background: rgba(10, 10, 10, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 255, 204, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 255, 204, 0.05);
+    transition: var(--transition);
+}
+
+[data-theme="light"] .navbar.minimal-nav {
+    background: rgba(255, 255, 255, 0.6);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    transition: color 0.3s ease, opacity 0.3s ease;
+    opacity: 0.8;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.5rem;
+}
+
+.nav-links a::before,
+.nav-links a::after {
+    position: absolute;
+    opacity: 0;
+    transition: all 0.3s ease;
+    color: var(--neon-cyan);
+    font-weight: bold;
+}
+
+.nav-links a::before { content: '['; left: -15px; }
+.nav-links a::after { content: ']'; right: -15px; }
+
+.nav-links a:hover::before { opacity: 1; transform: translateX(10px); }
+.nav-links a:hover::after { opacity: 1; transform: translateX(-10px); }
+.nav-links a:hover .link-text { color: var(--neon-cyan); text-shadow: 0 0 8px rgba(0, 255, 204, 0.5); }
+
+/* Estado activo indicado por el scrollspy */
+.nav-links a.active::before { opacity: 1; transform: translateX(10px); }
+.nav-links a.active::after { opacity: 1; transform: translateX(-10px); }
+
+.nav-links a.active .link-text {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 8px rgba(0, 255, 204, 0.5);
+}
+
+[data-theme="light"] .nav-links a.active .link-text {
+    text-shadow: none;
+    font-weight: 700;
+}
+
+/* Secciones equilibradas dentro de la navbar */
+.nav-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.nav-left { justify-content: flex-start; }
+
+.nav-center {
+    justify-content: center;
+    position: relative;
+    display: flex;
+}
+
+.nav-right { justify-content: flex-end; }
+
+/* =========================================
+   3. Logo flotante que aparece al scrollear
+   ========================================= */
+#nav-icon-container {
+    position: absolute;
+    display: block;
+    left: 50%;
+    width: 85px;
+    height: auto;
+    opacity: 0;
+    transform: translateX(-50%) translateY(-50px) scale(0.5);
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1005;
+    filter: drop-shadow(0 8px 15px rgba(255, 217, 0, 0.35));
+}
+
+#nav-icon-container.nav-icon-visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(5px) scale(1);
+}
+
+#nav-icon-container.nav-icon-visible .icon-fluid {
+    animation: hologram-glitch 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.icon-fluid {
+    width: 100%;
+    height: auto;
+    position: relative;
+    z-index: 2;
+}
+
+#nav-icon-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.9) 0px,
+        rgba(0, 255, 204, 0.8) 2px,
+        rgba(255, 0, 127, 0.8) 4px,
+        transparent 5px,
+        transparent 8px
+    );
+    mix-blend-mode: color-dodge;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 3;
+    border-radius: 50%;
+}
+
+#nav-icon-container.nav-icon-visible::after {
+    animation: glitch-lines 0.6s ease-out forwards;
+}
+
+@keyframes hologram-glitch {
+    0% {
+        filter: drop-shadow(6px 0 0 var(--neon-cyan)) drop-shadow(-6px 0 0 var(--neon-pink));
+        clip-path: inset(20% 0 80% 0);
+        transform: translate(-4px, 2px);
+    }
+    20% {
+        filter: drop-shadow(-6px 0 0 var(--neon-cyan)) drop-shadow(6px 0 0 #fff);
+        clip-path: inset(80% 0 5% 0);
+        transform: translate(4px, -2px);
+    }
+    40% {
+        filter: drop-shadow(3px 0 0 var(--neon-pink)) drop-shadow(-3px 0 0 #fff);
+        clip-path: inset(0 0 0 0);
+        transform: translate(-2px, 0);
+    }
+    60% {
+        filter: drop-shadow(0 0 15px var(--neon-cyan));
+        clip-path: inset(40% 0 40% 0);
+        transform: translate(2px, 2px);
+    }
+    80% {
+        filter: drop-shadow(3px 0 0 var(--neon-pink));
+        clip-path: inset(0 0 0 0);
+        transform: translate(0, 0);
+    }
+    100% {
+        filter: drop-shadow(0 0 0 transparent);
+        clip-path: inset(0 0 0 0);
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes glitch-lines {
+    0% { opacity: 0; transform: translateY(-10px) scale(0.9); }
+    20% { opacity: 1; transform: translateY(5px) scale(1.1); }
+    40% { opacity: 0; transform: translateY(-5px) scale(1); }
+    60% { opacity: 0.8; transform: translateY(2px) scale(1.05); }
+    100% { opacity: 0; transform: translateY(0) scale(1); }
+}
+
+/* Efecto de salida del ícono del hero */
+.hero-icon-faded {
+    opacity: 0;
+    transform: scale(0.8) translateY(-20px);
+}
+
+/* =========================================
+   4. Hero
+   ========================================= */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    padding: 0 2rem 3rem 2rem;
+    gap: 2.5rem;
+    color: #ffffff;
+}
+
+.hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: -2;
+    object-fit: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: -1;
+}
+
+[data-theme="light"] .hero-overlay {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.hero-main-layout.centered-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    z-index: 1;
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 5rem;
+    text-align: center;
+}
+
+.hero-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
+    margin-bottom: -10px;
+}
+
+.gold-icon-main {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    filter: drop-shadow(0 0 8px rgba(255, 217, 0, 0.822));
+    transition: filter 0.3s ease;
+}
+
+.gold-icon-main:hover {
+    filter: drop-shadow(0 0 15px rgba(255, 217, 0, 0.788));
+}
+
+.hero-brand-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 10px;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+}
+
+.glitch-text.light-weight {
+    font-size: 3.2rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+}
+
+.hero-content.centered-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-content.centered-content h2.glitch-text {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+}
+
+.hero-content.centered-content p.gradient-text {
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+}
+
+/* Ajustes del logo en modo claro */
+[data-theme="light"] .gold-icon-main {
+    filter: brightness(0) drop-shadow(-2px 2px 0px #00ffcc) drop-shadow(2px -2px 0px #ff007f) !important;
+    transition: filter 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+[data-theme="light"] .gold-icon-main:hover {
+    filter: brightness(0) saturate(100%) invert(23%) sepia(91%) saturate(3014%) hue-rotate(212deg) brightness(99%) contrast(106%) drop-shadow(0 8px 20px rgba(0, 102, 255, 0.5)) !important;
+}
+
+[data-theme="light"] .icon-fluid {
+    filter: brightness(0);
+}
+
+[data-theme="light"] #nav-icon-container .icon-fluid {
+    filter: brightness(0) !important;
+}
+
+[data-theme="light"] #nav-icon-container {
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15)) !important;
+}
+
+/* Textos que por defecto eran blancos y deben oscurecerse en claro */
+[data-theme="light"] .hero-brand-name,
+[data-theme="light"] .glitch-text,
+[data-theme="light"] .node-header,
+[data-theme="light"] .skill-name,
+[data-theme="light"] .project-mockup-item h4,
+[data-theme="light"] h3,
+[data-theme="light"] .contact-list a,
+[data-theme="light"] .term-title,
+[data-theme="light"] .footer-desc {
+    color: var(--text-color);
+}
+
+/* Suaviza el glitch en modo claro */
+[data-theme="light"] .glitch-text::before,
+[data-theme="light"] .glitch-text::after {
+    opacity: 0.4;
+}
+
+/* =========================================
+   5. Grids de layout
+   ========================================= */
+.split-layout {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 2rem;
+    align-items: stretch;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.skills-matrix-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+/* =========================================
+   6. Footer
+   ========================================= */
+.cyber-footer {
+    position: relative;
+    background: #020202;
+    padding: 4rem 2rem 1rem;
+    border-top: 1px solid rgba(255, 0, 127, 0.2);
+    overflow: hidden;
+}
+
+.footer-top-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(90deg, transparent, var(--neon-pink), var(--neon-cyan), transparent);
+}
+
+.footer-main-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1.5fr;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto 4rem;
+    align-items: start;
+}
+
+.footer-status-bar.enhanced-status {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 1.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: #cccccc;
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="light"] .cyber-footer {
+    background: #f4f6f9;
+    border-top: 1px solid rgba(0, 85, 255, 0.15);
+}
+
+[data-theme="light"] .col-title {
+    border-bottom: 1px dashed rgba(0, 85, 255, 0.3);
+    color: var(--neon-pink);
+}
+
+[data-theme="light"] .footer-desc,
+[data-theme="light"] .cyber-links a {
+    color: #444444;
+    font-weight: 500;
+}
+
+[data-theme="light"] .cyber-links a:hover {
+    color: var(--neon-cyan);
+}
+
+[data-theme="light"] .footer-status-bar.enhanced-status {
+    background: #1a1a2e;
+    color: #ffffff;
+    text-shadow: none;
+    border-top: none;
+    margin: 0 -2rem -1rem -2rem;
+    padding: 1.5rem 2rem;
+}
+
+/* =========================================
+   7. Menú móvil futurista
+   ========================================= */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(5, 5, 10, 0.95);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    /* Queda por debajo de la navbar (1000) para que la X siga visible */
+    z-index: 990;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    transition: clip-path 0.5s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.5s ease;
+    border-bottom: 3px solid var(--neon-cyan);
+}
+
+.mobile-menu-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.mobile-nav-links {
+    list-style: none;
+    text-align: left;
+    padding: 0;
+}
+
+.mobile-nav-links li {
+    margin: 2rem 0;
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+.mobile-menu-overlay.active .mobile-nav-links li { transform: translateY(0); opacity: 1; }
+.mobile-menu-overlay.active .mobile-nav-links li:nth-child(1) { transition-delay: 0.2s; }
+.mobile-menu-overlay.active .mobile-nav-links li:nth-child(2) { transition-delay: 0.3s; }
+.mobile-menu-overlay.active .mobile-nav-links li:nth-child(3) { transition-delay: 0.4s; }
+.mobile-menu-overlay.active .mobile-nav-links li:nth-child(4) { transition-delay: 0.5s; }
+.mobile-menu-overlay.active .mobile-nav-links li:nth-child(5) { transition-delay: 0.6s; }
+
+.mobile-link {
+    font-size: 2.2rem;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 2px;
+    transition: color 0.3s ease;
+    text-transform: uppercase;
+}
+
+.mobile-link:hover,
+.mobile-link:active {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 15px var(--neon-cyan);
+}
+
+[data-theme="light"] .mobile-menu-overlay {
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom: 3px solid var(--neon-pink);
+}
+
+[data-theme="light"] .mobile-link { color: #1a1a2e; }
+
+[data-theme="light"] .mobile-link:hover,
+[data-theme="light"] .mobile-link:active {
+    color: var(--neon-cyan);
+    text-shadow: none;
+}
+
+/* =========================================
+   8. Media queries
+   Orden preservado: en el archivo original había dos
+   bloques @media (max-width: 992px) que ajustaban
+   .gold-icon-main a 150px y 200px. El segundo ganaba,
+   así que se mantiene esa secuencia.
+   ========================================= */
+@media (max-width: 992px) {
+    .hero-main-layout.centered-hero {
+        gap: 1rem;
+        margin-top: 4rem;
+    }
+
+    .hero-content.centered-content h2.glitch-text {
+        font-size: 2.2rem;
+    }
+
+    .hero-brand-name {
+        font-size: 1rem;
+        letter-spacing: 8px;
+    }
+
+    .gold-icon-main {
+        max-width: 150px;
+    }
+}
+
+@media (max-width: 992px) {
+    .hero-main-layout {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .hero-content {
+        align-items: center;
+        text-align: center;
+    }
+
+    .hero-icon-wrapper {
+        justify-content: center;
+    }
+
+    .gold-icon-main {
+        max-width: 200px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    #nav-icon-container {
+        width: 65px;
+        transform: translateX(-50%) translateY(-40px) scale(0.5);
+    }
+
+    #nav-icon-container.nav-icon-visible {
+        transform: translateX(-50%) translateY(5px) scale(1);
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .navbar.minimal-nav {
+        padding: 1rem 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .split-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 992px) {
+    .footer-main-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .terminal-col {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-main-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .terminal-col {
+        grid-column: span 1;
+    }
+
+    .footer-status-bar.enhanced-status {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+}

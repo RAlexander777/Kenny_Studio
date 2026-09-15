@@ -1,0 +1,342 @@
+/* =========================================================
+   KENNY STUDIO — base.css
+   Tokens de tema, reset, tipografía, utilidades y efectos.
+   ========================================================= */
+
+/* =========================================
+   1. Tokens de color (tema oscuro por defecto)
+   ========================================= */
+:root {
+    --bg-color: #030305;
+    --text-color: #e0e0e0;
+    --neon-cyan: #00ffcc;
+    --neon-pink: #ff007f;
+    --card-bg: rgba(10, 10, 15, 0.75);
+    --terminal-bg: #000000;
+    --terminal-text: #00ffcc;
+    --transition: all 0.3s ease;
+
+    /* Tipografías. Se conservan las variantes mono originales del sitio:
+       no se unifican porque cambiarían el render de textos ya existentes. */
+    --font-display: 'Rajdhani', sans-serif;
+    --font-mono: 'Courier New', monospace;
+    --font-led: 'Share Tech Mono', monospace;
+}
+
+/* =========================================
+   2. Tokens de color (tema claro)
+   ========================================= */
+[data-theme="light"] {
+    --bg-color: #e2e6f0;
+    --text-color: #1a1a2e;
+    --neon-cyan: #0055ff;
+    --neon-pink: #d9005c;
+    --card-bg: #ffffff;
+    --terminal-bg: #ffffff;
+    --terminal-text: #0055ff;
+}
+
+/* =========================================
+   3. Reset y elementos base
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-display);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: var(--transition);
+    line-height: 1.6;
+}
+
+/* Salto accesible al contenido principal */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 1rem;
+    z-index: 11000;
+    padding: 0.75rem 1.25rem;
+    background: var(--neon-cyan);
+    color: #000;
+    font-family: var(--font-mono);
+    text-decoration: none;
+    border: 1px solid var(--neon-cyan);
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 1rem;
+}
+
+/* Foco visible y consistente */
+:focus-visible {
+    outline: 2px solid var(--neon-cyan);
+    outline-offset: 3px;
+}
+
+/* =========================================
+   4. Tipografía y utilidades
+   ========================================= */
+.neon-cyan-text {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 8px rgba(0, 255, 204, 0.4);
+}
+
+.neon-pink-text {
+    color: var(--neon-pink);
+    text-shadow: 0 0 8px rgba(255, 0, 127, 0.4);
+}
+
+.gradient-text {
+    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+}
+
+.dual-glow {
+    filter: drop-shadow(0 0 15px rgba(0, 255, 204, 0.4)) drop-shadow(0 0 20px rgba(255, 0, 127, 0.3));
+}
+
+.section-title {
+    text-align: left;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* =========================================
+   5. Efecto glitch para textos
+   ========================================= */
+.glitch-text {
+    position: relative;
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+}
+
+.glitch-text::before {
+    color: var(--neon-cyan);
+    z-index: -1;
+    transform: translate(-2px, 1px);
+    animation: glitch-anim 3s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+    color: var(--neon-pink);
+    z-index: -2;
+    transform: translate(2px, -1px);
+    animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+    0% { clip-path: inset(20% 0 80% 0); }
+    20% { clip-path: inset(60% 0 10% 0); }
+    40% { clip-path: inset(40% 0 50% 0); }
+    60% { clip-path: inset(80% 0 5% 0); }
+    80% { clip-path: inset(10% 0 70% 0); }
+    100% { clip-path: inset(30% 0 50% 0); }
+}
+
+/* Glitch permanente con cortes horizontales */
+.secret-glitch {
+    position: relative;
+    display: inline-block;
+    color: var(--neon-pink) !important;
+    text-shadow: 0 0 5px rgba(255, 0, 127, 0.4);
+}
+
+.secret-glitch::before,
+.secret-glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    pointer-events: none;
+}
+
+.secret-glitch::before {
+    color: var(--neon-cyan);
+    left: -2px;
+    animation: slice-glitch-1 2s infinite linear alternate-reverse;
+}
+
+.secret-glitch::after {
+    color: var(--neon-pink);
+    left: 2px;
+    background: transparent;
+    animation: slice-glitch-2 3s infinite linear alternate-reverse;
+}
+
+/* Fondos donde debe recortarse el glitch según el contexto */
+[data-theme="light"] .secret-glitch::before { background: #e2e6f0; }
+[data-theme="light"] .cyber-footer .secret-glitch::before { background: #f4f6f9; }
+.navbar .secret-glitch::before { background: rgba(10, 10, 10, 0.9); }
+[data-theme="light"] .navbar .secret-glitch::before { background: rgba(255, 255, 255, 0.9); }
+
+@keyframes slice-glitch-1 {
+    0% { clip-path: inset(10% 0 85% 0); transform: translateX(-2px); }
+    20% { clip-path: inset(80% 0 5% 0); transform: translateX(2px); }
+    40% { clip-path: inset(30% 0 60% 0); transform: translateX(-1px); }
+    60% { clip-path: inset(90% 0 2% 0); transform: translateX(3px); }
+    80% { clip-path: inset(15% 0 75% 0); transform: translateX(-2px); }
+    100% { clip-path: inset(45% 0 45% 0); transform: translateX(1px); }
+}
+
+@keyframes slice-glitch-2 {
+    0% { clip-path: inset(25% 0 65% 0); transform: translateX(2px); }
+    20% { clip-path: inset(5% 0 90% 0); transform: translateX(-2px); }
+    40% { clip-path: inset(55% 0 35% 0); transform: translateX(1px); }
+    60% { clip-path: inset(75% 0 15% 0); transform: translateX(-3px); }
+    80% { clip-path: inset(5% 0 85% 0); transform: translateX(2px); }
+    100% { clip-path: inset(85% 0 5% 0); transform: translateX(-1px); }
+}
+
+/* Parpadeo de cursor y reloj */
+.cursor { animation: blink 1s step-end infinite; }
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+.blink-colon { animation: blink-colon 1s step-end infinite; }
+
+@keyframes blink-colon {
+    50% { opacity: 0; }
+}
+
+/* =========================================
+   6. Fondo animado (canvas)
+   ========================================= */
+#cyber-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* =========================================
+   7. Transición glitch a pantalla completa
+   ========================================= */
+.global-glitch-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 255, 204, 0.1) 0px,
+        rgba(255, 0, 127, 0.1) 4px,
+        transparent 5px,
+        transparent 8px
+    );
+    backdrop-filter: invert(1) hue-rotate(180deg) grayscale(50%) contrast(300%);
+    -webkit-backdrop-filter: invert(1) hue-rotate(180deg) grayscale(50%) contrast(300%);
+}
+
+.global-glitch-transition.active {
+    animation: screen-glitch-jump 0.5s steps(10) forwards;
+}
+
+@keyframes screen-glitch-jump {
+    0% { opacity: 1; clip-path: inset(10% 0 80% 0); transform: translateX(-15px); }
+    20% { clip-path: inset(80% 0 5% 0); transform: translateX(15px); }
+    40% { clip-path: inset(30% 0 50% 0); transform: translateX(-10px); }
+    60% { clip-path: inset(10% 0 60% 0); transform: translateX(20px); }
+    80% { clip-path: inset(70% 0 20% 0); transform: translateX(-15px); }
+    100% { opacity: 0; clip-path: inset(0 0 0 0); transform: translateX(0); }
+}
+
+/* =========================================
+   8. Secuencia de arranque (preloader)
+   ========================================= */
+.boot-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 10%;
+    color: var(--neon-cyan);
+    font-family: var(--font-led);
+    font-size: 1.2rem;
+    transition: opacity 0.6s ease, filter 0.6s ease;
+}
+
+.boot-screen.hidden {
+    opacity: 0;
+    filter: blur(10px);
+    pointer-events: none;
+}
+
+.boot-terminal { text-shadow: 0 0 8px rgba(0, 255, 204, 0.5); }
+.boot-line { margin-bottom: 0.5rem; opacity: 0; }
+.boot-progress { margin-top: 1rem; color: #fff; }
+.boot-blink { animation: blink 1s step-end infinite; margin-top: 0.5rem; }
+.boot-ok { color: #27c93f; }
+
+[data-theme="light"] .boot-screen {
+    background: #f4f6f9;
+    color: var(--neon-pink);
+}
+[data-theme="light"] .boot-terminal { text-shadow: none; }
+[data-theme="light"] .boot-progress { color: #000; }
+
+/* =========================================
+   9. Accesibilidad: movimiento reducido
+   ========================================= */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    .boot-screen {
+        display: none;
+    }
+}
